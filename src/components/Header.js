@@ -82,7 +82,7 @@ class Header extends Component {
                      {
                         this.props.isTokenAvailable ? (
                            <li className="nav-item user-dropdown-menu">
-                              <a className="nav-link" onClick={this.dropdownToggle}>account <FaCaretDown /></a>
+                              <a className="nav-link" onClick={this.dropdownToggle}>account</a>
                               <div className={this.state.isDropdownOpen ? 'dropdown-show animated fadeInDown' : 'hide'}>
                                  <Link className="dropdown-list" to="/create" onClick={this.toggle}>my profile</Link>
                                  <Link className="dropdown-list" to="/" onClick={(event) => { this.toggle(); this.handleLogout();}}>logout</Link>

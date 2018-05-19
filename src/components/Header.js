@@ -7,6 +7,15 @@ import FaCaretDown from 'react-icons/lib/fa/caret-down';
 // Service Import
 import AuthService from '../services/auth.service';
 
+// Redux Import
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+// Reducer Import
+import { 
+   isLogout
+} from '../reducers/account';
+
 class Header extends Component {
 
    constructor(props) {
@@ -45,7 +54,7 @@ class Header extends Component {
 
    handleLogout() {
       this.Auth.logout();
-      this.props.onTokenChange();
+      this.props.isLogout();
    }
 
    render() {
@@ -80,9 +89,9 @@ class Header extends Component {
                      </li>
                      
                      {
-                        this.props.isTokenAvailable ? (
+                        this.props.isLogin ? (
                            <li className="nav-item user-dropdown-menu">
-                              <a className="nav-link" onClick={this.dropdownToggle}>account</a>
+                              <a className="nav-link" onClick={this.dropdownToggle}>account <FaCaretDown /></a>
                               <div className={this.state.isDropdownOpen ? 'dropdown-show animated fadeInDown' : 'hide'}>
                                  <Link className="dropdown-list" to="/create" onClick={this.toggle}>my profile</Link>
                                  <Link className="dropdown-list" to="/" onClick={(event) => { this.toggle(); this.handleLogout();}}>logout</Link>
@@ -110,4 +119,16 @@ class Header extends Component {
    }
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+   isLogin: state.account.isLogin
+});
+
+const mapDispatchToProps = (dispatch) => 
+   bindActionCreators(
+      {
+         isLogout
+      },
+      dispatch
+   );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

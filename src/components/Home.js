@@ -49,7 +49,7 @@ class Home extends Component {
 
       let all_stories = this.state.all_stories;
 
-      console.log(all_stories);
+      // console.log(all_stories);
 
       return(
 

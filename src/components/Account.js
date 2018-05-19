@@ -7,6 +7,16 @@ import AuthService from '../services/auth.service';
 import LoginService from '../services/login.service';
 import RegisterService from '../services/register.service';
 
+// Redux Import
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+// Reducer Import
+import { 
+   clearLoginFieldAfterLogin,
+   isLogin
+} from '../reducers/account';
+
 class Login extends Component {
 
    constructor(props) {
@@ -23,8 +33,7 @@ class Login extends Component {
          confirmPassword: '',
          confirmPasswordStatus: true,
          loginErrorMessage: [],
-         registerErrorMessage: [],
-         reCaptcha: false
+         registerErrorMessage: []
       };
 
       this.Auth = new AuthService();
@@ -58,18 +67,19 @@ class Login extends Component {
       .then((res) => {
 
          // Clear state and show success alert
-         this.setState({
-            loginEmail: '',
-            loginPassword: ''
-         });
-
+         
+         this.props.clearLoginFieldAfterLogin();
          // Redirect to home
          this.props.history.push("/");
          
          // Set token
          this.Auth.setToken(res.data.token);
 
-         return Promise.resolve(res);
+         if(this.Auth.getToken()) {
+            this.props.isLogin();
+         }
+
+         // return Promise.resolve(res);
 
          // console.log(res.data);
       })
@@ -90,7 +100,6 @@ class Login extends Component {
 
          // console.log(err.response);
       });
-      this.props.route.onTokenGenerated();
    }
 
    failedLoginAlert() {
@@ -182,13 +191,6 @@ class Login extends Component {
             confirmPasswordStatus: false
          })
       }
-   }
-
-   reCaptcha(value) {
-      console.log("Captcha value:", value);
-      this.setState({
-         reCaptcha: true
-      })
    }
 
    successAlert() {
@@ -295,4 +297,18 @@ class Login extends Component {
    }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+   // count: state.counter.count,
+   // lastName: state.account.lastName
+});
+
+const mapDispatchToProps = (dispatch) => 
+   bindActionCreators(
+      {
+         clearLoginFieldAfterLogin,
+         isLogin
+      },
+      dispatch
+   );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

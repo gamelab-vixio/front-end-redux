@@ -112,12 +112,6 @@ class Home extends Component {
             <div className="row no-gutters">
                <div className="col-12 col-sm-12 col-md-12 search-background">
                   <h1>the next generation interactive fiction platform</h1>
-                  <form className="form-inline search-bar">
-                     <input className="form-control search-input" type="text" placeholder="Search" />
-                     <button className="btn btn-primary search-button" type="submit">
-                        <FaSearch />
-                     </button>
-                  </form>
                </div>
             </div>
             <div className="row no-gutters">

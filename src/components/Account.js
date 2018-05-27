@@ -200,13 +200,6 @@ class Login extends Component {
       });
    }
 
-   errorAlert() {
-      Alert.error('<h5>Please Verify Your Captcha!</h5>', {
-         position: 'bottom-right',
-         effect: 'slide',
-      });
-   }
-
    render() {
 
       let { firstName, firstNameStatus, lastName, lastNameStatus, loginEmail, email, loginPassword, password, confirmPassword, confirmPasswordStatus, loginErrorMessage, registerErrorMessage } = this.state;

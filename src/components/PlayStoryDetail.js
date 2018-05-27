@@ -1,35 +1,48 @@
 import React, { Component } from 'react';
 
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import FaStars from 'react-icons/lib/fa/star';
+import FaStarO from 'react-icons/lib/fa/star-o';
 import TextareaAutosize from 'react-autosize-textarea';
 import Alert from 'react-s-alert';
-// import TiArrowRight from 'react-icons/lib/ti/arrow-right';
-// import TiArrowLeft from 'react-icons/lib/ti/arrow-left';
 import FaMailReply from 'react-icons/lib/fa/mail-reply';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 
 // Service Import
 import AuthService from '../services/auth.service';
-import BlogService from '../services/blog.service';
+import StoryService from '../services/story.service';
+import ReportService from '../services/report.service';
 
-class BlogDetail extends Component {
+class PlayStoryDetail extends Component {
 
    constructor(props) {
       super(props);
       this.state = {
-         blog_id : this.props.match.params.blog_detail,
-         blog_content: '',
-         display_message: ['Show Reply', 'Hide Reply'],
-         global_status_comment: [],
-         commentParent: '',
+         story_id : this.props.match.params.story_id,
+         story_content: '',
+         story_read: '',
+         image: '',
          isLoading: true,
+         isReport: false,
+         reason: '',
+         selectedStoryFile: null,
+         global_status_comment: [],
          commentParentIdFromChild: '',
          isReply: false,
-         commentChild: ''
+         commentChild: '',
+         commentParent: '',
+         display_message: ['Show Reply', 'Hide Reply']
       };
 
       this.Auth = new AuthService();
+      this.renderContent = this.renderContent.bind(this);
+      this.reportStoryStatus = this.reportStoryStatus.bind(this);
+      this.reportStory = this.reportStory.bind(this);
+      this.handleStoryReport = this.handleStoryReport.bind(this);
+      this.storyFileChangedHandler = this.storyFileChangedHandler.bind(this);
+
+      //Comment
       this.childCommentReply = this.childCommentReply.bind(this);
       this.view_reply_toggle.bind(this);
       this.cancelComment = this.cancelComment.bind(this);
@@ -43,62 +56,37 @@ class BlogDetail extends Component {
       // Set page to top
       window.scrollTo(0, 0);
       
-      let passed_blog_id = this.state.blog_id;
+      let story_id = this.state.story_id;
 
-      BlogService.getPostById(passed_blog_id)
+      StoryService.getStoryContent(story_id)
       .then((res) => {
 
          // Initialized comment status
-         let comment_length = res.data.blog_comment.length;
+         let comment_length = res.data.story_comment.length;
          let joined = [];
          for (let i = 0; i < comment_length; i++) {
-            let comment_id = res.data.blog_comment[i].id;
+            let comment_id = res.data.story_comment[i].id;
             joined = joined.concat([ [comment_id, 0] ]);
          }
 
          this.setState({
             global_status_comment: joined,
-            blog_content: res.data,
+            story_read: res.data,
             isLoading: false
+         }, () => {
+            console.log(this.state.global_status_comment)
          });
 
-         // console.log(res);
+         // console.log(res.data);
       })
       .catch((err) => {
          // console.log(err);
       });
    }
 
-   getContent() {
-      let blog_content = this.state.blog_content;
-      // let blog_content_id = parseInt(blog_content.id, 10);
-      // let blog_content_id_prev = (blog_content_id - 1);
-      // let blog_content_id_next = (blog_content_id + 1);
-
-      return (
-         <div>
-            <div className="blog-content">
-               <h2 className="blog-detail-box-title">{blog_content.title}</h2>
-               <h3 className="blog-detail-box-date">post date: {blog_content.updated_at} - by administrator</h3>
-               <hr className="blog-detail-box-line"/>
-               <div className="blog-detail-box-image">
-                  <img className="story-image" src={"data:image/jpeg;base64," + blog_content.image_url} alt="blog_thumbnail"/>
-               </div>
-               <p className="blog-detail-box-text">{blog_content.content}</p>
-            </div>
-            
-            {/*
-            <div className="change-post">
-               <Link className="previous-post" to={{pathname: '/blog/' + blog_content_id_prev}}><TiArrowLeft/>previous post</Link>
-               <Link className="next-post" to={{pathname: '/blog/' + blog_content_id_next}}>next post<TiArrowRight/></Link>
-            </div> */}
-         </div>
-      );
-   }
-
    getComment() {
       
-      let all_comments = this.state.blog_content.blog_comment;
+      let all_comments = this.state.story_read.story_comment;
 
       let render_all_comments = all_comments.map((comment, index) => 
          <div key={comment.id.toString()} className="col-12 col-sm-12 col-md-12 first-level-comment-wrapper">
@@ -166,7 +154,7 @@ class BlogDetail extends Component {
 
    handleChildCommentReplySubmit(e) {
       e.preventDefault();
-      let blog_id = this.state.blog_id;
+      let story_id = this.state.story_id;
       let commentParentId = this.state.commentParentIdFromChild;
       let reply = this.state.commentChild;
       let token = this.Auth.getToken();
@@ -177,7 +165,7 @@ class BlogDetail extends Component {
 
       if(this.Auth.getToken()) {
  
-         BlogService.createComment(data, blog_id, token, commentParentId)
+         StoryService.createComment(data, story_id, token, commentParentId)
          .then((res) => {
 
             // Clear state and show success alert
@@ -244,9 +232,9 @@ class BlogDetail extends Component {
       };
 
       if(this.Auth.getToken()) {
-         let blogId = this.state.blog_content.id;
+         let story_id = this.state.story_id;
          let token = this.Auth.getToken();
-         BlogService.createComment(commentParentData, blogId, token)
+         StoryService.createComment(commentParentData, story_id, token)
          .then((res) => {
 
             // Clear state and show success alert
@@ -276,20 +264,161 @@ class BlogDetail extends Component {
       });
    }
 
-   render() {
+   handleStoryReport(e) {
+      this.setState( {[e.target.name]: e.target.value} );
+   }
 
+   storyFileChangedHandler(e) {
+      this.setState({selectedStoryFile: e.target.files[0]})
+   }
+
+   reportStoryStatus(){
+      this.setState({
+         isReport: !this.state.isReport
+      })
+   }
+
+   reportStory(){
+
+      let story_id = this.state.story_id;
+      let token = this.Auth.getToken();
+
+      const formData = new FormData()
+
+      
+      formData.append('reason', this.state.reason)
+
+      if(this.state.selectedStoryFile !== null){
+         formData.append('photo', this.state.selectedStoryFile, this.state.selectedStoryFile.name)
+      }
+
+      ReportService.reportStory(story_id, token, formData)
+      .then((res) => {
+
+         this.setState({
+            isReport: !this.state.isReport,
+            reason: '',
+            selectedStoryFile: null
+         }, () => this.successAlert());
+
+         // console.log(res);
+      })
+      .catch((err) => {
+         this.errorAlert();
+         // console.log(err);
+      });
+   }
+
+   successAlert() {
+      Alert.success('<h5>Thank For Creating Better Community in Vixio :)</h5>', {
+         position: 'bottom-right',
+         effect: 'jelly',
+         offset: 500
+      });
+   }
+
+   errorAlert() {
+      Alert.error('<h5>"Reason" input field cannot be empty!</h5>', {
+         position: 'bottom-right',
+         effect: 'slide',
+         offset: 500
+      });
+   }
+
+   renderContent() {
+      let story_data = this.state.story_read;
+      let story_id = this.state.story_id;
+      const star_counter = [1,2,3,4,5];
+      
+      return(
+         <div className="card story-box">
+            <div className="card-header">
+               <div className="image-wrapper">
+                  <img className="story-image" src={"data:image/jpeg;base64," + story_data.image_url} alt="IF"/>
+               </div>
+            </div>
+            <div className="card-body">
+               <h1 className="card-title">
+                  {story_data.title}
+               </h1>
+               <p>{story_data.description}</p>
+               <h2 className="card-author">
+                  category :&nbsp;
+                  <br/>
+                  {
+
+                     story_data.story_category.map((category, index) =>{
+                        return (
+                           <label key={index} className="category">{category.category_type.name}</label>
+                        )
+                     })
+                  }
+               </h2>
+               <div className="rating-stars">
+                  {
+                     story_data.story_review[0] ? [
+                     
+                        star_counter.map((x, index) =>{
+                              return index + 1 <= Math.round(story_data.story_review[0].star) ? (
+                                 <FaStars key={index} size={15} color="#f4c150"/>
+                              ) : (
+                                 <FaStarO key={index} size={15} color="#f4c150"/>
+                              )
+                           }),
+                        <span key={star_counter[0] + 7} className="star-average">{Math.round(story_data.story_review[0].star)}</span>
+                     ] : [
+                        <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
+                        <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
+                        <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
+                        <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
+                        <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
+                     ]
+                  }
+               </div>
+
+               <div className="bottom-button">
+                  <Link to={"/play/" + story_id}>
+                     <button className="btn">play story</button>
+                  </Link>
+
+                  {
+                     this.Auth.getToken() ? (
+                        <button className="btn" onClick={this.reportStoryStatus}>report story</button>
+                     ) : (
+                        ''
+                     )
+                  }
+               </div>
+
+               {
+                  this.state.isReport ? (
+                     <div className="report-box animated fadeIn">
+                        <h1>story report</h1>
+                        <label>reason:</label>
+                        <TextareaAutosize className="form-control" rows={1} name="reason" value={this.state.reason} onChange={ this.handleStoryReport } placeholder="Reason to report..." autoComplete="off"/>
+                        <label>screenshot:</label>
+                        <input type="file" className="upload-image" onChange={this.storyFileChangedHandler}/>
+                        <button type="submit" className="btn submit-button" onClick={this.reportStory}>submit report</button>
+                     </div>
+                  ) : (
+                     ''
+                  )
+               }
+            </div>
+         </div>
+      );
+   }
+
+   render() {
       let { commentParent, commentChild } = this.state;
 
       if(!this.state.isLoading) {
          return (
-            <div className="container-fluid blog-detail animated fadeInDownBig">
+            <div className="container-fluid story-detail animated fadeInDownBig">
                <div className="row no-gutters">
                   <div className="col-12 col-sm-12 col-md-6 offset-md-3">
-                     <div className="blog-detail-read">
-                        
-                        {/*Render Blog*/}
-                        {this.getContent()}
-
+                     <div className="story-detail-read">
+                        {this.renderContent()}
                         <div className="blog-detail-comment">
                            <h2 className="comment-title">comments</h2>
 
@@ -307,7 +436,6 @@ class BlogDetail extends Component {
                                              <div className="create-comment">
                                                 <TextareaAutosize className="form-control comment-box" rows={1} value={commentParent} name="commentParent" placeholder="Add a public comment..." autoComplete="off" onChange={this.handleCommentParentValue}/>
                                                 <button type="submit" className="btn submit-comment">comment</button>
-                                                <Alert stack={{limit: 3}} timeout={5000} html={true} />
                                              </div>
                                           </div>
                                        </div>
@@ -327,7 +455,6 @@ class BlogDetail extends Component {
                                                 <TextareaAutosize className="form-control comment-box" rows={1} value={commentChild} name="commentChild" placeholder="Reply comment..." autoComplete="off" onChange={this.handleChildCommentValue}/>
                                                 <button className="btn cancel-comment" onClick={this.cancelComment}>cancel</button>
                                                 <button type="submit" className="btn submit-comment">reply comment</button>
-                                                <Alert stack={{limit: 3}} timeout={5000} html={true} />
                                              </div>
                                           </div>
                                        </div>
@@ -346,6 +473,7 @@ class BlogDetail extends Component {
                               )
                            }
                         </div>
+                        <Alert stack={{limit: 3}} timeout={5000} html={true} />
                      </div>
                   </div>
                </div>   
@@ -372,4 +500,4 @@ class BlogDetail extends Component {
    }
 }
 
-export default BlogDetail;
+export default PlayStoryDetail;

@@ -14,8 +14,11 @@ class Blog extends Component {
 
       this.state = {
          all_blogs: [],
-         isLoading: true
+         isLoading: true,
+         currentPageNumber: ''
       };
+
+      this.getMoreBlog = this.getMoreBlog.bind(this);
    }
 
    componentWillMount() {
@@ -27,14 +30,40 @@ class Blog extends Component {
 
          this.setState({
             all_blogs: res.data,
-            isLoading: false
+            isLoading: false,
+            currentPageNumber: res.data.current_page
          })
 
-         console.log(res.data);
+         // console.log(res.data);
       })
       .catch((err) => {
          // console.log(err);
       });
+   }
+
+   getMoreBlog() {
+      let next_page_number = this.state.currentPageNumber + 1;
+
+      if(next_page_number <= this.state.all_blogs.last_page) {
+         BlogService.getAllBlogPosts(next_page_number)
+         .then((res) => {
+            let result = res.data.data;
+            let newArr =this.state.all_blogs;
+            result.forEach(function(data, i){
+               newArr.data.push(data);
+            })
+            this.setState({
+               all_blogs: newArr,
+               currentPageNumber: next_page_number
+            })
+
+            
+            // console.log(res);
+         })
+         .catch((err) => {
+            // console.log(err);
+         });
+      }
    }
 
    getPosts() {
@@ -47,7 +76,7 @@ class Blog extends Component {
                <h3 className="blog-box-date">post date: {blog.updated_at} - by administrator</h3>
                <hr className="blog-box-line"/>
                <div className="blog-box-image">
-                  <img src={require('../images/lina.png')} alt="blog"/> 
+                  <img src={"data:image/jpeg;base64," + blog.image_url} alt="blog"/> 
                </div>
                <div className="blog-box-text">
                   <TextTruncate line={5} truncateText="…" text={blog.content}/>
@@ -79,31 +108,8 @@ class Blog extends Component {
                      </div>
                      
                      <div className="col-12 col-sm-12 col-md-12 text-center">
-                        <button className="btn blog-box-load-more">load more</button>
+                        <button className="btn blog-box-load-more" onClick={() => this.getMoreBlog()}>load more</button>
                      </div>
-                     
-                     <div className="col-12 col-sm-12 col-md-12 text-center">
-                        <div className="older-post-box">
-                           <h1 className="older-post-header">
-                              <span>older post</span>
-                           </h1>
-                           
-                           <Link className="older-post" to="/blog/">
-                              <h1 className="older-post-title">older post 1</h1>
-                              <h2 className="older-post-date">january 12, 2018, vixio administrator</h2>
-                           </Link>
-
-                           <Link className="older-post" to="/blog">
-                              <h1 className="older-post-title">older post 2</h1>
-                              <h2 className="older-post-date">december 25, 2017, vixio administrator</h2>
-                           </Link>
-
-                           <Link className="older-post" to="/blog">
-                              <h1 className="older-post-title">older post 3</h1>
-                              <h2 className="older-post-date">november 18, 2017, vixio administrator</h2>
-                           </Link>
-                        </div>
-                     </div> 
                   </div>
                </div>   
             </div>

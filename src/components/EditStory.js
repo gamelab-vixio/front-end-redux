@@ -6,13 +6,14 @@ import FaPlus from 'react-icons/lib/fa/plus';
 import Checkbox from 'rc-checkbox';
 
 import AuthService from '../services/auth.service';
-import StoryService from '../services/story.service';
+import WriterService from '../services/writer.service';
 
-class Create extends Component {
+class Edit extends Component {
 
    constructor(props) {
       super(props);
       this.state = {
+         story_id : this.props.match.params.story_id,
          data: [{
             name: "Beginning",
             paragraphs:[
@@ -40,8 +41,7 @@ class Create extends Component {
          storyCategories: '',
          story_title: '',
          story_description: '',
-         checked_categories: [],
-         selected_file: null
+         checked_categories: []
       };
 
       this.Auth = new AuthService();
@@ -58,20 +58,23 @@ class Create extends Component {
 
    componentWillMount() {
 
-      StoryService.getStoryCategories()
+      let token = this.Auth.getToken();
+      let story_id = this.state.story_id;
+
+      WriterService.getStoryRead(story_id, token)
       .then((res) => {
-         
+
          this.setState({
-            storyCategories: res.data,
+            data: JSON.parse(res.data.stories.content),
+            storyCategories: res.data.genres,
             isLoading: false
-         })
+         });
 
          console.log(res);
       })
       .catch((err) => {
-         console.log(err);
+         // console.log(err);
       });
-
    }
 
    getLinks(p){
@@ -96,7 +99,7 @@ class Create extends Component {
 
    inkResult(){
       let data = this.state.data;
-      let knot = "->" + data[0].name + ".p0\\n";
+      let knot = "->" + data[0].name + ".p0\n";
 
       data.forEach(function(section, i){
          knot+= "=== "+section['name']+"\n";
@@ -110,9 +113,9 @@ class Create extends Component {
                knot+="\t* "+paragraph['choices'][k]+"\n";
                let res = false;
                let p = paragraph['links'][k];
-               data.forEach(function(innerSection, innerI){
-                  if(innerI === p['innerSection']){
-                     res = innerSection['name']+".p"+p['paragraph'];
+               data.forEach(function(section, i){
+                  if(i === p['section']){
+                     res = section['name']+".p"+p['paragraph'];
                   }
                });
                if(!res){
@@ -758,6 +761,7 @@ class Create extends Component {
    save() {
       let data = JSON.stringify(this.state.data);
       let token = this.Auth.getToken();
+      let story_id = this.state.story_id;
       const storyData = new FormData()
 
       storyData.append('title', this.state.story_title);
@@ -766,8 +770,6 @@ class Create extends Component {
       storyData.append('photo', this.state.selectedFile);
       storyData.append('content', data);
 
-      // console.log(storyData.data);
-
       // let storyData = {
       //    title: this.state.story_title,
       //    description: this.state.story_description,
@@ -775,7 +777,8 @@ class Create extends Component {
       //    content: data
       // };
 
-      StoryService.createStory(token, storyData)
+
+      WriterService.updateStory(story_id, token, storyData)
       .then((res) => {
 
          this.props.history.push("/writer");
@@ -795,7 +798,7 @@ class Create extends Component {
             <div className="container-fluid create animated fadeInDown">
                <div className="row no-gutters">
                   <div className="col-12 col-sm-12 col-md-12">
-                     <h1 className="create-title">create story</h1>
+                     <h1 className="create-title">edit story</h1>
                      <hr className="styled-line"/>
                   </div>
                   <div className="col-12 col-sm-12 col-md-3 right-bar">
@@ -852,4 +855,4 @@ class Create extends Component {
    }
 }
 
-export default Create;
+export default Edit;

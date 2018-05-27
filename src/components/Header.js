@@ -76,17 +76,29 @@ class Header extends Component {
                         <Link className="nav-link custom-hover" to="/" onClick={this.toggle}>home</Link>
                      </li>
                      <li className="nav-item">
+                        <Link className="nav-link custom-hover" to="/story" onClick={this.toggle}>story</Link>
+                     </li>
+                     <li className="nav-item">
                         <Link className="nav-link custom-hover" to="/blog" onClick={this.toggle}>blog</Link>
                      </li>
                      <li className="nav-item">
                         <Link className="nav-link custom-hover" to="/documentation" onClick={this.toggle}>documentation</Link>
                      </li>
-                     <li className="nav-item">
-                        <Link className="nav-link custom-hover" to="/create" onClick={this.toggle}>create</Link>
-                     </li>
+                     
                      <li className="nav-item">
                         <Link className="nav-link custom-hover" to="/about" onClick={this.toggle}>about</Link>
                      </li>
+
+                     {
+                        this.props.isLogin ? (
+
+                           <li className="nav-item">
+                              <Link className="nav-link custom-hover" to="/writer" onClick={this.toggle}>writer</Link>
+                           </li>
+                        ) : (
+                           ''
+                        )
+                     }
                      
                      {
                         this.props.isLogin ? (
@@ -94,6 +106,7 @@ class Header extends Component {
                               <a className="nav-link" onClick={this.dropdownToggle}>account <FaCaretDown /></a>
                               <div className={this.state.isDropdownOpen ? 'dropdown-show animated fadeInDown' : 'hide'}>
                                  <Link className="dropdown-list" to="/create" onClick={this.toggle}>my profile</Link>
+                                 <Link className="dropdown-list" to="/profile/history" onClick={this.toggle}>history</Link>
                                  <Link className="dropdown-list" to="/" onClick={(event) => { this.toggle(); this.handleLogout();}}>logout</Link>
                               </div>
                            </li>
@@ -104,13 +117,6 @@ class Header extends Component {
                            </li>
                         )
                      }
-
-                     <li className="nav-item">
-                        <button className="search-button" onClick={this.search}>
-                           <FaSearch />
-                        </button>
-                        <input type="text" className={this.state.isSearch ? 'form-control navbar-search animated lightSpeedIn' : 'form-control navbar-search hide'} placeholder="Search something here"/>
-                     </li>
                   </ul>
                </div>
             </nav>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Link, Element } from 'react-scroll';
+import { Link, Element, animateScroll } from 'react-scroll';
 
 // Service Import
 import DocumentationService from '../services/documentation.service';
@@ -137,6 +137,10 @@ class Documentation extends Component {
       return render_documentation;
    }
 
+   scrollToTop() {
+      animateScroll.scrollToTop();
+   }
+
    render() {
       if(!this.state.isLoading) {
       
@@ -171,6 +175,7 @@ class Documentation extends Component {
                         
                            {/* Documentation Content*/}
                            {this.getDocumentation()}
+                           <button className="btn scroll-top" onClick={this.scrollToTop}>back to top</button>
                         </div>
                      </div>
                   </div>

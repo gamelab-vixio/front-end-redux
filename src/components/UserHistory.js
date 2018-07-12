@@ -27,6 +27,9 @@ class Story extends Component {
    }
 
    componentWillMount() {
+      
+      document.title = "My History";
+
       // Set page to top
       window.scrollTo(0, 0);
 

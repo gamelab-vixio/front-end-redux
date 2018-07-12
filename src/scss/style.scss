@@ -11,7 +11,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
 
 *{
-	box-sizing: border-box;
+   box-sizing: border-box;
    -webkit-box-sizing: border-box;
    image-rendering: -webkit-optimize-contrast;
 }
@@ -2320,7 +2320,7 @@ $custom-black: #08182b;
 
 		.collapse.navbar-collapse.show{
 			display: block;
-			height: 275px;
+			height: 380px;
 			overflow: hidden;
 		}
 

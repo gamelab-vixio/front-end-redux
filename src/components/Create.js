@@ -68,7 +68,6 @@ class Create extends Component {
             isLoading: false
          })
 
-         console.log(res);
       })
       .catch((err) => {
          console.log(err);
@@ -89,8 +88,6 @@ class Create extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
 
       return res;
@@ -130,12 +127,7 @@ class Create extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(knot);
-      })
-
-
-      // console.log(knot);
+      });
    }
 
    /******************************* SECTION (START) *******************************/
@@ -202,10 +194,7 @@ class Create extends Component {
          data: data,
          isLoading: false,
          dataMapping: dataMapping
-      }, () => {
-            console.log('add section data: ', this.state.data);
-            console.log('add section data mapping: ', this.state.dataMapping);
-      });
+      };
 
    }
 
@@ -225,9 +214,7 @@ class Create extends Component {
          this.setState({
             data: data,
             isLoading: false
-         }, () => {
-            // console.log(this.state.data);
-         })
+         });
       }
    }
 
@@ -267,8 +254,6 @@ class Create extends Component {
          this.setState({
             data: data,
             isLoading: false
-         }, () => {
-            console.log('delete section data', data);
          });
 
       }
@@ -289,8 +274,6 @@ class Create extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
 
       let newParagraph = {
@@ -302,7 +285,6 @@ class Create extends Component {
    }
 
    deleteParagraph(sectionIndex, paragraphIndex, lineIndex){
-       console.log('asdasd', this.state.data, sectionIndex, paragraphIndex);
       if(sectionIndex !== 0 || paragraphIndex !== 0){
          let data = this.state.data;
 
@@ -330,9 +312,6 @@ class Create extends Component {
             data: data,
              dataMapping: dataMapping,
             isLoading: false,
-         }, () => {
-            console.log('delete paragraph data: ', data);
-            console.log('delete paragraph data mapping: ', this.state.dataMapping);
          });
       }else{
          alert("Cannot delete first paragraph");
@@ -348,8 +327,6 @@ class Create extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
    }
 
@@ -365,8 +342,6 @@ class Create extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
 
       return data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].length - 1;
@@ -382,8 +357,6 @@ class Create extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
    }
 
@@ -396,11 +369,8 @@ class Create extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
 
-      console.log("thisState" , this.state.data)
    }
 
    /******************************* CHOICES (END) *******************************/
@@ -458,9 +428,6 @@ class Create extends Component {
             clickedChoiceIndex: '',
             dataMapping : dataMapping,
             isSideMenu: false
-         }, () => {
-            console.log("data",data);
-            console.log("map", dataMapping);
          });
       }
    }
@@ -470,8 +437,6 @@ class Create extends Component {
        let dataMapping = this.state.dataMapping;
 
       const { name = false } = data[lineIndex] || {};
-
-      console.log('asdasd')
 
        data[sectionIndex]['paragraphs'][paragraphIndex]['links'][choiceIndex] = {section: 'END'};
       if(name === ""){
@@ -484,9 +449,6 @@ class Create extends Component {
          data: data,
          isLoading: false,
          dataMapping: dataMapping
-      }, () => {
-            console.log("data",data);
-            console.log("map", dataMapping);
       });
    }
 
@@ -497,8 +459,6 @@ class Create extends Component {
 
       this.setState({
          dataMapping: dataMapping
-      }, () => {
-            console.log("rewind map", dataMapping);
       });
    }
 
@@ -522,8 +482,6 @@ class Create extends Component {
 
       this.setState({
          dataMapping: dataMapping
-      }, () => {
-            console.log("map", dataMapping);
       });
    }
 
@@ -779,12 +737,10 @@ class Create extends Component {
    }
 
    handleChange(e) {
-      // console.log("A", e);
       this.setState( {[e.target.name]: e.target.value} );
    }
 
    checkBoxValue = (e) => {
-      // console.log(e.target.value)
       this.setState({
          checked_categories  : [...this.state.checked_categories, e.target.value]
       })
@@ -805,21 +761,11 @@ class Create extends Component {
       storyData.append('photo', this.state.selectedFile);
       storyData.append('content', data);
 
-      // console.log(storyData.data);
-
-      // let storyData = {
-      //    title: this.state.story_title,
-      //    description: this.state.story_description,
-      //    categories: this.state.checked_categories,
-      //    content: data
-      // };
-
       StoryService.createStory(token, storyData)
       .then((res) => {
 
          this.props.history.push("/writer");
 
-         console.log(res.data);
       })
       .catch((err) => {
 

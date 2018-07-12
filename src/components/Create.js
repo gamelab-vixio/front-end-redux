@@ -144,33 +144,41 @@ class Create extends Component {
       let data = this.state.data;
       let dataMapping = this.state.dataMapping;
       data.forEach(function(item, i){
-         if(newSection === item['name']){
+         if(newSection === item['name'] && item['name'] !== ''){
             alert("Section named "+ newSection + " is already there");
             exist = false;
          }
       });
 
-      if(exist && paragraphIndex === -1){
-         data.push({
-            name: newSection,
-            paragraphs: [{
-               content: "",
-               choices: [],
-               links:[]
-            }]
-         });
-
-         dataMapping.push(
-         {
-            section: data.length - 1,
-            paragraph: 0,
-            choice: '',
-            linkS: '',
-            linkP: ''
-         }
-      );
+      if(!exist) {
+         return;
       }
-      else{
+
+
+
+      data.push({
+        name: newSection,
+        paragraphs: [{
+            content: "",
+            choices: [],
+            links:[]
+        }]
+      });
+
+       const choiceIndex = this.addChoice(sectionIndex, paragraphIndex);
+
+       this.editLink(sectionIndex, paragraphIndex, choiceIndex, data.length - 1, 0);
+
+      /*dataMapping.push({
+         section: data.length - 1,
+         paragraph: 0,
+         choice: '',
+         linkS: '',
+         linkP: ''
+      });*/
+
+
+      /*else{
          data.push({
             name: newSection,
             paragraphs: [data[sectionIndex]['paragraphs'][paragraphIndex]]
@@ -188,17 +196,17 @@ class Create extends Component {
                });
             });
          });
-      }
+      }*/
 
       this.setState({
          data: data,
          isLoading: false,
          dataMapping: dataMapping
       }, () => {
-            // console.log(this.state.data);
-      })
+            console.log('add section data: ', this.state.data);
+            console.log('add section data mapping: ', this.state.dataMapping);
+      });
 
-      console.log(this.state.data);
    }
 
    editSection(oldSectionIndex, e){
@@ -226,8 +234,17 @@ class Create extends Component {
    deleteSection(sectionIndex){
       if(sectionIndex !== 0) {
          let data = this.state.data;
-         //change link
          let upperSectionLength = data[sectionIndex-1]['paragraphs'].length;
+          //change link of the parent section
+          data[sectionIndex-1]['paragraphs'].forEach(function(item, i){
+              item['links'].forEach(function(link, j){
+                  if(link.hasOwnProperty('paragraph') && link['section'] === sectionIndex){
+                      link['paragraph']+=upperSectionLength;
+                      link['section'] = sectionIndex-1;
+                  }
+              })
+          });
+          //change link of the deleted section
          data[sectionIndex]['paragraphs'].forEach(function(item, i){
             item['links'].forEach(function(link, j){
                if(link.hasOwnProperty('paragraph') && link['section'] === sectionIndex){
@@ -245,11 +262,13 @@ class Create extends Component {
 
          data.splice(sectionIndex, 1);
 
+         this.rewindStory(sectionIndex-1);
+
          this.setState({
             data: data,
             isLoading: false
          }, () => {
-            console.log(data);
+            console.log('delete section data', data);
          });
 
       }
@@ -282,8 +301,9 @@ class Create extends Component {
       return newParagraph;
    }
 
-   deleteParagraph(sectionIndex, paragraphIndex){
-      if(sectionIndex !== 0){
+   deleteParagraph(sectionIndex, paragraphIndex, lineIndex){
+       console.log('asdasd', this.state.data, sectionIndex, paragraphIndex);
+      if(sectionIndex !== 0 || paragraphIndex !== 0){
          let data = this.state.data;
 
          data[sectionIndex]['paragraphs'].splice(paragraphIndex, 1);
@@ -293,22 +313,29 @@ class Create extends Component {
                paragraph['links'].forEach(function(link, k){
                   if(link['section'] === sectionIndex && link['paragraph'] === paragraphIndex){
                      paragraph['choices'].splice(k, 1);
-                     paragraph['choices'].splice(k, 1);
+                     paragraph['links'].splice(k, 1);
                   }
                });
             });
          });
 
-         sectionIndex = data.length - 1;
+         if(data[sectionIndex].name === "" && data[sectionIndex]['paragraphs'].length === 0 ){
+            this.deleteSection(sectionIndex);
+         }
+
+         const dataMapping = this.state.dataMapping;
+         dataMapping.splice(lineIndex, 1);
 
          this.setState({
             data: data,
-            isLoading: false
+             dataMapping: dataMapping,
+            isLoading: false,
          }, () => {
-            console.log(data);
+            console.log('delete paragraph data: ', data);
+            console.log('delete paragraph data mapping: ', this.state.dataMapping);
          });
       }else{
-         alert("Cannot delete first section");
+         alert("Cannot delete first paragraph");
       }
    }
 
@@ -329,10 +356,10 @@ class Create extends Component {
    /******************************* PARAGRAPH (END) *******************************/
 
    /******************************* CHOICES (START) *******************************/
-   addChoice(sectionIndex, paragraphIndex, choiceText){
+   addChoice(sectionIndex, paragraphIndex){
       let data = this.state.data;
 
-      data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].push(choiceText);
+      data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].push('');
       data[sectionIndex]['paragraphs'][paragraphIndex]['links'].push({section:'END'});
 
       this.setState({
@@ -341,6 +368,8 @@ class Create extends Component {
       }, () => {
          console.log(data);
       });
+
+      return data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].length - 1;
    }
 
    editChoice(sectionIndex, paragraphIndex, choiceIndex, e){
@@ -427,7 +456,8 @@ class Create extends Component {
             clickedIndex: '',
             clickedParagraphIndex: '',
             clickedChoiceIndex: '',
-            dataMapping : dataMapping
+            dataMapping : dataMapping,
+            isSideMenu: false
          }, () => {
             console.log("data",data);
             console.log("map", dataMapping);
@@ -437,11 +467,18 @@ class Create extends Component {
 
    deleteLink(sectionIndex, paragraphIndex, choiceIndex, lineIndex){
       let data = this.state.data;
+       let dataMapping = this.state.dataMapping;
 
-      data[sectionIndex]['paragraphs'][paragraphIndex]['links'][choiceIndex] = {section: 'END'};
+      const { name = false } = data[lineIndex] || {};
 
-      let dataMapping = this.state.dataMapping;
-      dataMapping.splice(lineIndex, 1);
+      console.log('asdasd')
+
+       data[sectionIndex]['paragraphs'][paragraphIndex]['links'][choiceIndex] = {section: 'END'};
+      if(name === ""){
+          this.deleteSection(lineIndex);
+      }
+
+       dataMapping.splice(lineIndex, 1);
 
       this.setState({
          data: data,
@@ -455,13 +492,13 @@ class Create extends Component {
 
    rewindStory(lineIndex){
       let dataMapping = this.state.dataMapping;
-   
+
       dataMapping.splice(lineIndex+1, dataMapping.length - 1 - lineIndex);
 
       this.setState({
          dataMapping: dataMapping
       }, () => {
-            console.log("map", dataMapping);
+            console.log("rewind map", dataMapping);
       });
    }
 
@@ -501,9 +538,9 @@ class Create extends Component {
 
    renderStory() {
       let renderData = this.state.dataMapping.map((line, l_index) => {
-         
+
          return(
-      
+
             this.state.data.map((section, index) => {
                if(line.section === index){
                   return(
@@ -516,12 +553,12 @@ class Create extends Component {
                                        <div className="section-title-wrapper">                           
                                           <label>section</label>
                                           <TextareaAutosize className="form-control add-section" rows={1} placeholder="Section name" autoComplete="off" value={section.name} onChange={(e) => this.editSection(index, e)}/>
-                                          <button className="btn add-section-button" onClick={() => this.addSection('',index)}><FaPlus size={15}/> section</button>
+                                          <button className="btn add-section-button" onClick={() => this.addSection('',index, p_index)}><FaPlus size={15}/> section</button>
                                           <button className="btn delete-option-button" onClick={() => this.deleteSection(index)}><FaPlus size={15}/> section</button>                                             
                                        </div>
                                        <div className="paragraph-wrapper">
                                           <TextareaAutosize className="paragraph" rows={5} placeholder={paragraph.content} onChange={(e) => this.editParagraphText(index, p_index, e)} autoComplete="off" />
-                                          <button className="btn delete-option-button" onClick={() => this.deleteParagraph(index, p_index)}><FaPlus size={15}/> paragraph</button>
+                                          <button className="btn delete-option-button" onClick={() => this.deleteParagraph(index, p_index, l_index)}><FaPlus size={15}/> paragraph</button>
                                        </div>   
                                        {
                                           paragraph.choices.map((choice, c_index) => {
@@ -560,7 +597,7 @@ class Create extends Component {
                                              }
                                           })
                                        }
-                                       <button className="btn add-option-button" onClick={() => this.addChoice(index, p_index, '')}><FaPlus size={15}/> option</button>
+                                       <button className="btn add-option-button" onClick={() => this.addChoice(index, p_index)}><FaPlus size={15}/> option</button>
                                     </div>
                                  </div>
                               )
@@ -574,7 +611,7 @@ class Create extends Component {
                                  <div key={l_index+''+index+''+p_index} className="section-block">
                                     <div className="col-md-12 section-wrapper">
                                        <div className="section-title-wrapper"> 
-                                          <label onClick={() => this.rewindStory(l_index)}>Back</label>
+                                          <label onClick={() => this.rewindStory(l_index)} className="back-button" >Back</label>
                                           <label>section</label>
                                           <TextareaAutosize className="form-control add-section" rows={1} placeholder="Section name" autoComplete="off" value={section.name} onChange={(e) => this.editSection(index, e)}/>
                                        </div>
@@ -609,7 +646,7 @@ class Create extends Component {
                                        }
                                     </div>
                                     <div className="section-link-wrapper">
-                                       <div className="section-link" onClick={() => this.deleteLink(line.section, line.paragraph, line.choice, l_index+1 )}></div>
+                                       <div className="section-link" onClick={() => this.deleteLink(line.section, line.paragraph, line.choice, l_index+1 )} />
                                     </div>
                                  </div>
                               )
@@ -623,7 +660,7 @@ class Create extends Component {
                                  <div key={l_index+''+index+''+p_index} className="section-block">
                                     <div className="col-md-12 section-wrapper">
                                        <div className="section-title-wrapper">
-                                          <label onClick={() => this.rewindStory(l_index)}>Back</label>                       
+                                          <label onClick={() => this.rewindStory(l_index)} className="back-button" >Back</label>
                                           <label>section</label>
                                           <TextareaAutosize className="form-control add-section" rows={1} placeholder="Section name" autoComplete="off" value={section.name} onChange={(e) => this.editSection(index, e)}/>
                                        </div>
@@ -732,8 +769,8 @@ class Create extends Component {
                         )
                      }, this)
                   }
-                        
-               
+
+
             </div>
          )
       });
@@ -821,24 +858,19 @@ class Create extends Component {
                         </div>
                      </div>
                   </div>
-                  {
-                     this.state.isSideMenu ? (
-                        <div className="col-12 col-sm-12 col-md-3 side-bar">
-                           <div className="side-bar-wrapper">
-                              <div className="top-menu text-center">
-                                 <button className="btn" onClick={() => this.editLink(this.state.clickedIndex, this.state.clickedParagraphIndex, this.state.clickedChoiceIndex)}>new paragraph</button>
-                              </div>
-                              <hr/>
-                              <div className="bottom-menu">
-                                 <h1>contents</h1>
-                                    {this.renderContents()}
-                              </div>   
-                           </div>   
+                  <div className="col-12 col-sm-12 col-md-3 side-bar">
+                     <div className="side-bar-wrapper">
+                         { this.state.isSideMenu && (<h3 className="create-title link-to">Link to...</h3>)}
+                        <div className="top-menu text-center">
+                            <button className="btn" onClick={() => this.editLink(this.state.clickedIndex, this.state.clickedParagraphIndex, this.state.clickedChoiceIndex)}>new paragraph</button>
                         </div>
-                     ) : (
-                        ''
-                     )
-                  }
+                        <hr/>
+                        <div className="bottom-menu">
+                           <h1>contents</h1>
+                           {this.renderContents()}
+                        </div>
+                     </div>
+                  </div>
                   <div className="col-sm-12 col-md-12">
                      <div className="bottom-wrapper text-center">
                         <button className="btn save-and-quit" onClick={this.save}>save and quit</button>

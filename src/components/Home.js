@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import Slider from 'react-slick';
 import TextTruncate from 'react-text-truncate';
-import FaSearch from 'react-icons/lib/fa/search';
 import FaStars from 'react-icons/lib/fa/star';
 // import FaStarO from 'react-icons/lib/fa/star-o';
 
@@ -63,7 +62,7 @@ class Home extends Component {
                   {               
                      all_stories.data.map((story, index) => {
                         return(
-                           <div key={story.id} className="col-sm-2 col-md-2 story-box-wrapper d-flex">
+                           <div key={story.id} className="col-sm-4 col-md-4 col-lg-2 story-box-wrapper">
                               <div className="card story-box">
                                  <div className="card-header">
                                     <div className="image-wrapper">
@@ -126,10 +125,10 @@ class Home extends Component {
                            {/*Desktop version*/}
                            <div className="story-category-wrapper desktop-version">
                               <h1 className="category-title text-center">Top Search in This Month</h1>                     
-                              <Slider {...settings}>
+                              {/* <Slider {...settings}> */}
                                  {this.renderStoryCard()}
                                  {/*this.retrieveStoryData(2)*/}
-                              </Slider>
+                              {/* </Slider> */}
                            </div>
 
 

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
-import FaSearch from 'react-icons/lib/fa/search';
 import FaCaretDown from 'react-icons/lib/fa/caret-down';
 
 // Service Import

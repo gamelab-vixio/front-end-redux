@@ -284,7 +284,7 @@ class BlogDetail extends Component {
          return (
             <div className="container-fluid blog-detail animated fadeInDownBig">
                <div className="row no-gutters">
-                  <div className="col-12 col-sm-12 col-md-6 offset-md-3">
+                  <div className="col-12 col-sm-12 col-md-12 col-lg-6 offset-lg-3">
                      <div className="blog-detail-read">
                         
                         {/*Render Blog*/}

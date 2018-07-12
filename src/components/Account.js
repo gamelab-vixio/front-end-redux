@@ -210,7 +210,7 @@ class Login extends Component {
       return (
          <div className="container-fluid account animated fadeInDown">
             <div className="row no-gutters">
-               <div className="col-12 col-sm-6 col-md-4 offset-md-4">
+               <div className="col-12 col-sm-6 col-md-6 col-lg-4 offset-md-3 offset-lg-4">
                   <h1 className="login-title">login</h1>
                   <hr className="styled-line"/>
                   <form onSubmit={this.handleLoginSubmit}>
@@ -232,7 +232,7 @@ class Login extends Component {
             </div>
        
             <div className="row no-gutters">
-               <div className="col-12 col-sm-6 col-md-4 offset-md-4">
+               <div className="col-12 col-sm-6 col-md-6 col-lg-4 offset-md-3 offset-lg-4">
                   <div className="register">
                      <h1 className="divider">
                         <span>or</span>

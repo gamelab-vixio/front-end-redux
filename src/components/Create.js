@@ -58,6 +58,8 @@ class Create extends Component {
 
    componentWillMount() {
 
+      document.title = "Create Story";
+
       StoryService.getStoryCategories()
       .then((res) => {
          

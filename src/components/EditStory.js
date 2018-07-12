@@ -58,6 +58,8 @@ class Edit extends Component {
 
    componentWillMount() {
 
+      document.title = "Edit Story";
+      
       let token = this.Auth.getToken();
       let story_id = this.state.story_id;
 

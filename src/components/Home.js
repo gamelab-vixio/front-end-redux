@@ -23,6 +23,9 @@ class Home extends Component {
    }
 
    componentWillMount() {
+
+		document.title = "Home";	
+		
       // Set page to top
       window.scrollTo(0, 0);
       

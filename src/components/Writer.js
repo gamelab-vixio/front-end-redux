@@ -30,6 +30,8 @@ class Writer extends Component {
    }
 
    componentWillMount() {
+      document.title = "Writer";
+      
       // Set page to top
       window.scrollTo(0, 0);
 

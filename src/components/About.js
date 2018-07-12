@@ -7,6 +7,8 @@ class About extends Component {
    
    // Set page to top
    componentWillMount(){
+      document.title = "About";
+
       window.scrollTo(0, 0);
    }
 

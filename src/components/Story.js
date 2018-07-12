@@ -30,6 +30,9 @@ class Story extends Component {
    }
 
    componentWillMount() {
+      
+      document.title = "Story";
+
       // Set page to top
       window.scrollTo(0, 0);
 

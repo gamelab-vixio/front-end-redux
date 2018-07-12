@@ -29,6 +29,7 @@ class Writer extends Component {
    }
 
    componentWillMount() {
+      document.title = "Play Story";
 
       // Set page to top
       window.scrollTo(0, 0);

@@ -45,6 +45,9 @@ class Login extends Component {
 
    // Set page to top
    componentWillMount(){
+
+      document.title = "Account";
+      
       window.scrollTo(0, 0);
    }
 

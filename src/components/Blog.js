@@ -22,6 +22,9 @@ class Blog extends Component {
    }
 
    componentWillMount() {
+		
+		document.title = "Blog";
+
       // Set page to top
       window.scrollTo(0, 0);
 

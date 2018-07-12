@@ -194,7 +194,7 @@ class Create extends Component {
          data: data,
          isLoading: false,
          dataMapping: dataMapping
-      };
+      });
 
    }
 

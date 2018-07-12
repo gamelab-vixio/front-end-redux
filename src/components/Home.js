@@ -23,7 +23,7 @@ class Home extends Component {
 
    componentWillMount() {
 
-		document.title = "Home";	
+		document.title = "Vixio - Home";	
 		
       // Set page to top
       window.scrollTo(0, 0);

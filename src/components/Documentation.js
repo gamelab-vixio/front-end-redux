@@ -21,7 +21,7 @@ class Documentation extends Component {
 
    componentWillMount() {
 
-      document.title = "Documentation";
+      document.title = "Vixio - Documentation";
 
       // Set page to top
       window.scrollTo(0, 0);

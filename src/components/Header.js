@@ -104,7 +104,7 @@ class Header extends Component {
                            <li className="nav-item user-dropdown-menu">
                               <a className="nav-link" onClick={this.dropdownToggle}>account <FaCaretDown /></a>
                               <div className={this.state.isDropdownOpen ? 'dropdown-show animated fadeInDown' : 'hide'}>
-                                 <Link className="dropdown-list" to="/create" onClick={this.toggle}>my profile</Link>
+                                 <Link className="dropdown-list" to="/profile" onClick={this.toggle}>my profile</Link>
                                  <Link className="dropdown-list" to="/profile/history" onClick={this.toggle}>history</Link>
                                  <Link className="dropdown-list" to="/" onClick={(event) => { this.toggle(); this.handleLogout();}}>logout</Link>
                               </div>

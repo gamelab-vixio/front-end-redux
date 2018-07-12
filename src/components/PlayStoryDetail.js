@@ -54,6 +54,8 @@ class PlayStoryDetail extends Component {
 
    componentWillMount() {
       // Set page to top
+      document.title = "Vixio - Story Info";
+
       window.scrollTo(0, 0);
       
       let story_id = this.state.story_id;

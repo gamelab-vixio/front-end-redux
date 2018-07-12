@@ -7,7 +7,7 @@ class About extends Component {
    
    // Set page to top
    componentWillMount(){
-      document.title = "About";
+      document.title = "Vixio - About";
 
       window.scrollTo(0, 0);
    }

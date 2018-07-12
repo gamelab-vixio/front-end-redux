@@ -58,7 +58,7 @@ class Create extends Component {
 
    componentWillMount() {
 
-      document.title = "Create Story";
+      document.title = "Vixio - Create Story";
 
       StoryService.getStoryCategories()
       .then((res) => {

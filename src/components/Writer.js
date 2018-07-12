@@ -30,8 +30,8 @@ class Writer extends Component {
    }
 
    componentWillMount() {
-      document.title = "Writer";
-      
+      document.title = "Vixio - Writer Dashboard";
+
       // Set page to top
       window.scrollTo(0, 0);
 

@@ -46,7 +46,7 @@ class Login extends Component {
    // Set page to top
    componentWillMount(){
 
-      document.title = "Account";
+      document.title = "Vixio - Account";
       
       window.scrollTo(0, 0);
    }

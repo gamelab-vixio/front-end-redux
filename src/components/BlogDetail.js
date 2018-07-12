@@ -41,6 +41,7 @@ class BlogDetail extends Component {
 
    componentWillMount() {
       // Set page to top
+      document.title = "Vixio - Blog Content";
       window.scrollTo(0, 0);
       
       let passed_blog_id = this.state.blog_id;

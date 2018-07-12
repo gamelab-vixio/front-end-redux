@@ -30,7 +30,7 @@ class UserProfile extends Component {
    }
 
    componentWillMount() {
-      document.title = "My Profile";
+      document.title = "Vixio - My Profile";
 
       // Set page to top
       window.scrollTo(0, 0);

@@ -94,8 +94,6 @@ class Writer extends Component {
             isThx: true
          })
 
-         this.props.history.push("/story/" + this.state.story_id);
-
          // console.log(res);
       })
       .catch((err) => {
@@ -150,6 +148,10 @@ class Writer extends Component {
       });
    }
 
+   backToStoryList() {
+      this.props.history.push("/story/" + this.state.story_id);
+   }
+
    render() {
 
       if(!this.state.isLoading) {
@@ -196,6 +198,9 @@ class Writer extends Component {
                         this.state.isThx ? (
                            <div className="review animated fadeIn">
                               <h1>thank you for reviewing this story!</h1>
+                              <div className="play-read">    
+                                 <button className="btn start-read" onClick={(e) => {this.backToStoryList()}}>back to story info</button>
+                              </div>
                            </div>
                         ) : (
                            ''

@@ -94,7 +94,7 @@ class PlayStoryDetail extends Component {
             isLoading: false
          })
 
-         console.log(res.data);
+         // console.log(res.data);
       })
       .catch((err) => {
          // console.log(err);
@@ -117,9 +117,9 @@ class PlayStoryDetail extends Component {
                      all_stories.map((story, index) => {
                         return(
                            <div className="item-based-list" key={story.id}>
-                              <Link to={"/story/" + story.id}>
+                              <a href={"/story/" + story.id}>
                                  <h2>{story.title}</h2>
-                              </Link>
+                              </a>
                            </div>
                         )
                      })

@@ -149,8 +149,6 @@ class StoryDetail extends Component {
          });
       });
 
-      // console.log(knot);
-
       const inkData = new FormData();
 
       inkData.append('ink', knot);

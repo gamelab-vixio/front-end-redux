@@ -39,6 +39,7 @@ class Home extends Component {
       
       this.retrieveMostPopular();
       this.retrieveNewAvailable();
+      this.retrieveUserBased();
    }
 
    retrieveMostPopular() {
@@ -83,7 +84,7 @@ class Home extends Component {
             isLoading: false
          })
 
-         // console.log(res.data);
+         console.log(res.data);
       })
       .catch((err) => {
          // console.log(err);
@@ -196,7 +197,7 @@ class Home extends Component {
 
       let all_stories = this.state.userBased;
 
-      console.log(all_stories);
+      // console.log(all_stories);
 
       return(
 
@@ -263,19 +264,19 @@ class Home extends Component {
                            <div>
                               <div className="story-category-wrapper">
                                  <h1 className="category-title text-center">Most Popular</h1>                     
-                                    {this.renderMostPopular()}
+                                 {this.renderMostPopular()}
                               </div>
 
                               <div className="story-category-wrapper">
                                  <h1 className="category-title text-center">New Available</h1>                     
-                                    {this.renderNewAvailable()}
+                                 {this.renderNewAvailable()}
                               </div>
                               
                               {
                                  this.props.isLogin ? (
                                     <div className="story-category-wrapper">
                                        <h1 className="category-title text-center">User Based</h1>                     
-                                          {this.renderUserBased()}
+                                       {this.renderUserBased()}
                                     </div>
                                  ) : (
                                     ''

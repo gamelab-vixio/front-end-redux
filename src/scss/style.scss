@@ -1032,6 +1032,57 @@ $custom-black: #08182b;
 				}
 			}
 		}
+
+		.similar-stories-wrapper{
+			position: relative;
+			padding: 0 15px !important;
+
+			h1{
+				position: relative;
+				margin-bottom: 15px;
+				padding-bottom: 5px;
+				border-bottom: 1px solid $custom-pink;
+				text-align: center;
+				text-transform: capitalize;
+				font-size: 20px;
+				color: $custom-pink;
+			}
+
+			.similar-stories{
+				position: relative;
+				padding: 15px 15px 0 15px;
+				background-color: $custom-black;
+				border-radius: 5px;
+
+				.similar-stories-box{
+					position: relative;
+					text-align: center;
+					
+					.item-based-list{
+						width: 100%;
+								
+						a{
+							position: relative;
+							text-decoration: none;
+							
+							h2{
+								position: relative;
+								margin-bottom: 0;
+								padding-bottom: 15px;
+								text-transform: capitalize;
+								vertical-align: middle;
+								font-size: 14px;
+								color: $custom-white;
+
+								&:hover{
+									color: $custom-pink;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 

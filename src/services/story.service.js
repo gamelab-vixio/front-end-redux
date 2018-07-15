@@ -60,6 +60,9 @@ export default {
 	},
 	userBased(token){
 		return axios.get(this.url + '/getUserBased/?token=' + token)
+	},
+	itemBased(storyId){
+		return axios.get(this.url + '/getItemBased/' + storyId);
 	}
 }
 

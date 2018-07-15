@@ -32,7 +32,8 @@ class PlayStoryDetail extends Component {
          isReply: false,
          commentChild: '',
          commentParent: '',
-         display_message: ['Show Reply', 'Hide Reply']
+         display_message: ['Show Reply', 'Hide Reply'],
+         itemBased: []
       };
 
       this.Auth = new AuthService();
@@ -76,7 +77,7 @@ class PlayStoryDetail extends Component {
             story_read: res.data,
             isLoading: false
          }, () => {
-            console.log(this.state.global_status_comment)
+            // console.log(this.state.global_status_comment)
          });
 
          // console.log(res.data);
@@ -84,6 +85,50 @@ class PlayStoryDetail extends Component {
       .catch((err) => {
          // console.log(err);
       });
+
+      StoryService.itemBased(story_id)
+      .then((res) => {
+
+         this.setState({
+            itemBased: res.data,
+            isLoading: false
+         })
+
+         console.log(res.data);
+      })
+      .catch((err) => {
+         // console.log(err);
+      });
+   }
+
+   renderItemBased() {
+
+      let all_stories = this.state.itemBased;
+
+      // console.log(all_stories);
+
+      return(
+
+         <div className="row no-gutters">
+            <div className="col-12 col-sm-12 col-md-12">
+               <div className="row no-gutters story-row">
+                  
+                  {               
+                     all_stories.map((story, index) => {
+                        return(
+                           <div className="item-based-list" key={story.id}>
+                              <Link to={"/story/" + story.id}>
+                                 <h2>{story.title}</h2>
+                              </Link>
+                           </div>
+                        )
+                     })
+                  }
+
+               </div>
+            </div>
+         </div>
+      );
    }
 
    getComment() {
@@ -476,6 +521,14 @@ class PlayStoryDetail extends Component {
                            }
                         </div>
                         <Alert stack={{limit: 3}} timeout={5000} html={true} />
+                     </div>
+                  </div>
+                  <div className="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-4 similar-stories-wrapper">
+                     <div className="similar-stories">
+                        <h1>similar stories</h1>
+                        <div className="similar-stories-box">
+                           {this.renderItemBased()}
+                        </div>
                      </div>
                   </div>
                </div>   

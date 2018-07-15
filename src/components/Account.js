@@ -210,7 +210,7 @@ class Login extends Component {
       return (
          <div className="container-fluid account animated fadeInDown">
             <div className="row no-gutters">
-               <div className="col-12 col-sm-6 col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+               <div className="col-12 col-sm-9 col-md-9 col-lg-6 col-xl-6 offset-sm-2 offset-md-2 offset-lg-3 offset-xl-3">
                   <h1 className="login-title">login</h1>
                   <hr className="styled-line"/>
                   <form onSubmit={this.handleLoginSubmit}>
@@ -223,7 +223,7 @@ class Login extends Component {
                         <input type="password" className="form-control" id="login-password" value={loginPassword} name="loginPassword" placeholder="Enter your password" autoComplete="off" onChange={this.handleLoginValue}/>
                         <span className="error-message">{loginErrorMessage.password}</span>
 
-                        <div className="col-12 col-sm-12 col-md-12 text-right button-wrapper">
+                        <div className="text-right button-wrapper">
                            <button type="submit" className="btn btn-outline-primary manual-signin-button">login</button>
                         </div>
                      </div>
@@ -232,7 +232,7 @@ class Login extends Component {
             </div>
        
             <div className="row no-gutters">
-               <div className="col-12 col-sm-6 col-md-6 col-lg-4 offset-md-3 offset-lg-4">
+               <div className="col-12 col-sm-9 col-md-9 col-lg-6 col-xl-6 offset-sm-2 offset-md-2 offset-lg-3 offset-xl-3">
                   <div className="register">
                      <h1 className="divider">
                         <span>or</span>

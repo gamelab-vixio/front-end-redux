@@ -7361,6 +7361,10 @@ $custom-black: #08182b;
   and (min-width: 992px) {
 
 	/*------------ Header ------------*/
+	.navbar.navbar-expand-lg .collapse.navbar-collapse.show, .navbar.navbar-expand-lg .collapse.navbar-collapse.hide{
+		height: 0;
+	}
+
 	.navbar.navbar-expand-lg{
 		padding: 0 0 0 30px;
 		border-color: $custom-black !important;
@@ -7413,7 +7417,7 @@ $custom-black: #08182b;
 					box-shadow: 0 0 0 0.2rem rgba(238,37,96, 0.5) !important;
 					color: $custom-black;
   				}
-  			}
+			}
 
   			.hide{
   				display: none;
@@ -9918,6 +9922,10 @@ $custom-black: #08182b;
   and (min-width: 1200px) {
 
 	/*------------ Header ------------*/
+	.navbar.navbar-expand-lg .collapse.navbar-collapse.show, .navbar.navbar-expand-lg .collapse.navbar-collapse.hide{
+		height: 0;
+	}
+
 	.navbar.navbar-expand-lg{
 		padding: 0 0 0 30px;
 		border-color: $custom-black !important;

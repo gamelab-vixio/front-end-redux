@@ -155,13 +155,13 @@ class Documentation extends Component {
                      <hr className="styled-line"/>
                      
                      <div className="row no-gutters documentation-read">
-                        <div className="col-12 col-sm-12 col-md-3 left-content">
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 left-content">
                            <ul>
                               {this.getDocumentationLeftContent()}
                            </ul>
                         </div>
                      
-                        <div className="col-12 col-sm-12 col-md-9 right-content">                     
+                        <div className="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9 right-content">                     
 
                            <div className="first-level-select">
                               <label className="select-title-label" htmlFor="select_title">Select Title</label>

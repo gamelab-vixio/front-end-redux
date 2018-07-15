@@ -1788,7 +1788,7 @@ $custom-black: #08182b;
 						padding-bottom: 5px;
 						text-transform: capitalize;
 						font-size: 18px;
-						color: $custom-black;
+						color: $custom-pink;
 
 						&:before{
 							content:'# ';
@@ -1827,7 +1827,7 @@ $custom-black: #08182b;
 						text-transform: capitalize;
 						font-weight: bold;
 						font-size: 22px;
-						color: $custom-black;
+						color: $custom-pink;
 
 						&:before{
 							content:'# ';
@@ -3770,32 +3770,13 @@ $custom-black: #08182b;
 			font-size: 24px;
 			color: $custom-black;
 		}
-
 		.documentation-read{
 			
 			.left-content{
-				position: relative;
-				padding: 18px 15px 15px 15px;
-
-				ul{
-
-					li{
-						margin-bottom: 30px;
-						text-transform: capitalize;
-						font-size: 14px;
-						color: $custom-black;
-						cursor: pointer;
-
-						&:hover{
-							font-weight: bold;
-						}
-					}
-				}
+				display: none;
 			}
-
+			
 			.right-content{
-				position: relative;
-				padding: 15px;
 
 				.documentation-subtitle{
 					position: relative;
@@ -3808,7 +3789,12 @@ $custom-black: #08182b;
 				
 				// Select Box
 				.first-level-select{
-					display: none;
+					position: relative;
+					margin-top: 5px;
+
+					.select-title-label{
+						font-size: 14px;
+					}
 				}
 
 				.first-level{
@@ -3817,15 +3803,16 @@ $custom-black: #08182b;
 					h1{
 						margin-bottom: 35px;
 						text-transform: capitalize;
-						font-size: 24px;
+						font-size: 22px;
 					}
 				}
 				
 				// Table Of Contents
 				h1.first-level-toc{
 					position: relative;
+					margin-top: 30px;
 					text-transform: capitalize;
-					font-size: 32px;
+					font-size: 28px;
 				}
 
 				.second-level-toc{
@@ -3836,13 +3823,8 @@ $custom-black: #08182b;
 						display: inline-block;
 						padding-bottom: 5px;
 						text-transform: capitalize;
-						font-size: 20px;
+						font-size: 18px;
 						color: $custom-pink;
-						cursor: pointer;
-
-						&:hover{
-							font-weight: bold;
-						}
 
 						&:before{
 							content:'# ';
@@ -3855,13 +3837,8 @@ $custom-black: #08182b;
 
 						a{
 							text-transform: capitalize;
-							font-size: 16px;
+							font-size: 14px;
 							color: $custom-black;
-							cursor: pointer;
-
-							&:hover{
-								font-weight: bold;
-							}
 
 							&:before{
 								content:'# ';
@@ -3885,7 +3862,7 @@ $custom-black: #08182b;
 						margin-bottom: 30px;
 						text-transform: capitalize;
 						font-weight: bold;
-						font-size: 24px;
+						font-size: 22px;
 						color: $custom-pink;
 
 						&:before{
@@ -3901,15 +3878,15 @@ $custom-black: #08182b;
 							position: relative;
 							margin-bottom: 15px;
 							text-transform: capitalize;
-							font-size: 20px;
+							font-size: 18px;
 							color: $custom-black;
 						}
 
 						p{
 							position: relative;
 							text-align: left;
+							font-size: 14px;
 							line-height: 2em;
-							font-size: 16px;
 							color: $custom-black;
 
 							&:first-letter{
@@ -6404,28 +6381,10 @@ $custom-black: #08182b;
 		.documentation-read{
 			
 			.left-content{
-				position: relative;
-				padding: 18px 15px 15px 15px;
-
-				ul{
-
-					li{
-						margin-bottom: 30px;
-						text-transform: capitalize;
-						font-size: 14px;
-						color: $custom-black;
-						cursor: pointer;
-
-						&:hover{
-							font-weight: bold;
-						}
-					}
-				}
+				display: none;
 			}
-
+			
 			.right-content{
-				position: relative;
-				padding: 15px;
 
 				.documentation-subtitle{
 					position: relative;
@@ -6438,7 +6397,12 @@ $custom-black: #08182b;
 				
 				// Select Box
 				.first-level-select{
-					display: none;
+					position: relative;
+					margin-top: 5px;
+
+					.select-title-label{
+						font-size: 14px;
+					}
 				}
 
 				.first-level{
@@ -6447,15 +6411,16 @@ $custom-black: #08182b;
 					h1{
 						margin-bottom: 35px;
 						text-transform: capitalize;
-						font-size: 24px;
+						font-size: 22px;
 					}
 				}
 				
 				// Table Of Contents
 				h1.first-level-toc{
 					position: relative;
+					margin-top: 30px;
 					text-transform: capitalize;
-					font-size: 32px;
+					font-size: 28px;
 				}
 
 				.second-level-toc{
@@ -6466,13 +6431,8 @@ $custom-black: #08182b;
 						display: inline-block;
 						padding-bottom: 5px;
 						text-transform: capitalize;
-						font-size: 20px;
+						font-size: 18px;
 						color: $custom-pink;
-						cursor: pointer;
-
-						&:hover{
-							font-weight: bold;
-						}
 
 						&:before{
 							content:'# ';
@@ -6485,13 +6445,8 @@ $custom-black: #08182b;
 
 						a{
 							text-transform: capitalize;
-							font-size: 16px;
+							font-size: 14px;
 							color: $custom-black;
-							cursor: pointer;
-
-							&:hover{
-								font-weight: bold;
-							}
 
 							&:before{
 								content:'# ';
@@ -6515,7 +6470,7 @@ $custom-black: #08182b;
 						margin-bottom: 30px;
 						text-transform: capitalize;
 						font-weight: bold;
-						font-size: 24px;
+						font-size: 22px;
 						color: $custom-pink;
 
 						&:before{
@@ -6531,15 +6486,15 @@ $custom-black: #08182b;
 							position: relative;
 							margin-bottom: 15px;
 							text-transform: capitalize;
-							font-size: 20px;
+							font-size: 18px;
 							color: $custom-black;
 						}
 
 						p{
 							position: relative;
 							text-align: left;
+							font-size: 14px;
 							line-height: 2em;
-							font-size: 16px;
 							color: $custom-black;
 
 							&:first-letter{
@@ -8965,6 +8920,7 @@ $custom-black: #08182b;
 		.documentation-read{
 			
 			.left-content{
+				display: block;
 				position: relative;
 				padding: 18px 15px 15px 15px;
 
@@ -11526,6 +11482,7 @@ $custom-black: #08182b;
 		.documentation-read{
 			
 			.left-content{
+				display: block;
 				position: relative;
 				padding: 18px 15px 15px 15px;
 

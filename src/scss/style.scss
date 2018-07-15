@@ -40,7 +40,7 @@ body{
 	
 	// CSS Loader
 	.loader{
-		height: 66vh;
+		height: 100vh;
 
 		.sk-cube-grid {
 		  position: relative;
@@ -1580,7 +1580,7 @@ $custom-black: #08182b;
 							display: flex;
 							justify-content: flex-end;
 							flex-wrap: wrap;
-							width: 245px;
+							width: 100%;
 
 							.comment-box{
 								position: relative;

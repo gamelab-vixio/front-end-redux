@@ -108,38 +108,57 @@ class Home extends Component {
          arrows: true,
          pauseOnHover: true,
       };
+      if(!this.state.isLoading) {
+         
+         return (
+            <div className="container-fluid home animated fadeIn">
+               {/*
+               <div className="row no-gutters">
+                  <div className="col-12 col-sm-12 col-md-12 search-background">
+                     <h1>the next generation interactive fiction platform</h1>
+                  </div>
+               </div> */}
+               <div className="row no-gutters">
+                  <div className="col-12 col-sm-12 col-md-12">
 
-      return (
-         <div className="container-fluid home animated fadeIn">
-            {/*
-            <div className="row no-gutters">
-               <div className="col-12 col-sm-12 col-md-12 search-background">
-                  <h1>the next generation interactive fiction platform</h1>
-               </div>
-            </div> */}
-            <div className="row no-gutters">
-               <div className="col-12 col-sm-12 col-md-12">
-
-                  {
-                     !this.state.isLoading ? (
-                        <div>
-                           {/*Desktop version*/}
-                           <div className="story-category-wrapper">
-                              <h1 className="category-title text-center">Top Search in This Month</h1>                     
-                              {/* <Slider {...settings}> */}
-                                 {this.renderStoryCard()}
-                                 {/*this.retrieveStoryData(2)*/}
-                              {/* </Slider> */}
+                     {
+                        !this.state.isLoading ? (
+                           <div>
+                              {/*Desktop version*/}
+                              <div className="story-category-wrapper">
+                                 <h1 className="category-title text-center">Top Search in This Month</h1>                     
+                                 {/* <Slider {...settings}> */}
+                                    {this.renderStoryCard()}
+                                    {/*this.retrieveStoryData(2)*/}
+                                 {/* </Slider> */}
+                              </div>
                            </div>
-                        </div>
-                     ) : (
-                        ''
-                     )
-                  }
+                        ) : (
+                           ''
+                        )
+                     }
+                  </div>
                </div>
             </div>
-         </div>
-      );
+         );
+      }
+      else {
+         return(
+            <div className="loader">
+               <div className="sk-cube-grid">
+                  <div className="sk-cube sk-cube1"></div>
+                  <div className="sk-cube sk-cube2"></div>
+                  <div className="sk-cube sk-cube3"></div>
+                  <div className="sk-cube sk-cube4"></div>
+                  <div className="sk-cube sk-cube5"></div>
+                  <div className="sk-cube sk-cube6"></div>
+                  <div className="sk-cube sk-cube7"></div>
+                  <div className="sk-cube sk-cube8"></div>
+                  <div className="sk-cube sk-cube9"></div>
+               </div>
+            </div>
+         );
+      }
    }
 }
 

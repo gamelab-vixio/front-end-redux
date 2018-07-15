@@ -88,7 +88,7 @@ class Story extends Component {
       const star_counter = [1,2,3,4,5];
          return(
             
-            <div  key={index} className="col-12 col-sm-3 col-md-3 story-box-wrapper">
+            <div  key={index} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 story-box-wrapper">
                <Link to={"/story/" + story.id}>
                   <div className="card story-box">
                      <div className="card-header">

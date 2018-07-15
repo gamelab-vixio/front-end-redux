@@ -3959,7 +3959,408 @@ $custom-black: #08182b;
 			}
 		}
 	}
+/*------------ Create ------------*/
+	.create{
+		position: relative;
+		padding: 15px !important;
+		background-color: $custom-white;
+		
+		.save-and-quit{
+			margin-top: 15px;
+			background-color: $custom-black;
+			font-size: 14px;
+			text-transform: capitalize;
+			color: $custom-white;
 
+			&:hover{
+				background-color: $custom-pink;
+			}
+		}
+		.create-title{
+			position: relative;
+			margin: 0;
+			text-align: center;
+			text-transform: uppercase;
+			font-size: 24px;
+			color: $custom-black;
+
+			&.link-to{
+				color: $custom-white;
+				font-size: 14px;
+				margin-bottom: 8px;
+			}
+		}
+
+		.right-bar{
+			position: relative;
+			padding: 0 15px 0 0 !important;
+
+			.left-side-bar-wrapper{
+				position: relative;
+				padding: 15px;
+				background-color: $custom-black;
+				border-radius: 5px;
+				
+				label{
+					display: block;
+					position: relative;
+					margin-top: 15px;
+					font-weight: bold;
+					text-transform: capitalize;
+					font-size: 14px;
+					color: $custom-white;
+			
+					&:first-child{
+						margin-top: 0;
+					}
+				}
+
+				.checkbox{
+
+					.title{
+						margin: 15px 0 15px 0;
+						font-weight: bold;
+					}
+
+					label{
+						display: block;
+						font-weight: normal;
+
+						input{
+							margin: 0 5px 0 0;
+						}
+					}
+				}
+			}
+		}
+		
+		.side-bar{
+			position: relative;
+			padding: 0 0 0 15px !important;
+
+			.side-bar-wrapper{
+				position: relative;
+				padding: 15px;
+				background-color: $custom-black;
+				border-radius: 5px;
+
+				.top-menu{
+					position: relative;
+						
+					button{
+						font-size: 16px;
+						background-color: $custom-pink;
+						color: $custom-white;
+						text-transform: capitalize;
+					}
+				}
+
+				hr{
+					border-color: $custom-white;
+				}
+
+				.bottom-menu{
+					h1{
+						position: relative;
+						margin-bottom: 15px;
+						font-size: 16px;
+						color: $custom-pink;
+						text-align: center;
+						text-transform: capitalize;
+					}
+					
+					.section-block{
+						position: relative;
+						margin-top: 30px;
+
+						h2{
+							position: relative;
+							font-size: 14px;
+							color: $custom-white;
+							text-transform: capitalize;
+						}
+
+						.paragraph-sidebar{
+							position: relative;
+							padding-left: 30px;
+							font-size: 14px;
+							color: $custom-white;
+							word-wrap: break-word;
+							cursor: pointer;
+
+							&:first-letter{
+								text-transform: uppercase;
+							}
+
+							&:hover{
+								color: $custom-pink;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.create-read{
+			position: relative;
+			
+			.section-block{
+				position: relative;
+
+				&:last-child{
+
+					.section-link{
+						display: none;
+					}
+				}
+
+				.section-wrapper{
+					z-index: 10;
+					position: relative;
+					padding: 15px;
+					height: auto;
+					border-radius: 5px;
+					background-color: $custom-black;
+
+					.section-title-wrapper{
+						position: relative;
+						margin-bottom: 15px;
+						// text-align: left;
+
+						.back-button {
+							color: $custom-pink !important;
+						}
+		
+						.section-title{
+							display: inline-block;
+							margin: 0;
+							padding: 5px;
+							border-radius: 5px;
+							font-weight: bold;
+							letter-spacing: 0.1em;
+							font-size: 16px;
+							color: $custom-pink;
+						}
+						
+						label{
+							position: relative;
+							display: block;
+							font-size: 14px;
+							color: $custom-white;
+							text-transform: capitalize;
+						}
+
+						.add-section-button{
+							display: inline-block;
+							margin-top: 15px;
+							text-transform: capitalize;
+						}
+
+						.delete-option-button{
+							display: inline-block;
+							position: relative;
+							margin-top: 15px;
+							margin-left: 15px;
+							background-color: #FF4500 !important;
+							border-color: #FF4500 !important;
+							text-transform: capitalize;
+							color: $custom-white;
+
+							&:active, &:hover{
+								border-color: $custom-black !important;
+								background-color: #a9a9a9 !important;
+								color: $custom-white !important;
+							}
+
+							svg{
+								transform: rotate(45deg);
+							}
+
+							&:active, &:hover{
+								border-color: $custom-white !important;
+								background-color: $custom-black !important;
+								color: $custom-white !important;
+							}
+						}
+					}
+
+					.paragraph-wrapper{
+						position: relative;
+						margin-top: 50px;
+
+						.paragraph{
+							position: relative;
+							width: 100%;
+							padding: 10px 15px 10px 15px;
+							border: none;
+							border-radius: 5px;
+							font-size: 14px;
+							color: $custom-black;
+
+							&:focus{
+								outline: none;
+							}
+						}
+
+						.delete-option-button{
+							display: inline-block;
+							position: relative;
+							margin-top: 10px;
+							margin-bottom: 35px;
+							background-color: #FF4500 !important;
+							border-color: #FF4500 !important;
+							text-transform: capitalize;
+							color: $custom-white;
+
+							&:active, &:hover{
+								border-color: $custom-black !important;
+								background-color: #a9a9a9 !important;
+								color: $custom-white !important;
+							}
+
+							svg{
+								transform: rotate(45deg);
+							}
+
+							&:active, &:hover{
+								border-color: $custom-white !important;
+								background-color: $custom-black !important;
+								color: $custom-white !important;
+							}
+						}
+					}
+
+					.choices-wrapper{
+						display: flex;
+						position: relative;
+						padding-top: 10px;
+						
+						label{
+							position: relative;
+							width: 83px;
+							padding: 5px 0 5px 0;
+							text-transform: capitalize;
+							font-size: 14px;
+							color: $custom-white;
+							vertical-align: middle;
+						}
+
+						.choices{
+							position: relative;
+							width: 470px;
+							height: 33px;
+							padding: 5px 15px 5px 15px;
+							border: none;
+							border-radius: 5px 0 0 5px;
+							font-size: 14px;
+							color: $custom-black;
+
+							&:focus{
+								outline: none;
+							}
+						}
+
+						.delete-option-button{
+							position: relative;
+							height: 100%;
+							border-radius: 0 5px 5px 0;
+							background-color: #FF4500 !important;
+							border-color: #FF4500 !important;
+							text-transform: capitalize;
+							color: $custom-white;
+
+							&:active, &:hover{
+								border-color: $custom-black !important;
+								background-color: #a9a9a9 !important;
+								color: $custom-white !important;
+							}
+
+							svg{
+								transform: rotate(45deg);
+							}
+
+							&:active, &:hover{
+								border-color: $custom-white !important;
+								background-color: $custom-black !important;
+								color: $custom-white !important;
+							}
+						}
+
+						.add-link-button{
+							position: relative;
+							margin-left: 11px;
+							height: 100%;
+							background-color: $custom-pink !important;
+							color: $custom-white;
+							text-transform: capitalize;
+
+							&:active, &:hover{
+								border-color: $custom-black !important;
+								background-color: #ff0066 !important;
+								color: $custom-black !important;
+							}
+
+							.add-link-button:focus{
+								-webkit-box-shadow: 0 0 0 0.1rem rgba(238,37,96, 0.5) !important;
+								box-shadow: 0 0 0 0.1rem rgba(238,37,96, 0.5) !important;
+							}
+						}
+					}
+
+					.add-option-button{
+						position: relative;
+						height: 100%;
+						margin-top: 10px;
+						background-color: $custom-white !important;
+						color: $custom-black;
+						text-transform: capitalize;
+
+						&:active, &:hover{
+							border-color: $custom-black !important;
+							background-color: #a9a9a9 !important;
+							color: $custom-white !important;
+						}
+
+						.add-link-button:focus{
+							-webkit-box-shadow: 0 0 0 0.1rem rgba(238,37,96, 0.5) !important;
+							box-shadow: 0 0 0 0.1rem rgba(238,37,96, 0.5) !important;
+						}
+					}
+				}
+
+				.section-link-wrapper{
+					position: relative;
+					width: 100%;
+					height: 100px;
+					padding: 0 30px 0 30px;
+					
+					.section-link{
+						z-index: 9;
+						width: 100%;
+						height: 100px;
+						border-left: 3px dashed $custom-pink;
+						border-right: 3px dashed $custom-pink;
+						cursor: pointer;
+
+						&:hover{
+							border-color: black;
+
+							&:after{
+								content: "Unlink Section";
+								display: flex;
+								width: 100%;
+								height: 100%;
+								justify-content: center;
+								align-items: center;
+								font-size: 15px;
+								color: $custom-pink;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	/*------------ Create ------------*/
 	.create{
 		position: relative;

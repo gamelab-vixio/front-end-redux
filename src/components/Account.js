@@ -72,11 +72,12 @@ class Login extends Component {
          // Clear state and show success alert
          
          this.props.clearLoginFieldAfterLogin();
-         // Redirect to home
-         this.props.history.push("/");
          
          // Set token
          this.Auth.setToken(res.data.token);
+
+         // Redirect to home
+         this.props.history.push("/");
 
          if(this.Auth.getToken()) {
             this.props.isLogin();

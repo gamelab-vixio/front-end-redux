@@ -418,7 +418,7 @@ class PlayStoryDetail extends Component {
          return (
             <div className="container-fluid story-detail animated fadeInDownBig">
                <div className="row no-gutters">
-                  <div className="col-12 col-sm-12 col-md-10 col-lg-6 offset-md-1 offset-lg-3">
+                  <div className="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-4">
                      <div className="story-detail-read">
                         {this.renderContent()}
                         <div className="blog-detail-comment">

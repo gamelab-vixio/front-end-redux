@@ -849,7 +849,7 @@ $custom-black: #08182b;
 		.blog-detail-comment{
 			position: relative;
 			margin-top: 15px;
-			padding: 0 15px 0 15px;
+			padding: 0 10px 0 10px;
 			
 			.comment-title{
 				position: relative;
@@ -892,7 +892,7 @@ $custom-black: #08182b;
 							display: flex;
 							justify-content: flex-end;
 							flex-wrap: wrap;
-							width: 245px;
+							width: 100%;
 
 							.comment-box{
 								position: relative;
@@ -3345,7 +3345,6 @@ $custom-black: #08182b;
 
 			.card-body{
 				position: relative;
-				padding: 15px;
 				
 				.card-title{
 					position: relative;

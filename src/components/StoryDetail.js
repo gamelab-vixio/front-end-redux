@@ -125,7 +125,8 @@ class StoryDetail extends Component {
       let knot = "->" + data[0].name + ".p0\n";
 
       data.forEach(function(section, i){
-         knot+= "=== "+section['name']+"\n";
+         const sectionName = section['name'].replace(new RegExp(' ', 'g'), '_');
+         knot+= "=== "+sectionName+"\n";
          section['paragraphs'].forEach(function(paragraph, j){
             knot+="\t= p"+j+"\n";
             knot+="\t"+paragraph['content']+"\n";

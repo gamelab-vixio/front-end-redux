@@ -137,17 +137,14 @@ class StoryDetail extends Component {
                knot+="\t* "+paragraph['choices'][k]+"\n";
                let res = false;
                let p = paragraph['links'][k];
-               data.forEach(function(innerSection, innerI){
-                  if(innerI === p['innerSection']){
-                     res = innerSection['name']+".p"+p['paragraph'];
-                  }
-               });
+               if(p){
+                  res = data[p['section']]['name']+".p"+p['paragraph'];
+               }
                if(!res){
                   res = "END";
                }
 
-               let link = res;
-               knot+="\t->"+link+"\n";
+               knot+="\t->"+res+"\n";
             }
          });
       });

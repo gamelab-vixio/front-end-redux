@@ -51,6 +51,15 @@ export default {
 		else {
 			return axios.post(this.url + '/createComment/' + story_id + '/?token=' + token, data)
 		}
+	},
+	mostPopular(){
+		return axios.get(this.url + '/getMostPopular')
+	},
+	newAvailable(){
+		return axios.get(this.url + '/getNewAvailable')
+	},
+	userBased(token){
+		return axios.get(this.url + '/getUserBased/?token=' + token)
 	}
 }
 

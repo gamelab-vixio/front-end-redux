@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 
-import Slider from 'react-slick';
 import TextTruncate from 'react-text-truncate';
 import FaStars from 'react-icons/lib/fa/star';
+import { Link } from 'react-router-dom';
 // import FaStarO from 'react-icons/lib/fa/star-o';
 
 // Service Import
+import AuthService from '../services/auth.service';
 import StoryService from '../services/story.service';
+
+// Redux Import
+import { connect } from 'react-redux';
 
 class Home extends Component {
    
@@ -14,11 +18,16 @@ class Home extends Component {
       super(props);
 
       this.state = {
-         all_stories: [],
+         mostPopular: [],
+         newAvailable: [],
+         userBased: [],
          isLoading: true
       };
 
-      this.retrieveStoryData = this.retrieveStoryData.bind(this);
+      this.Auth = new AuthService();
+      this.retrieveMostPopular = this.retrieveMostPopular.bind(this);
+      this.retrieveNewAvailable = this.retrieveNewAvailable.bind(this);
+      this.retrieveUserBased = this.retrieveUserBased.bind(this);
    }
 
    componentWillMount() {
@@ -28,15 +37,16 @@ class Home extends Component {
       // Set page to top
       window.scrollTo(0, 0);
       
-      this.retrieveStoryData();
+      this.retrieveMostPopular();
+      this.retrieveNewAvailable();
    }
 
-   retrieveStoryData(page_number) {
-      StoryService.getAllStories(page_number)
+   retrieveMostPopular() {
+      StoryService.mostPopular()
       .then((res) => {
 
          this.setState({
-            all_stories: res.data,
+            mostPopular: res.data,
             isLoading: false
          })
 
@@ -47,9 +57,42 @@ class Home extends Component {
       });
    }
 
-   renderStoryCard() {
+   retrieveNewAvailable() {
+      StoryService.newAvailable()
+      .then((res) => {
 
-      let all_stories = this.state.all_stories;
+         this.setState({
+            newAvailable: res.data,
+            isLoading: false
+         })
+
+         // console.log(res.data);
+      })
+      .catch((err) => {
+         // console.log(err);
+      });
+   }
+
+   retrieveUserBased() {
+      let token = this.Auth.getToken();
+      StoryService.userBased(token)
+      .then((res) => {
+
+         this.setState({
+            userBased: res.data,
+            isLoading: false
+         })
+
+         // console.log(res.data);
+      })
+      .catch((err) => {
+         // console.log(err);
+      });
+   }
+
+   renderMostPopular() {
+
+      let all_stories = this.state.mostPopular;
 
       // console.log(all_stories);
 
@@ -60,31 +103,135 @@ class Home extends Component {
                <div className="row no-gutters story-row">
                   
                   {               
-                     all_stories.data.map((story, index) => {
+                     all_stories.map((story, index) => {
                         return(
                            <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
-                              <div className="card story-box">
-                                 <div className="card-header">
-                                    <div className="image-wrapper">
-                                       <img className="story-image" src={'https://pm1.narvii.com/6028/a945a07be845c179ae038a85a307f6964af5aa0b_hq.jpg'} alt="IF"/>
+                              <Link to={"/story/" + story.id}>
+                                 <div className="card story-box">
+                                    <div className="card-header">
+                                       <div className="image-wrapper">
+                                       <img className="story-image" src={"data:image/jpeg;base64," + story.image_url} alt="IF"/>
+                                       </div>
+                                    </div>
+                                    <div className="card-body">
+                                       <h1 className="card-title">
+                                          <TextTruncate line={2} truncateText="…" text={story.title}/>
+                                       </h1>
+                                       {/* <h2 className="card-author">{story.user.name}</h2> */}
+                                       <div className="rating-stars">
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <span className="star-average">5.0</span>
+                                          <span className="total-comments">(1024)</span>
+                                       </div>
                                     </div>
                                  </div>
-                                 <div className="card-body">
-                                    <h1 className="card-title">
-                                       <TextTruncate line={2} truncateText="…" text={story.title}/>
-                                    </h1>
-                                    <h2 className="card-author">{story.user.name}</h2>
-                                    <div className="rating-stars">
-                                       <FaStars size={15} color="#f4c150"/>
-                                       <FaStars size={15} color="#f4c150"/>
-                                       <FaStars size={15} color="#f4c150"/>
-                                       <FaStars size={15} color="#f4c150"/>
-                                       <FaStars size={15} color="#f4c150"/>
-                                       <span className="star-average">5.0</span>
-                                       <span className="total-comments">(1024)</span>
+                              </Link>
+                           </div>
+                        )
+                     })
+                  }
+
+               </div>
+            </div>
+         </div>
+      );
+   }
+
+   renderNewAvailable() {
+
+      let all_stories = this.state.newAvailable;
+
+      // console.log(all_stories);
+
+      return(
+
+         <div className="row no-gutters">
+            <div className="col-12 col-sm-12 col-md-12">
+               <div className="row no-gutters story-row">
+                  
+                  {               
+                     all_stories.map((story, index) => {
+                        return(
+                           <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
+                              <Link to={"/story/" + story.id}>
+                                 <div className="card story-box">
+                                    <div className="card-header">
+                                       <div className="image-wrapper">
+                                       <img className="story-image" src={"data:image/jpeg;base64," + story.image_url} alt="IF"/>
+                                       </div>
+                                    </div>
+                                    <div className="card-body">
+                                       <h1 className="card-title">
+                                          <TextTruncate line={2} truncateText="…" text={story.title}/>
+                                       </h1>
+                                       {/* <h2 className="card-author">{story.user.name}</h2> */}
+                                       <div className="rating-stars">
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <span className="star-average">5.0</span>
+                                          <span className="total-comments">(1024)</span>
+                                       </div>
                                     </div>
                                  </div>
-                              </div>
+                              </Link>
+                           </div>
+                        )
+                     })
+                  }
+
+               </div>
+            </div>
+         </div>
+      );
+   }
+
+   renderUserBased() {
+
+      let all_stories = this.state.userBased;
+
+      console.log(all_stories);
+
+      return(
+
+         <div className="row no-gutters">
+            <div className="col-12 col-sm-12 col-md-12">
+               <div className="row no-gutters story-row">
+                  
+                  {               
+                     all_stories.map((story, index) => {
+                        return(
+                           <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
+                              <Link to={"/story/" + story.id}>   
+                                 <div className="card story-box">
+                                    <div className="card-header">
+                                       <div className="image-wrapper">
+                                       <img className="story-image" src={"data:image/jpeg;base64," + story.image_url} alt="IF"/>
+                                       </div>
+                                    </div>
+                                    <div className="card-body">
+                                       <h1 className="card-title">
+                                          <TextTruncate line={2} truncateText="…" text={story.title}/>
+                                       </h1>
+                                       {/* <h2 className="card-author">{story.user.name}</h2> */}
+                                       <div className="rating-stars">
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <FaStars size={15} color="#f4c150"/>
+                                          <span className="star-average">5.0</span>
+                                          <span className="total-comments">(1024)</span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </Link>
                            </div>
                         )
                      })
@@ -98,18 +245,8 @@ class Home extends Component {
 
    render() {
 
-      var settings = {
-         dots: false,
-         infinite: true,
-         speed: 500,
-         slidesToShow: 1,
-         slidesToScroll: 1,
-         autoplay: true,
-         arrows: true,
-         pauseOnHover: true,
-      };
       if(!this.state.isLoading) {
-         
+
          return (
             <div className="container-fluid home animated fadeIn">
                {/*
@@ -124,14 +261,27 @@ class Home extends Component {
                      {
                         !this.state.isLoading ? (
                            <div>
-                              {/*Desktop version*/}
                               <div className="story-category-wrapper">
-                                 <h1 className="category-title text-center">Top Search in This Month</h1>                     
-                                 {/* <Slider {...settings}> */}
-                                    {this.renderStoryCard()}
-                                    {/*this.retrieveStoryData(2)*/}
-                                 {/* </Slider> */}
+                                 <h1 className="category-title text-center">Most Popular</h1>                     
+                                    {this.renderMostPopular()}
                               </div>
+
+                              <div className="story-category-wrapper">
+                                 <h1 className="category-title text-center">New Available</h1>                     
+                                    {this.renderNewAvailable()}
+                              </div>
+                              
+                              {
+                                 this.props.isLogin ? (
+                                    <div className="story-category-wrapper">
+                                       <h1 className="category-title text-center">User Based</h1>                     
+                                          {this.renderUserBased()}
+                                    </div>
+                                 ) : (
+                                    ''
+                                 )
+                              }
+                              
                            </div>
                         ) : (
                            ''
@@ -162,4 +312,8 @@ class Home extends Component {
    }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+   isLogin: state.account.isLogin
+});
+
+export default connect(mapStateToProps)(Home);

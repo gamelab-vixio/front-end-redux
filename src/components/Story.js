@@ -208,7 +208,7 @@ class Story extends Component {
                      <h1 className="story-title">story</h1>
                      <hr className="styled-line"/>
                      <div className="search-bar">
-                        <input type="text" className="form-control search-input" name="search" value={this.state.search} onChange={ this.handleSearch } placeholder="Search story to play..."/>
+                        <input type="text" className="form-control search-input" name="search" value={this.state.search} onChange={ this.handleSearch } placeholder="Search story to play..." autoComplete="off"/>
                         <button type="submit" className="search-button" onClick={this.searchStory}><FaSearch /></button>
                      </div>
                      {
@@ -225,7 +225,7 @@ class Story extends Component {
                            </div>
                         )
                      }
-                     <div className="row no-gutters">
+                     <div className="row no-gutters search-story-wrapper">
                         {this.renderStories()}
                      </div>
                      

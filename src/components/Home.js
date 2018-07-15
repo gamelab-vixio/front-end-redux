@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import TextTruncate from 'react-text-truncate';
 import FaStars from 'react-icons/lib/fa/star';
 import { Link } from 'react-router-dom';
-// import FaStarO from 'react-icons/lib/fa/star-o';
+import FaStarO from 'react-icons/lib/fa/star-o';
 
 // Service Import
 import AuthService from '../services/auth.service';
@@ -96,7 +96,7 @@ class Home extends Component {
       let all_stories = this.state.mostPopular;
 
       // console.log(all_stories);
-
+      const star_counter = [1,2,3,4,5];
       return(
 
          <div className="row no-gutters">
@@ -118,15 +118,38 @@ class Home extends Component {
                                        <h1 className="card-title">
                                           <TextTruncate line={2} truncateText="…" text={story.title}/>
                                        </h1>
-                                       {/* <h2 className="card-author">{story.user.name}</h2> */}
+                                       <h2 className="card-author">{story.user.name}</h2>
+                                       <h2 className="card-author">
+                                          category :&nbsp;
+                                          <br/>
+                                          {
+                                             story.story_category.map((category, index) =>{
+                                                   return (
+                                                   <label key={index} className="category">{category.category_type.name}</label>
+                                                   )
+                                             })
+                                          }
+                                       </h2>
                                        <div className="rating-stars">
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <span className="star-average">5.0</span>
-                                          <span className="total-comments">(1024)</span>
+                                          {
+                                             story.story_review.length !== 0 ? [
+                                             
+                                                   star_counter.map((x, index) =>{
+                                                      return index + 1 <= Math.round(story.story_review[0].star) ? (
+                                                         <FaStars key={index} size={15} color="#f4c150"/>
+                                                      ) : (
+                                                         <FaStarO key={index} size={15} color="#f4c150"/>
+                                                      )
+                                                   }),
+                                                   <span key={index} className="star-average">{Math.round(story.story_review[0].star)}</span>
+                                             ] : [
+                                                   <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
+                                             ]
+                                          }
                                        </div>
                                     </div>
                                  </div>
@@ -148,6 +171,7 @@ class Home extends Component {
 
       // console.log(all_stories);
 
+      const star_counter = [1,2,3,4,5];
       return(
 
          <div className="row no-gutters">
@@ -169,15 +193,38 @@ class Home extends Component {
                                        <h1 className="card-title">
                                           <TextTruncate line={2} truncateText="…" text={story.title}/>
                                        </h1>
-                                       {/* <h2 className="card-author">{story.user.name}</h2> */}
+                                       <h2 className="card-author">{story.user.name}</h2>
+                                       <h2 className="card-author">
+                                          category :&nbsp;
+                                          <br/>
+                                          {
+                                             story.story_category.map((category, index) =>{
+                                                   return (
+                                                   <label key={index} className="category">{category.category_type.name}</label>
+                                                   )
+                                             })
+                                          }
+                                       </h2>
                                        <div className="rating-stars">
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <span className="star-average">5.0</span>
-                                          <span className="total-comments">(1024)</span>
+                                          {
+                                             story.story_review.length !== 0 ? [
+                                             
+                                                   star_counter.map((x, index) =>{
+                                                      return index + 1 <= Math.round(story.story_review[0].star) ? (
+                                                         <FaStars key={index} size={15} color="#f4c150"/>
+                                                      ) : (
+                                                         <FaStarO key={index} size={15} color="#f4c150"/>
+                                                      )
+                                                   }),
+                                                   <span key={index} className="star-average">{Math.round(story.story_review[0].star)}</span>
+                                             ] : [
+                                                   <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
+                                             ]
+                                          }
                                        </div>
                                     </div>
                                  </div>
@@ -196,7 +243,7 @@ class Home extends Component {
    renderUserBased() {
 
       let all_stories = this.state.userBased;
-
+      const star_counter = [1,2,3,4,5];
       // console.log(all_stories);
 
       return(
@@ -220,15 +267,38 @@ class Home extends Component {
                                        <h1 className="card-title">
                                           <TextTruncate line={2} truncateText="…" text={story.title}/>
                                        </h1>
-                                       {/* <h2 className="card-author">{story.user.name}</h2> */}
+                                       <h2 className="card-author">{story.user.name}</h2>
+                                       <h2 className="card-author">
+                                          category :&nbsp;
+                                          <br/>
+                                          {
+                                             story.story_category.map((category, index) =>{
+                                                   return (
+                                                   <label key={index} className="category">{category.category_type.name}</label>
+                                                   )
+                                             })
+                                          }
+                                       </h2>
                                        <div className="rating-stars">
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <FaStars size={15} color="#f4c150"/>
-                                          <span className="star-average">5.0</span>
-                                          <span className="total-comments">(1024)</span>
+                                          {
+                                             story.story_review.length !== 0 ? [
+                                             
+                                                   star_counter.map((x, index) =>{
+                                                      return index + 1 <= Math.round(story.story_review[0].star) ? (
+                                                         <FaStars key={index} size={15} color="#f4c150"/>
+                                                      ) : (
+                                                         <FaStarO key={index} size={15} color="#f4c150"/>
+                                                      )
+                                                   }),
+                                                   <span key={index} className="star-average">{Math.round(story.story_review[0].star)}</span>
+                                             ] : [
+                                                   <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
+                                                   <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
+                                             ]
+                                          }
                                        </div>
                                     </div>
                                  </div>

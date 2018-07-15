@@ -69,11 +69,12 @@ class Writer extends Component {
          })
       }   
 
-      if(!this.state.story_data.canContinue && this.Auth.getToken()) {
+      if((this.state.story_data.currentChoices.length === 0) && this.Auth.getToken()) {
          this.setState({
             isReview: true
          })
       }
+      // console.log(this.state.story_data);
    }
 
    sendReview(newRating) {

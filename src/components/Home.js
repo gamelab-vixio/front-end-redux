@@ -62,7 +62,7 @@ class Home extends Component {
                   {               
                      all_stories.data.map((story, index) => {
                         return(
-                           <div key={story.id} className="col-sm-4 col-md-4 col-lg-2 story-box-wrapper">
+                           <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
                               <div className="card story-box">
                                  <div className="card-header">
                                     <div className="image-wrapper">
@@ -111,11 +111,12 @@ class Home extends Component {
 
       return (
          <div className="container-fluid home animated fadeIn">
+            {/*
             <div className="row no-gutters">
                <div className="col-12 col-sm-12 col-md-12 search-background">
                   <h1>the next generation interactive fiction platform</h1>
                </div>
-            </div>
+            </div> */}
             <div className="row no-gutters">
                <div className="col-12 col-sm-12 col-md-12">
 
@@ -123,104 +124,12 @@ class Home extends Component {
                      !this.state.isLoading ? (
                         <div>
                            {/*Desktop version*/}
-                           <div className="story-category-wrapper desktop-version">
+                           <div className="story-category-wrapper">
                               <h1 className="category-title text-center">Top Search in This Month</h1>                     
                               {/* <Slider {...settings}> */}
                                  {this.renderStoryCard()}
                                  {/*this.retrieveStoryData(2)*/}
                               {/* </Slider> */}
-                           </div>
-
-
-                           {/*Mobile version*/}
-                           <div className="story-category-wrapper mobile-version">
-                              <h1 className="category-title text-center">Top Search in This Month</h1>                     
-                              <Slider {...settings}>
-                                 {/*Interactive Fiction Category Row*/}
-                                 <div className="row no-gutters">
-                                    {/*Interactive Fiction Game*/}
-                                    <div className="col-12 col-sm-12 story-box-wrapper d-flex">
-                                       <div className="card story-box">
-                                          <div className="card-header">
-                                             <div className="image-wrapper">
-                                                <img className="story-image" src={'https://pm1.narvii.com/6028/a945a07be845c179ae038a85a307f6964af5aa0b_hq.jpg'} alt="IF"/>
-                                             </div>
-                                          </div>
-                                          <div className="card-body">
-                                             <h1 className="card-title">
-                                                <TextTruncate line={2} truncateText="…" text="1"/>
-                                             </h1>
-                                             <h2 className="card-author">shan valdo</h2>
-                                             <div className="rating-stars">
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <span className="star-average">5.0</span>
-                                                <span className="total-comments">(1024)</span>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-
-                                 <div className="row no-gutters">
-                                    {/*Interactive Fiction Game*/}
-                                    <div className="col-12 col-sm-12 story-box-wrapper d-flex">
-                                       <div className="card story-box">
-                                          <div className="card-header">
-                                             <div className="image-wrapper">
-                                                <img className="story-image" src={'https://pm1.narvii.com/6028/a945a07be845c179ae038a85a307f6964af5aa0b_hq.jpg'} alt="IF"/>
-                                             </div>
-                                          </div>
-                                          <div className="card-body">
-                                             <h1 className="card-title">
-                                                <TextTruncate line={2} truncateText="…" text="2"/>
-                                             </h1>
-                                             <h2 className="card-author">shan valdo</h2>
-                                             <div className="rating-stars">
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <span className="star-average">5.0</span>
-                                                <span className="total-comments">(1024)</span>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-
-                                 <div className="row no-gutters">
-                                    {/*Interactive Fiction Game*/}
-                                    <div className="col-12 col-sm-12 story-box-wrapper d-flex">
-                                       <div className="card story-box">
-                                          <div className="card-header">
-                                             <div className="image-wrapper">
-                                                <img className="story-image" src={'https://pm1.narvii.com/6028/a945a07be845c179ae038a85a307f6964af5aa0b_hq.jpg'} alt="IF"/>
-                                             </div>
-                                          </div>
-                                          <div className="card-body">
-                                             <h1 className="card-title">
-                                                <TextTruncate line={2} truncateText="…" text="3"/>
-                                             </h1>
-                                             <h2 className="card-author">shan valdo</h2>
-                                             <div className="rating-stars">
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <FaStars size={15} color="#f4c150"/>
-                                                <span className="star-average">5.0</span>
-                                                <span className="total-comments">(1024)</span>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </Slider>
                            </div>
                         </div>
                      ) : (

@@ -49,7 +49,7 @@ class About extends Component {
                      <h2>contributors</h2>
                   </div>
                </div>   
-               <div className="col-12 col-sm-4 col-md-4">
+               <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                   <div className="card">
                      <div className="card-body">
                         <div className="profile-image">
@@ -70,7 +70,7 @@ class About extends Component {
                   </div>
                </div>
 
-               <div className="col-12 col-sm-4 col-md-4">
+               <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                   <div className="card">
                      <div className="card-body">
                         <div className="profile-image">
@@ -91,7 +91,7 @@ class About extends Component {
                   </div>
                </div>
 
-               <div className="col-12 col-sm-4 col-md-4">
+               <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                   <div id="last-card" className="card">
                      <div className="card-body">
                         <div className="profile-image">

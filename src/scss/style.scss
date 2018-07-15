@@ -3045,6 +3045,7 @@ $custom-black: #08182b;
 	/*------------ Writer -------------------*/
 	.writer{
 		position: relative;
+		height: 100vh;
 		padding: 15px 0 15px 0 !important;
 		background-color: $custom-white;
 
@@ -3947,6 +3948,7 @@ $custom-black: #08182b;
 				border-radius: 5px;
 				
 				label{
+					display: block;
 					position: relative;
 					margin-top: 15px;
 					font-weight: bold;

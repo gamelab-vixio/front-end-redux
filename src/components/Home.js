@@ -84,7 +84,7 @@ class Home extends Component {
             isLoading: false
          })
 
-         console.log(res.data);
+         // console.log(res.data);
       })
       .catch((err) => {
          // console.log(err);
@@ -343,7 +343,7 @@ class Home extends Component {
                               </div>
                               
                               {
-                                 this.props.isLogin ? (
+                                 this.props.isLogin && (this.state.userBased.length !== 0) ? (
                                     <div className="story-category-wrapper">
                                        <h1 className="category-title text-center">User Based</h1>                     
                                        {this.renderUserBased()}

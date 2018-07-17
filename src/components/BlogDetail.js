@@ -5,6 +5,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import Alert from 'react-s-alert';
 // import TiArrowRight from 'react-icons/lib/ti/arrow-right';
 // import TiArrowLeft from 'react-icons/lib/ti/arrow-left';
+import ReactHtmlParser from 'react-html-parser';
 import FaMailReply from 'react-icons/lib/fa/mail-reply';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
@@ -85,7 +86,7 @@ class BlogDetail extends Component {
                <div className="blog-detail-box-image">
                   <img className="story-image" src={"data:image/jpeg;base64," + blog_content.image_url} alt="blog_thumbnail"/>
                </div>
-               <p className="blog-detail-box-text">{blog_content.content}</p>
+               <p className="blog-detail-box-text">{ ReactHtmlParser(blog_content.content) }</p>
             </div>
             
             {/*

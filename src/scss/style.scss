@@ -29,6 +29,10 @@ body{
 	   text-decoration: none !important;
    }
 
+   .blog-separator{
+	   height: 50px;
+   }
+
 	#wrapper{
 		position: relative;
 		min-height: 100vh;
@@ -1465,6 +1469,7 @@ $custom-black: #08182b;
 				position: relative;
 				margin-top: 10px;
 				margin-bottom: 0;
+				text-align: justify;
 				font-size: 12px;
 				color: white;
 
@@ -1474,11 +1479,14 @@ $custom-black: #08182b;
 			}
 
 			.read-more{
-				position: relative;
-				margin-top: 10px;
-				display: flex;
-				justify-content: flex-end;
-				align-items: center;
+				// position: relative;
+				// margin-top: 10px;
+				// display: flex;
+				// justify-content: flex-end;
+				// align-items: center;
+				position: absolute;
+				right: 15px;
+				bottom: 15px;
 
 				.read-more-button{
 					position: relative;
@@ -2787,6 +2795,7 @@ $custom-black: #08182b;
 				margin-bottom: 0;
 				font-size: 14px;
 				color: white;
+				text-align: justify;
 
 				&:first-letter{
 					text-transform: uppercase;
@@ -2794,11 +2803,14 @@ $custom-black: #08182b;
 			}
 
 			.read-more{
-				position: relative;
-				margin-top: 15px;
-				display: flex;
-				justify-content: flex-end;
-				align-items: center;
+				// position: relative;
+				// margin-top: 15px;
+				// display: flex;
+				// justify-content: flex-end;
+				// align-items: center;
+				position: absolute;
+				right: 15px;
+				bottom: 15px;
 
 				.read-more-button{
 					position: relative;
@@ -5796,6 +5808,7 @@ $custom-black: #08182b;
 				margin-bottom: 0;
 				font-size: 14px;
 				color: white;
+				text-align: justify;
 
 				&:first-letter{
 					text-transform: uppercase;
@@ -5803,11 +5816,14 @@ $custom-black: #08182b;
 			}
 
 			.read-more{
-				position: relative;
-				margin-top: 15px;
-				display: flex;
-				justify-content: flex-end;
-				align-items: center;
+				// position: relative;
+				// margin-top: 15px;
+				// display: flex;
+				// justify-content: flex-end;
+				// align-items: center;
+				position: absolute;
+				right: 15px;
+				bottom: 15px;
 
 				.read-more-button{
 					position: relative;
@@ -8335,6 +8351,7 @@ $custom-black: #08182b;
 				margin-bottom: 0;
 				font-size: 14px;
 				color: white;
+				text-align: justify;
 
 				&:first-letter{
 					text-transform: uppercase;
@@ -8342,11 +8359,14 @@ $custom-black: #08182b;
 			}
 
 			.read-more{
-				position: relative;
-				margin-top: 15px;
-				display: flex;
-				justify-content: flex-end;
-				align-items: center;
+				// position: relative;
+				// margin-top: 15px;
+				// display: flex;
+				// justify-content: flex-end;
+				// align-items: center;
+				position: absolute;
+				right: 15px;
+				bottom: 15px;
 
 				.read-more-button{
 					position: relative;
@@ -10897,6 +10917,7 @@ $custom-black: #08182b;
 				margin-bottom: 0;
 				font-size: 14px;
 				color: white;
+				text-align: justify;
 
 				&:first-letter{
 					text-transform: uppercase;
@@ -10904,11 +10925,14 @@ $custom-black: #08182b;
 			}
 
 			.read-more{
-				position: relative;
-				margin-top: 15px;
-				display: flex;
-				justify-content: flex-end;
-				align-items: center;
+				// position: relative;
+				// margin-top: 15px;
+				// display: flex;
+				// justify-content: flex-end;
+				// align-items: center;
+				position: absolute;
+				right: 15px;
+				bottom: 15px;
 
 				.read-more-button{
 					position: relative;

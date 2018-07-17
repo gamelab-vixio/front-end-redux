@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate';
 import TiArrowRight from 'react-icons/lib/ti/arrow-right';
+import ReactHtmlParser from 'react-html-parser';
 
 // Service Import
 import BlogService from '../services/blog.service';
@@ -82,8 +83,10 @@ class Blog extends Component {
                   <img src={"data:image/jpeg;base64," + blog.image_url} alt="blog"/> 
                </div>
                <div className="blog-box-text">
-                  <TextTruncate line={5} truncateText="…" text={blog.content}/>
+                  { ReactHtmlParser(blog.content) }
+                  {/* <TextTruncate line={5} truncateText="…" text={blog_content}/> */}
                </div>
+               <div className="blog-separator"></div>
                <div className="read-more">   
                   <Link className="btn read-more-button" to={"/blog/" + blog.id}>read more<TiArrowRight /></Link>
                </div>

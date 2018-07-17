@@ -74,6 +74,12 @@ class Writer extends Component {
             isReview: true
          })
       }
+
+      if(this.state.story_data.currentChoices.length === 0) {
+			this.setState({
+				isThx: true
+			})
+		}
       // console.log(this.state.story_data);
    }
 
@@ -198,7 +204,7 @@ class Writer extends Component {
                      {
                         this.state.isThx ? (
                            <div className="review animated fadeIn">
-                              <h1>thank you for reviewing this story!</h1>
+                              <h1>thank you for playing!</h1>
                               <div className="play-read">    
                                  <button className="btn start-read" onClick={(e) => {this.backToStoryList()}}>back to story info</button>
                               </div>

@@ -30,6 +30,7 @@ class Header extends Component {
       this.toggle = this.toggle.bind(this);
       this.dropdownToggle = this.dropdownToggle.bind(this);
       this.search = this.search.bind(this);
+      console.log(this.Auth.getToken());
    }
 
 
@@ -89,7 +90,7 @@ class Header extends Component {
                      </li>
 
                      {
-                        this.props.isLogin ? (
+                        this.Auth.getToken() ? (
 
                            <li className="nav-item">
                               <Link className="nav-link custom-hover" to="/writer" onClick={this.toggle}>writer</Link>
@@ -100,7 +101,7 @@ class Header extends Component {
                      }
                      
                      {
-                        this.props.isLogin ? (
+                        this.Auth.getToken() ? (
                            <li className="nav-item user-dropdown-menu">
                               <a className="nav-link" onClick={this.dropdownToggle}>account <FaCaretDown /></a>
                               <div className={this.state.isDropdownOpen ? 'dropdown-show animated fadeInDown' : 'hide'}>

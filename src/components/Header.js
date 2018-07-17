@@ -30,7 +30,7 @@ class Header extends Component {
       this.toggle = this.toggle.bind(this);
       this.dropdownToggle = this.dropdownToggle.bind(this);
       this.search = this.search.bind(this);
-      console.log(this.Auth.getToken());
+    //   console.log(this.Auth.getToken());
    }
 
 

@@ -41,6 +41,8 @@ class Edit extends Component {
          storyCategories: '',
          story_title: '',
          story_description: '',
+         current_story_image: '',
+         current_story_genre: '',
          checked_categories: []
       };
 
@@ -69,10 +71,14 @@ class Edit extends Component {
          this.setState({
             data: JSON.parse(res.data.stories.content),
             storyCategories: res.data.genres,
-            isLoading: false
+            isLoading: false,
+            story_title: res.data.stories.title,
+            story_description: res.data.stories.description,
+            current_story_image: res.data.stories.image_url,
+            current_story_genre: res.data.stories.story_category
          });
 
-         console.log(res);
+         console.log(res.data.stories);
       })
       .catch((err) => {
          // console.log(err);
@@ -92,8 +98,6 @@ class Edit extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
 
       return res;
@@ -101,7 +105,7 @@ class Edit extends Component {
 
    inkResult(){
       let data = this.state.data;
-      let knot = "->" + data[0].name + ".p0\n";
+      let knot = "->" + data[0].name + ".p0\\n";
 
       data.forEach(function(section, i){
          knot+= "=== "+section['name']+"\n";
@@ -115,9 +119,9 @@ class Edit extends Component {
                knot+="\t* "+paragraph['choices'][k]+"\n";
                let res = false;
                let p = paragraph['links'][k];
-               data.forEach(function(section, i){
-                  if(i === p['section']){
-                     res = section['name']+".p"+p['paragraph'];
+               data.forEach(function(innerSection, innerI){
+                  if(innerI === p['innerSection']){
+                     res = innerSection['name']+".p"+p['paragraph'];
                   }
                });
                if(!res){
@@ -133,12 +137,7 @@ class Edit extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(knot);
-      })
-
-
-      // console.log(knot);
+      });
    }
 
    /******************************* SECTION (START) *******************************/
@@ -147,33 +146,41 @@ class Edit extends Component {
       let data = this.state.data;
       let dataMapping = this.state.dataMapping;
       data.forEach(function(item, i){
-         if(newSection === item['name']){
+         if(newSection === item['name'] && item['name'] !== ''){
             alert("Section named "+ newSection + " is already there");
             exist = false;
          }
       });
 
-      if(exist && paragraphIndex === -1){
-         data.push({
-            name: newSection,
-            paragraphs: [{
-               content: "",
-               choices: [],
-               links:[]
-            }]
-         });
-
-         dataMapping.push(
-         {
-            section: data.length - 1,
-            paragraph: 0,
-            choice: '',
-            linkS: '',
-            linkP: ''
-         }
-      );
+      if(!exist) {
+         return;
       }
-      else{
+
+
+
+      data.push({
+        name: newSection,
+        paragraphs: [{
+            content: "",
+            choices: [],
+            links:[]
+        }]
+      });
+
+       const choiceIndex = this.addChoice(sectionIndex, paragraphIndex);
+
+       this.editLink(sectionIndex, paragraphIndex, choiceIndex, data.length - 1, 0);
+
+      /*dataMapping.push({
+         section: data.length - 1,
+         paragraph: 0,
+         choice: '',
+         linkS: '',
+         linkP: ''
+      });*/
+
+
+      /*else{
          data.push({
             name: newSection,
             paragraphs: [data[sectionIndex]['paragraphs'][paragraphIndex]]
@@ -191,17 +198,14 @@ class Edit extends Component {
                });
             });
          });
-      }
+      }*/
 
       this.setState({
          data: data,
          isLoading: false,
          dataMapping: dataMapping
-      }, () => {
-            // console.log(this.state.data);
-      })
+      });
 
-      console.log(this.state.data);
    }
 
    editSection(oldSectionIndex, e){
@@ -220,17 +224,24 @@ class Edit extends Component {
          this.setState({
             data: data,
             isLoading: false
-         }, () => {
-            // console.log(this.state.data);
-         })
+         });
       }
    }
 
    deleteSection(sectionIndex){
       if(sectionIndex !== 0) {
          let data = this.state.data;
-         //change link
          let upperSectionLength = data[sectionIndex-1]['paragraphs'].length;
+          //change link of the parent section
+          data[sectionIndex-1]['paragraphs'].forEach(function(item, i){
+              item['links'].forEach(function(link, j){
+                  if(link.hasOwnProperty('paragraph') && link['section'] === sectionIndex){
+                      link['paragraph']+=upperSectionLength;
+                      link['section'] = sectionIndex-1;
+                  }
+              })
+          });
+          //change link of the deleted section
          data[sectionIndex]['paragraphs'].forEach(function(item, i){
             item['links'].forEach(function(link, j){
                if(link.hasOwnProperty('paragraph') && link['section'] === sectionIndex){
@@ -248,11 +259,11 @@ class Edit extends Component {
 
          data.splice(sectionIndex, 1);
 
+         this.rewindStory(sectionIndex-1);
+
          this.setState({
             data: data,
             isLoading: false
-         }, () => {
-            console.log(data);
          });
 
       }
@@ -273,8 +284,6 @@ class Edit extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
 
       let newParagraph = {
@@ -285,8 +294,8 @@ class Edit extends Component {
       return newParagraph;
    }
 
-   deleteParagraph(sectionIndex, paragraphIndex){
-      if(sectionIndex !== 0){
+   deleteParagraph(sectionIndex, paragraphIndex, lineIndex){
+      if(sectionIndex !== 0 || paragraphIndex !== 0){
          let data = this.state.data;
 
          data[sectionIndex]['paragraphs'].splice(paragraphIndex, 1);
@@ -296,22 +305,26 @@ class Edit extends Component {
                paragraph['links'].forEach(function(link, k){
                   if(link['section'] === sectionIndex && link['paragraph'] === paragraphIndex){
                      paragraph['choices'].splice(k, 1);
-                     paragraph['choices'].splice(k, 1);
+                     paragraph['links'].splice(k, 1);
                   }
                });
             });
          });
 
-         sectionIndex = data.length - 1;
+         if(data[sectionIndex].name === "" && data[sectionIndex]['paragraphs'].length === 0 ){
+            this.deleteSection(sectionIndex);
+         }
+
+         const dataMapping = this.state.dataMapping;
+         dataMapping.splice(lineIndex, 1);
 
          this.setState({
             data: data,
-            isLoading: false
-         }, () => {
-            console.log(data);
+             dataMapping: dataMapping,
+            isLoading: false,
          });
       }else{
-         alert("Cannot delete first section");
+         alert("Cannot delete first paragraph");
       }
    }
 
@@ -324,26 +337,24 @@ class Edit extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
    }
 
    /******************************* PARAGRAPH (END) *******************************/
 
    /******************************* CHOICES (START) *******************************/
-   addChoice(sectionIndex, paragraphIndex, choiceText){
+   addChoice(sectionIndex, paragraphIndex){
       let data = this.state.data;
 
-      data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].push(choiceText);
+      data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].push('');
       data[sectionIndex]['paragraphs'][paragraphIndex]['links'].push({section:'END'});
 
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
+
+      return data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].length - 1;
    }
 
    editChoice(sectionIndex, paragraphIndex, choiceIndex, e){
@@ -356,8 +367,6 @@ class Edit extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
    }
 
@@ -370,11 +379,8 @@ class Edit extends Component {
       this.setState({
          data: data,
          isLoading: false
-      }, () => {
-         console.log(data);
       });
 
-      console.log("thisState" , this.state.data)
    }
 
    /******************************* CHOICES (END) *******************************/
@@ -430,41 +436,39 @@ class Edit extends Component {
             clickedIndex: '',
             clickedParagraphIndex: '',
             clickedChoiceIndex: '',
-            dataMapping : dataMapping
-         }, () => {
-            console.log("data",data);
-            console.log("map", dataMapping);
+            dataMapping : dataMapping,
+            isSideMenu: false
          });
       }
    }
 
    deleteLink(sectionIndex, paragraphIndex, choiceIndex, lineIndex){
       let data = this.state.data;
+       let dataMapping = this.state.dataMapping;
 
-      data[sectionIndex]['paragraphs'][paragraphIndex]['links'][choiceIndex] = {section: 'END'};
+      const { name = false } = data[lineIndex] || {};
 
-      let dataMapping = this.state.dataMapping;
-      dataMapping.splice(lineIndex, 1);
+       data[sectionIndex]['paragraphs'][paragraphIndex]['links'][choiceIndex] = {section: 'END'};
+      if(name === ""){
+          this.deleteSection(lineIndex);
+      }
+
+       dataMapping.splice(lineIndex, 1);
 
       this.setState({
          data: data,
          isLoading: false,
          dataMapping: dataMapping
-      }, () => {
-            console.log("data",data);
-            console.log("map", dataMapping);
       });
    }
 
    rewindStory(lineIndex){
       let dataMapping = this.state.dataMapping;
-   
+
       dataMapping.splice(lineIndex+1, dataMapping.length - 1 - lineIndex);
 
       this.setState({
          dataMapping: dataMapping
-      }, () => {
-            console.log("map", dataMapping);
       });
    }
 
@@ -488,8 +492,6 @@ class Edit extends Component {
 
       this.setState({
          dataMapping: dataMapping
-      }, () => {
-            console.log("map", dataMapping);
       });
    }
 
@@ -725,10 +727,10 @@ class Edit extends Component {
                         return (
                            <label key={storyCategory.id}>
                               <Checkbox
-                                 // checkboxDepth={2}
-                                 name={storyCategory.name}
-                                 value={storyCategory.id}
-                                 onChange={(e) => this.checkBoxValue(e)}>
+                              // checkboxDepth={2}
+                              name={storyCategory.name}
+                              value={storyCategory.id}
+                              onChange={(e) => this.checkBoxValue(e)}>
                               </Checkbox>
                               {storyCategory.name}
                            </label>
@@ -811,7 +813,10 @@ class Edit extends Component {
                         <label htmlFor="story-description">story description</label>
                         <input type="text" className="form-control" name="story_description" value={this.state.story_description} onChange={this.handleChange}/>
 
-                        <label htmlFor="edit-profile-image">story image</label>
+                        <label htmlFor="edit-profile-image">current image</label>
+                        <img src={"data:image/jpeg;base64," + this.state.current_story_image} alt="blog"/> 
+
+                        <label htmlFor="edit-profile-image">new story image</label>
                         <input type="file" className="upload-image" onChange={this.fileChangedHandler}/>
 
                         {this.renderCheckbox()}

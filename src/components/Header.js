@@ -93,7 +93,7 @@ class Header extends Component {
                         this.Auth.getToken() ? (
 
                            <li className="nav-item">
-                              <Link className="nav-link custom-hover" to="/writer" onClick={this.toggle}>writer</Link>
+                              <Link className="nav-link custom-hover writer-mobile" to="/writer" onClick={this.toggle}>writer</Link>
                            </li>
                         ) : (
                            ''

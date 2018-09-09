@@ -12,7 +12,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 // Reducer Import
-import { 
+import {
    clearLoginFieldAfterLogin,
    isLogin
 } from '../reducers/account';
@@ -157,7 +157,7 @@ class Login extends Component {
             let status = err.response.status;
 
             if(status === 400 || status === 422)
-            {   
+            {
                this.setState({
                   registerErrorMessage: err.response.data.errors
                })

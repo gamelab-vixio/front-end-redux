@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 import TextTruncate from 'react-text-truncate';
-import FaStars from 'react-icons/lib/fa/star';
-import FaStarO from 'react-icons/lib/fa/star-o';
 import { Link } from 'react-router-dom';
 
 // Service Import
@@ -10,7 +8,7 @@ import AuthService from '../services/auth.service';
 import UserService from '../services/user.service';
 
 // UI Import
-import { RatingStars } from '../ui';
+import { RatingStars, LoadingScreen } from '../ui';
 class Story extends Component {
 
    constructor(props){
@@ -148,21 +146,7 @@ class Story extends Component {
          );
       }
       else {
-         return(
-            <div className="loader">
-               <div className="sk-cube-grid">
-                  <div className="sk-cube sk-cube1"></div>
-                  <div className="sk-cube sk-cube2"></div>
-                  <div className="sk-cube sk-cube3"></div>
-                  <div className="sk-cube sk-cube4"></div>
-                  <div className="sk-cube sk-cube5"></div>
-                  <div className="sk-cube sk-cube6"></div>
-                  <div className="sk-cube sk-cube7"></div>
-                  <div className="sk-cube sk-cube8"></div>
-                  <div className="sk-cube sk-cube9"></div>
-               </div>
-            </div>
-         );
+         return <LoadingScreen />
       }
    }
 }

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
-import TextTruncate from 'react-text-truncate';
 import TiArrowRight from 'react-icons/lib/ti/arrow-right';
 import ReactHtmlParser from 'react-html-parser';
 
 // Service Import
 import BlogService from '../services/blog.service';
 
+// UI Import
+import { LoadingScreen } from '../ui';
 class Blog extends Component {
 
    constructor(props){
@@ -84,7 +85,6 @@ class Blog extends Component {
                </div>
                <div className="blog-box-text">
                   { ReactHtmlParser(blog.content) }
-                  {/* <TextTruncate line={5} truncateText="…" text={blog_content}/> */}
                </div>
                <div className="blog-separator"></div>
                <div className="read-more">   
@@ -98,9 +98,7 @@ class Blog extends Component {
    }
 
    render() {
-
       if(!this.state.isLoading) {
-
          return (
             <div className="container-fluid blog animated fadeIn">
                <div className="row no-gutters">
@@ -108,35 +106,18 @@ class Blog extends Component {
                      <h1 className="blog-title">blog</h1>
                      <hr className="styled-line"/>
                      <div className="row no-gutters">
-
                         {this.getPosts()}
-                        
                      </div>
-                     
                      <div className="col-12 col-sm-12 col-md-12 text-center">
                         <button className="btn blog-box-load-more" onClick={() => this.getMoreBlog()}>load more</button>
                      </div>
                   </div>
-               </div>   
+               </div>
             </div>
          );
       }
       else {
-         return(
-            <div className="loader">
-               <div className="sk-cube-grid">
-                  <div className="sk-cube sk-cube1"></div>
-                  <div className="sk-cube sk-cube2"></div>
-                  <div className="sk-cube sk-cube3"></div>
-                  <div className="sk-cube sk-cube4"></div>
-                  <div className="sk-cube sk-cube5"></div>
-                  <div className="sk-cube sk-cube6"></div>
-                  <div className="sk-cube sk-cube7"></div>
-                  <div className="sk-cube sk-cube8"></div>
-                  <div className="sk-cube sk-cube9"></div>
-               </div>
-            </div>
-         );
+         return <LoadingScreen />
       }
    }
 }

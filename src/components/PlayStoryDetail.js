@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
-import FaStars from 'react-icons/lib/fa/star';
-import FaStarO from 'react-icons/lib/fa/star-o';
 import TextareaAutosize from 'react-autosize-textarea';
 import Alert from 'react-s-alert';
 import FaMailReply from 'react-icons/lib/fa/mail-reply';
@@ -15,7 +13,7 @@ import StoryService from '../services/story.service';
 import ReportService from '../services/report.service';
 
 // UI Import
-import { RatingStars } from '../ui';
+import { RatingStars, LoadingScreen } from '../ui';
 
 class PlayStoryDetail extends Component {
 
@@ -404,7 +402,7 @@ class PlayStoryDetail extends Component {
                      })
                   }
                </h2>
-               <RatingStars rating={Math.round(story_data.story_review[0].star)} maxRating={5} />
+               <RatingStars rating={Math.round(story_data.story_review[0].star)} />
 
                <div className="bottom-button">
                   <Link to={"/play/" + story_id}>
@@ -519,21 +517,7 @@ class PlayStoryDetail extends Component {
          );
       }
       else {
-         return(
-            <div className="loader">
-               <div className="sk-cube-grid">
-                  <div className="sk-cube sk-cube1"></div>
-                  <div className="sk-cube sk-cube2"></div>
-                  <div className="sk-cube sk-cube3"></div>
-                  <div className="sk-cube sk-cube4"></div>
-                  <div className="sk-cube sk-cube5"></div>
-                  <div className="sk-cube sk-cube6"></div>
-                  <div className="sk-cube sk-cube7"></div>
-                  <div className="sk-cube sk-cube8"></div>
-                  <div className="sk-cube sk-cube9"></div>
-               </div>
-            </div>
-         );
+         return <LoadingScreen />
       }
    }
 }

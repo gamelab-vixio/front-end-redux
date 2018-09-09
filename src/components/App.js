@@ -27,21 +27,21 @@ const App = () => (
     <Header />
 
     <main>
-      <Route exact path='/' component={Home}/>
-      <Route exact path='/story' component={Story}/>
-      <Route exact path='/blog' component={Blog}/>
-      <Route exact path='/blog/:blog_detail' component={BlogDetail}/>
-      <Route exact path='/documentation' component={Documentation}/>
-      <Route exact path='/writer' component={Writer}/>
-      <Route exact path='/writer/create' component={Create}/>
-      <Route exact path='/writer/story/edit/:story_id' component={EditStory}/>
-      <Route exact path='/writer/story/:story_id' component={StoryDetail}/>
-      <Route exact path='/play/:story_id' component={Play}/>
-      <Route exact path='/about' component={About}/>
-      <Route exact path='/account' component={Account}/>
-      <Route exact path='/profile' component={UserProfile} />
-      <Route exact path='/story/:story_id' component={PlayStoryDetail} />
-      <Route exact path='/profile/history' component={UserHistory} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/story" component={Story} />
+      <Route exact path="/blog" component={Blog} />
+      <Route exact path="/blog/:blog_detail" component={BlogDetail} />
+      <Route exact path="/documentation" component={Documentation} />
+      <Route exact path="/writer" component={Writer} />
+      <Route exact path="/writer/create" component={Create} />
+      <Route exact path="/writer/story/edit/:story_id" component={EditStory} />
+      <Route exact path="/writer/story/:story_id" component={StoryDetail} />
+      <Route exact path="/play/:story_id" component={Play} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/account" component={Account} />
+      <Route exact path="/profile" component={UserProfile} />
+      <Route exact path="/story/:story_id" component={PlayStoryDetail} />
+      <Route exact path="/profile/history" component={UserHistory} />
     </main>
 
     <Footer />

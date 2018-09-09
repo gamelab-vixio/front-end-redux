@@ -68,10 +68,7 @@ module.exports = {
     // We inferred the "public path" (such as / or /my-project) from homepage.
     publicPath: publicPath,
     // Point sourcemap entries to original disk location (format as URL on Windows)
-    devtoolModuleFilenameTemplate: info =>
-      path
-        .relative(paths.appSrc, info.absoluteResourcePath)
-        .replace(/\\/g, '/'),
+    devtoolModuleFilenameTemplate: info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/'),
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.
@@ -90,7 +87,6 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-      
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -121,7 +117,6 @@ module.exports = {
             options: {
               formatter: eslintFormatter,
               eslintPath: require.resolve('eslint'),
-              
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -149,7 +144,6 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
               compact: true,
             },
           },
@@ -163,7 +157,7 @@ module.exports = {
                 loader: require.resolve('css-loader'),
                 options: {
                   importLoaders: 1,
-                }
+                },
               },
               {
                 loader: require.resolve('sass-loader'),
@@ -175,18 +169,13 @@ module.exports = {
                   plugins: () => [
                     require('postcss-flexbugs-fixes'),
                     autoprefixer({
-                      browsers: [
-                        '>1%',
-                        'last 4 versions',
-                        'Firefox ESR',
-                        'not ie < 9',  
-                      ],
+                      browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'],
                       flexbox: 'no-2009',
                     }),
                   ],
                 },
-              }, 
-            ]
+              },
+            ],
           },
           // The notation here is somewhat confusing.
           // "postcss" loader applies autoprefixer to our CSS.

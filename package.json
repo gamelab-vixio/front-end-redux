@@ -65,7 +65,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "prettier": "prettier --single-quote --trailing-comma es5 --print-width 120 --write"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -111,6 +112,7 @@
   },
   "devDependencies": {
     "node-sass": "^4.9.2",
+    "prettier": "1.14.2",
     "sass-loader": "^7.0.3"
   }
 }

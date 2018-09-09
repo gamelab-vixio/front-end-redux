@@ -4,10 +4,7 @@ import TextTruncate from 'react-text-truncate';
 import FaSearch from 'react-icons/lib/fa/search';
 import { Link } from 'react-router-dom';
 
-// Service Import
-import StoryService from '../services/story.service';
-
-// UI Import
+import { StoryService } from '../services';
 import { RatingStars, LoadingScreen } from '../ui';
 class Story extends Component {
 

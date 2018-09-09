@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import UserService from '../services/user.service';
-
-// UI Import
+import { AuthService, UserService} from '../services';
 import { LoadingScreen } from '../ui';
 
 class UserProfile extends Component {

@@ -7,14 +7,8 @@ import FaMailReply from 'react-icons/lib/fa/mail-reply';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import StoryService from '../services/story.service';
-import ReportService from '../services/report.service';
-
-// UI Import
+import { AuthService, StoryService, ReportService } from '../services';
 import { RatingStars, LoadingScreen } from '../ui';
-
 class PlayStoryDetail extends Component {
 
    constructor(props) {

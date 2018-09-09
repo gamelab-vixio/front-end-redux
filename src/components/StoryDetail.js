@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import WriterService from '../services/writer.service';
-
-// UI Import
+import { AuthService, WriterService } from '../services';
 import { RatingStars, LoadingScreen } from '../ui';
 
 class StoryDetail extends Component {
@@ -77,7 +73,7 @@ class StoryDetail extends Component {
                      })
                   }
                </h2>
-               <RatingStars rating={Math.round(story_data.story_review[0].star)} maxRating={5} />
+               <RatingStars rating={Math.round(story_data.story_review[0].star)} />
                <div className="bottom-button">
                   <Link to={"/writer/story/edit/" + story_id}>
                      <button className="btn">edit story</button>

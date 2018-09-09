@@ -5,9 +5,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import FaPlus from 'react-icons/lib/fa/plus';
 import Checkbox from 'rc-checkbox';
 
-import AuthService from '../services/auth.service';
-import StoryService from '../services/story.service';
-
+import { AuthService, StoryService } from '../services';
 class Create extends Component {
 
    constructor(props) {

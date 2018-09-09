@@ -4,11 +4,9 @@ import FaLinkedin from 'react-icons/lib/fa/linkedin';
 import FaFacebook from 'react-icons/lib/fa/facebook';
 
 class About extends Component {
-   
    // Set page to top
    componentWillMount(){
       document.title = "Vixio - About";
-
       window.scrollTo(0, 0);
    }
 
@@ -23,10 +21,9 @@ class About extends Component {
                      <hr className="styled-line"/>
                      <h2 className="description-title">about this project</h2>
                      <p className="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Eum quas praesentium sint quae quo asperiores similique 
-                      laboriosam reiciendis, perspiciatis ex obcaecati cupiditate 
+                      Eum quas praesentium sint quae quo asperiores similique
+                      laboriosam reiciendis, perspiciatis ex obcaecati cupiditate
                       assumenda quos a. Veniam aperiam nemo officia fuga.</p>
-                     
                      <div className="milestone">
                         <h2 className="milestone-title">milestone</h2>
                         <div className="timeline-item" date-is='01-01-2018'>
@@ -39,16 +36,15 @@ class About extends Component {
                            <p>description</p>
                         </div>
                      </div>
-                  </div>   
+                  </div>
                </div>
-            </div>   
-               
+            </div>
             <div className="row no-gutters">
                <div className="col-12 col-sm-12 col-md-12">
                   <div className="contributors-title">
                      <h2>contributors</h2>
                   </div>
-               </div>   
+               </div>
                <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
                   <div className="card">
                      <div className="card-body">
@@ -109,9 +105,9 @@ class About extends Component {
                            <FaLinkedin size={25} color="#0077b5"/>
                         </a>
                      </div>
-                  </div>   
+                  </div>
                </div>
-            </div>   
+            </div>
          </div>
       );
    }

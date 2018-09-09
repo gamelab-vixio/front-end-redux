@@ -5,8 +5,7 @@ import TextareaAutosize from 'react-autosize-textarea';
 import FaPlus from 'react-icons/lib/fa/plus';
 import Checkbox from 'rc-checkbox';
 
-import AuthService from '../services/auth.service';
-import WriterService from '../services/writer.service';
+import { AuthService, WriterService } from '../services';
 
 class Edit extends Component {
 

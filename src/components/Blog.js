@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 import TiArrowRight from 'react-icons/lib/ti/arrow-right';
 import ReactHtmlParser from 'react-html-parser';
 
-// Service Import
-import BlogService from '../services/blog.service';
-
-// UI Import
+import { BlogService } from '../services';
 import { LoadingScreen } from '../ui';
 class Blog extends Component {
 

@@ -3,11 +3,7 @@ import React, { Component } from 'react';
 import TextTruncate from 'react-text-truncate';
 import { Link } from 'react-router-dom';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import UserService from '../services/user.service';
-
-// UI Import
+import { AuthService, UserService } from '../services';
 import { RatingStars, LoadingScreen } from '../ui';
 class Story extends Component {
 

@@ -5,11 +5,7 @@ import TextTruncate from 'react-text-truncate';
 import FaPlus from 'react-icons/lib/fa/plus';
 import FaSearch from 'react-icons/lib/fa/search';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import WriterService from '../services/writer.service';
-
-// UI Import
+import { AuthService, WriterService} from '../services';
 import { RatingStars, LoadingScreen } from '../ui';
 class Writer extends Component {
 

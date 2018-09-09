@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import { Story } from 'inkjs';
 import ReactStars from 'react-stars'
 
-// Service Import
-import AuthService from '../services/auth.service';
-import StoryService from '../services/story.service';
-
-// UI Import
+import { AuthService, StoryService } from '../services';
 import { LoadingScreen } from '../ui';
 class Writer extends Component {
 

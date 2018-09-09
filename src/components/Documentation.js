@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 
 import { Link, Element, animateScroll } from 'react-scroll';
 
-// Service Import
-import DocumentationService from '../services/documentation.service';
-
-// UI Import
+import { DocumentationService } from '../services';
 import { LoadingScreen } from '../ui';
 class Documentation extends Component {
 

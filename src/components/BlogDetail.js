@@ -10,11 +10,7 @@ import FaMailReply from 'react-icons/lib/fa/mail-reply';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import BlogService from '../services/blog.service';
-
-// UI Import
+import { AuthService, BlogService } from '../services';
 import { LoadingScreen } from '../ui';
 class BlogDetail extends Component {
 

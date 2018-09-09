@@ -3,17 +3,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FaCaretDown from 'react-icons/lib/fa/caret-down';
 
-// Service Import
-import AuthService from '../services/auth.service';
+import { AuthService } from '../services';
 
 // Redux Import
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// Reducer Import
-import { 
-   isLogout
-} from '../reducers/account';
+import { isLogout } from '../reducers/account';
 
 class Header extends Component {
 

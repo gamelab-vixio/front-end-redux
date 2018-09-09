@@ -3,14 +3,8 @@ import React, { Component } from 'react';
 import TextTruncate from 'react-text-truncate';
 import { Link } from 'react-router-dom';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import StoryService from '../services/story.service';
-
-// Redux Import
 import { connect } from 'react-redux';
-
-// UI Import
+import { AuthService, StoryService } from '../services';
 import { RatingStars, LoadingScreen } from '../ui';
 
 class Home extends Component {
@@ -121,7 +115,7 @@ class Home extends Component {
                                              })
                                           }
                                        </h2>
-                                       <RatingStars rating={Math.round(story.story_review[0].star)} maxRating={5}/>
+                                       <RatingStars rating={Math.round(story.story_review[0].star)} />
                                     </div>
                                  </div>
                               </Link>
@@ -169,7 +163,7 @@ class Home extends Component {
                                              })
                                           }
                                        </h2>
-                                       <RatingStars rating={Math.round(story.story_review[0].star)} maxRating={5}/>
+                                       <RatingStars rating={Math.round(story.story_review[0].star)} />
                                     </div>
                                  </div>
                               </Link>
@@ -217,7 +211,7 @@ class Home extends Component {
                                              })
                                           }
                                        </h2>
-                                       <RatingStars rating={Math.round(story.story_review[0].star)} maxRating={5}/>
+                                       <RatingStars rating={Math.round(story.story_review[0].star)} />
                                     </div>
                                  </div>
                               </Link>

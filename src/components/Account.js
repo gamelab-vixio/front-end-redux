@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import Alert from 'react-s-alert';
 
 // Service Import
-import AuthService from '../services/auth.service';
-import LoginService from '../services/login.service';
-import RegisterService from '../services/register.service';
+import { AuthService, LoginService, RegisterService } from '../services';
 
 // Redux Import
 import { bindActionCreators } from 'redux';

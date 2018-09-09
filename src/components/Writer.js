@@ -57,14 +57,13 @@ class Writer extends Component {
 
       if(this.state.search.length !== 0){
          stories = this.state.search_stories;
-      } 
+      }
       else {
          stories = this.state.storyList;
       }
 
       if(stories.length !== 0) {
          var renderStory = stories.data.map((story, index) => {
-            const star_counter = [1,2,3,4,5];
             return(
                <div key={index} className="col-12 col-sm-3 col-md-3 story-box-wrapper">
                   <Link to={"writer/story/" + story.id}>

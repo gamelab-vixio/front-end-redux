@@ -3,7 +3,7 @@ import { Story } from 'inkjs';
 import ReactStars from 'react-stars'
 
 import { AuthService, StoryService } from '../services';
-import { LoadingScreen } from '../ui';
+import { Token, LoadingScreen } from '../ui';
 class Writer extends Component {
 
    constructor(props) {
@@ -141,7 +141,6 @@ class Writer extends Component {
 
       StoryService.addPlayed(story_id, token)
       .then((res) => {
-         
          this.setState({
             isStartReading: true
          })
@@ -192,7 +191,7 @@ class Writer extends Component {
                                  onChange={this.sendReview}
                                  size={30}
                                  half={false}
-                                 color2={'#f4c150'}/>
+                                 color2={Token.color.yellow}/>
                            </div>
                         ) : (
                            ''
@@ -203,7 +202,7 @@ class Writer extends Component {
                         this.state.isThx ? (
                            <div className="review animated fadeIn">
                               <h1>thank you for playing!</h1>
-                              <div className="play-read">    
+                              <div className="play-read">
                                  <button className="btn start-read" onClick={(e) => {this.backToStoryList()}}>back to story info</button>
                               </div>
                            </div>
@@ -212,7 +211,7 @@ class Writer extends Component {
                         )
                      }
                   </div>
-               </div>   
+               </div>
             </div>
          );
       }

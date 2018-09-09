@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 import UserService from '../services/user.service';
 
-
+// UI Import
+import { RatingStars } from '../ui';
 class Story extends Component {
 
    constructor(props){
@@ -112,27 +113,7 @@ class Story extends Component {
                               })
                            }
                         </h2>
-                        <div className="rating-stars">
-                           {
-                              story.story.story_review.length !== 0 ? [
-                              
-                                 star_counter.map((x, index) =>{
-                                       return index + 1 <= Math.round(story.story.story_review[0].star) ? (
-                                          <FaStars key={index} size={15} color="#f4c150"/>
-                                       ) : (
-                                          <FaStarO key={index} size={15} color="#f4c150"/>
-                                       )
-                                    }),
-                                 <span key={index} className="star-average">{Math.round(story.story.story_review[0].star)}</span>
-                              ] : [
-                                 <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
-                                 <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
-                                 <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
-                                 <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
-                                 <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
-                              ]
-                           }
-                        </div>
+                        <RatingStars rating={Math.round(story.story.story_review[0].star)} />
                      </div>
                   </div>
                </Link>

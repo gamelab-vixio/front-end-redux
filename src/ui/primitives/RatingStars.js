@@ -8,8 +8,12 @@ import { Token } from '../../ui';
 class RatingStars extends Component {
     static propTypes = {
         rating: PropTypes.number.isRequired,
-        maxRating: PropTypes.number.isRequired,
+        maxRating: PropTypes.number,
     };
+
+    static defaultProps = {
+        maxRating: 5,
+    }
 
     render() {
         const { rating, maxRating } = this.props;

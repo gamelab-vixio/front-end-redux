@@ -5,7 +5,7 @@ class Footer extends Component {
     return (
       <div className="footer">
         <div className="footer-center">
-          <h1>vixio</h1>
+          <h1>Vixio</h1>
         </div>
         <div className="footer-bottom">
           <span>Copyright © 2018. All rights reserved</span>

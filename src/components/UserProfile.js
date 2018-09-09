@@ -82,7 +82,6 @@ class UserProfile extends Component {
             <p>{profile.name}</p>
             <label htmlFor="email">email :</label>
             <p>{profile.email}</p>
-            
             <button type="submit" className="btn edit-profile" onClick={this.changePassword}>change password</button>
             {
                this.state.isChangePassword ? (

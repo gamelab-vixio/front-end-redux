@@ -22,7 +22,6 @@ class Story extends Component {
    }
 
    componentWillMount() {
-      
       document.title = "Vixio - My History";
 
       // Set page to top

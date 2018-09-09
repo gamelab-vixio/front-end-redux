@@ -37,7 +37,6 @@ class Writer extends Component {
 
          WriterService.getStoryList(token)
          .then((res) => {
-            
             this.setState({
                isLoading: false,
                storyList: res.data,

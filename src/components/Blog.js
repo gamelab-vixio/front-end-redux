@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
 import TiArrowRight from 'react-icons/lib/ti/arrow-right';
 import ReactHtmlParser from 'react-html-parser';
-
 import { BlogService } from '../services';
 import { LoadingScreen } from '../ui';
 class Blog extends Component {
 
    constructor(props){
       super(props);
-
       this.state = {
          all_blogs: [],
          isLoading: true,
          currentPageNumber: ''
       };
-
-      this.getMoreBlog = this.getMoreBlog.bind(this);
    }
 
    componentWillMount() {
-		
-		document.title = "Vixio - Blog";
+	document.title = "Vixio - Blog";
 
       // Set page to top
       window.scrollTo(0, 0);
@@ -43,7 +37,7 @@ class Blog extends Component {
       });
    }
 
-   getMoreBlog() {
+   getMoreBlog = () => {
       let next_page_number = this.state.currentPageNumber + 1;
 
       if(next_page_number <= this.state.all_blogs.last_page) {
@@ -58,8 +52,6 @@ class Blog extends Component {
                all_blogs: newArr,
                currentPageNumber: next_page_number
             })
-
-            
             // console.log(res);
          })
          .catch((err) => {
@@ -106,7 +98,7 @@ class Blog extends Component {
                         {this.getPosts()}
                      </div>
                      <div className="col-12 col-sm-12 col-md-12 text-center">
-                        <button className="btn blog-box-load-more" onClick={() => this.getMoreBlog()}>load more</button>
+                        <button className="btn blog-box-load-more" onClick={this.getMoreBlog()}>load more</button>
                      </div>
                   </div>
                </div>

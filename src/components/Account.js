@@ -1,22 +1,11 @@
 import React, { Component } from 'react';
-
 import Alert from 'react-s-alert';
-
-// Service Import
 import { AuthService, LoginService, RegisterService } from '../services';
-
-// Redux Import
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
-// Reducer Import
-import {
-   clearLoginFieldAfterLogin,
-   isLogin
-} from '../reducers/account';
+import { clearLoginFieldAfterLogin, isLogin } from '../reducers/account';
 
 class Login extends Component {
-
    constructor(props) {
       super(props);
       this.state = {
@@ -35,26 +24,19 @@ class Login extends Component {
       };
 
       this.Auth = new AuthService();
-      this.handleLoginValue = this.handleLoginValue.bind(this);
-      this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
-      this.handleRegisterValue = this.handleRegisterValue.bind(this);
-      this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this);
    }
 
-   // Set page to top
-   componentWillMount(){
-
+   componentWillMount() {
       document.title = "Vixio - Account";
-      
       window.scrollTo(0, 0);
    }
 
    /* <------------- Login --------------> */
-   handleLoginValue(e) {
+   handleLoginValue = (e) => {
       this.setState( {[e.target.name]: e.target.value} );
    }
 
-   handleLoginSubmit(e){
+   handleLoginSubmit = (e) => {
       e.preventDefault();
 
       // JSON into Variable
@@ -66,29 +48,22 @@ class Login extends Component {
 
       LoginService.loginUser(loginData)
       .then((res) => {
-
          // Clear state and show success alert
-         
          this.props.clearLoginFieldAfterLogin();
-         
          // Set token
          this.Auth.setToken(res.data.token);
-
          // Redirect to home
          this.props.history.push("/");
-
          if(this.Auth.getToken()) {
             this.props.isLogin();
          }
-
          // return Promise.resolve(res);
-
          // console.log(res.data);
       })
       .catch((err) => {
          let status = err.response.status;
 
-         if(status === 400 || status === 422) {   
+         if(status === 400 || status === 422) {
             this.setState({
                loginErrorMessage: err.response.data.errors
             });
@@ -99,8 +74,6 @@ class Login extends Component {
                loginErrorMessage: []
             }, this.failedLoginAlert());
          }
-
-         // console.log(err.response);
       });
    }
 
@@ -112,11 +85,11 @@ class Login extends Component {
    }
 
    /* <------------- Register --------------> */
-   handleRegisterValue(e) {
+   handleRegisterValue = (e) => {
       this.setState( {[e.target.name]: e.target.value} );
    }
 
-   handleRegisterSubmit(e) {
+   handleRegisterSubmit = (e) => {
       e.preventDefault();
 
       // Password Confirmation
@@ -203,7 +176,6 @@ class Login extends Component {
    }
 
    render() {
-
       let { firstName, firstNameStatus, lastName, lastNameStatus, loginEmail, email, loginPassword, password, confirmPassword, confirmPasswordStatus, loginErrorMessage, registerErrorMessage } = this.state;
 
       return (
@@ -226,10 +198,10 @@ class Login extends Component {
                            <button type="submit" className="btn btn-outline-primary manual-signin-button">login</button>
                         </div>
                      </div>
-                  </form>   
+                  </form>
                </div>
             </div>
-       
+
             <div className="row no-gutters">
                <div className="col-12 col-sm-9 col-md-9 col-lg-6 col-xl-6 offset-sm-2 offset-md-2 offset-lg-3 offset-xl-3">
                   <div className="register">
@@ -297,7 +269,7 @@ const mapStateToProps = (state) => ({
    // lastName: state.account.lastName
 });
 
-const mapDispatchToProps = (dispatch) => 
+const mapDispatchToProps = (dispatch) =>
    bindActionCreators(
       {
          clearLoginFieldAfterLogin,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { ProfileCard } from '../ui';
 class About extends Component {
    // Set page to top
-   componentWillMount(){
+   componentWillMount() {
       document.title = "Vixio - About";
       window.scrollTo(0, 0);
    }

@@ -1,81 +1,63 @@
 import React, { Component } from 'react';
-
 import TextTruncate from 'react-text-truncate';
 import { Link } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 import { AuthService, StoryService } from '../services';
 import { RatingStars, LoadingScreen } from '../ui';
-
 class Home extends Component {
-   constructor(props){
+   constructor(props) {
       super(props);
-
       this.state = {
          mostPopular: [],
          newAvailable: [],
          userBased: [],
          isLoading: true
       };
-
       this.Auth = new AuthService();
-      this.retrieveMostPopular = this.retrieveMostPopular.bind(this);
-      this.retrieveNewAvailable = this.retrieveNewAvailable.bind(this);
-      this.retrieveUserBased = this.retrieveUserBased.bind(this);
    }
 
    componentWillMount() {
 	document.title = "Vixio - Home";
-      // Set page to top
       window.scrollTo(0, 0);
       this.retrieveMostPopular();
       this.retrieveNewAvailable();
       this.retrieveUserBased();
    }
 
-   retrieveMostPopular() {
+   retrieveMostPopular = () => {
       StoryService.mostPopular()
       .then((res) => {
-
          this.setState({
             mostPopular: res.data,
             isLoading: false
          })
-
-         // console.log(res.data);
       })
       .catch((err) => {
          // console.log(err);
       });
    }
 
-   retrieveNewAvailable() {
+   retrieveNewAvailable = () => {
       StoryService.newAvailable()
       .then((res) => {
-
          this.setState({
             newAvailable: res.data,
             isLoading: false
          })
-
-         // console.log(res.data);
       })
       .catch((err) => {
          // console.log(err);
       });
    }
 
-   retrieveUserBased() {
+   retrieveUserBased = () => {
       let token = this.Auth.getToken();
       StoryService.userBased(token)
       .then((res) => {
-
          this.setState({
             userBased: res.data,
             isLoading: false
          })
-
-         // console.log(res.data);
       })
       .catch((err) => {
          // console.log(err);
@@ -123,7 +105,6 @@ class Home extends Component {
                         )
                      })
                   }
-
                </div>
             </div>
          </div>

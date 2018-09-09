@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
-import FaStars from 'react-icons/lib/fa/star';
-import FaStarO from 'react-icons/lib/fa/star-o';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import WriterService from '../services/writer.service';
+import { AuthService, WriterService } from '../services';
+import { RatingStars, LoadingScreen } from '../ui';
 
 class StoryDetail extends Component {
-
    constructor(props) {
       super(props);
       this.state = {
@@ -28,10 +24,8 @@ class StoryDetail extends Component {
    componentWillMount() {
       // Set page to top
       window.scrollTo(0, 0);
-      
       let story_id = this.state.story_id;
       let token = this.Auth.getToken();
-
       WriterService.getStoryRead(story_id, token)
       .then((res) => {
 
@@ -50,8 +44,6 @@ class StoryDetail extends Component {
    renderContent() {
       let story_data = this.state.story_read;
       let story_id = this.state.story_id;
-      const star_counter = [1,2,3,4,5];
-      
       return(
          <div className="card story-box">
             <div className="card-header">
@@ -68,7 +60,6 @@ class StoryDetail extends Component {
                   category :&nbsp;
                   <br/>
                   {
-
                      story_data.story_category.map((category, index) =>{
                         return (
                            <label key={index} className="category">{category.category_type.name}</label>
@@ -76,33 +67,11 @@ class StoryDetail extends Component {
                      })
                   }
                </h2>
-               <div className="rating-stars">
-                  {
-                     story_data.story_review[0] ? [
-                     
-                        star_counter.map((x, index) =>{
-                              return index + 1 <= Math.round(story_data.story_review[0].star) ? (
-                                 <FaStars key={index} size={15} color="#f4c150"/>
-                              ) : (
-                                 <FaStarO key={index} size={15} color="#f4c150"/>
-                              )
-                           }),
-                        <span key={star_counter[0] + 7} className="star-average">{Math.round(story_data.story_review[0].star)}</span>
-                     ] : [
-                        <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
-                        <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
-                        <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
-                        <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
-                        <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
-                     ]
-                  }
-               </div>
-
+               <RatingStars rating={Math.round(story_data.story_review[0].star)} />
                <div className="bottom-button">
                   <Link to={"/writer/story/edit/" + story_id}>
                      <button className="btn">edit story</button>
                   </Link>
-                  
                   <button className="btn" onClick={this.deleteStory}>delete story</button>
                   {
                      this.state.story_read.publish === 0 ?
@@ -206,26 +175,12 @@ class StoryDetail extends Component {
                         {this.renderContent()}
                      </div>
                   </div>
-               </div>   
+               </div>
             </div>
          );
       }
       else {
-         return(
-            <div className="loader">
-               <div className="sk-cube-grid">
-                  <div className="sk-cube sk-cube1"></div>
-                  <div className="sk-cube sk-cube2"></div>
-                  <div className="sk-cube sk-cube3"></div>
-                  <div className="sk-cube sk-cube4"></div>
-                  <div className="sk-cube sk-cube5"></div>
-                  <div className="sk-cube sk-cube6"></div>
-                  <div className="sk-cube sk-cube7"></div>
-                  <div className="sk-cube sk-cube8"></div>
-                  <div className="sk-cube sk-cube9"></div>
-               </div>
-            </div>
-         );
+         return <LoadingScreen />
       }
    }
 }

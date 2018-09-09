@@ -11,7 +11,7 @@ export const history = createHistory();
 const initialState = {};
 const enhancers = [];
 const middleware = [
-	thunk, 
+	thunk,
 	routerMiddleware(history)
 ];
 
@@ -26,14 +26,14 @@ if (process.env.NODE_ENV === 'development') {
 
 // Combine enhancers and middleware previously defined
 const composedEnhancers = compose(
-	applyMiddleware(...middleware), 
+	applyMiddleware(...middleware),
 	...enhancers
 );
 
 
 // Create the store based on information above!
 export default createStore(
-	rootReducer, 
-	initialState, 
+	rootReducer,
+	initialState,
 	composedEnhancers
 );

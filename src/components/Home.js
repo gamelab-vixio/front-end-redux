@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 
 import TextTruncate from 'react-text-truncate';
-import FaStars from 'react-icons/lib/fa/star';
 import { Link } from 'react-router-dom';
-import FaStarO from 'react-icons/lib/fa/star-o';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import StoryService from '../services/story.service';
-
-// Redux Import
 import { connect } from 'react-redux';
+import { AuthService, StoryService } from '../services';
+import { RatingStars, LoadingScreen } from '../ui';
 
 class Home extends Component {
-   
    constructor(props){
       super(props);
 
@@ -31,12 +25,9 @@ class Home extends Component {
    }
 
    componentWillMount() {
-
-		document.title = "Vixio - Home";	
-		
+	document.title = "Vixio - Home";
       // Set page to top
       window.scrollTo(0, 0);
-      
       this.retrieveMostPopular();
       this.retrieveNewAvailable();
       this.retrieveUserBased();
@@ -92,18 +83,12 @@ class Home extends Component {
    }
 
    renderMostPopular() {
-
       let all_stories = this.state.mostPopular;
-
-      // console.log(all_stories);
-      const star_counter = [1,2,3,4,5];
       return(
-
          <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
                <div className="row no-gutters story-row">
-                  
-                  {               
+                  {
                      all_stories.map((story, index) => {
                         return(
                            <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
@@ -130,27 +115,7 @@ class Home extends Component {
                                              })
                                           }
                                        </h2>
-                                       <div className="rating-stars">
-                                          {
-                                             story.story_review.length !== 0 ? [
-                                             
-                                                   star_counter.map((x, index) =>{
-                                                      return index + 1 <= Math.round(story.story_review[0].star) ? (
-                                                         <FaStars key={index} size={15} color="#f4c150"/>
-                                                      ) : (
-                                                         <FaStarO key={index} size={15} color="#f4c150"/>
-                                                      )
-                                                   }),
-                                                   <span key={index} className="star-average">{Math.round(story.story_review[0].star)}</span>
-                                             ] : [
-                                                   <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
-                                             ]
-                                          }
-                                       </div>
+                                       <RatingStars rating={Math.round(story.story_review[0].star)} />
                                     </div>
                                  </div>
                               </Link>
@@ -166,19 +131,12 @@ class Home extends Component {
    }
 
    renderNewAvailable() {
-
       let all_stories = this.state.newAvailable;
-
-      // console.log(all_stories);
-
-      const star_counter = [1,2,3,4,5];
       return(
-
          <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
                <div className="row no-gutters story-row">
-                  
-                  {               
+                  {
                      all_stories.map((story, index) => {
                         return(
                            <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
@@ -205,27 +163,7 @@ class Home extends Component {
                                              })
                                           }
                                        </h2>
-                                       <div className="rating-stars">
-                                          {
-                                             story.story_review.length !== 0 ? [
-                                             
-                                                   star_counter.map((x, index) =>{
-                                                      return index + 1 <= Math.round(story.story_review[0].star) ? (
-                                                         <FaStars key={index} size={15} color="#f4c150"/>
-                                                      ) : (
-                                                         <FaStarO key={index} size={15} color="#f4c150"/>
-                                                      )
-                                                   }),
-                                                   <span key={index} className="star-average">{Math.round(story.story_review[0].star)}</span>
-                                             ] : [
-                                                   <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
-                                             ]
-                                          }
-                                       </div>
+                                       <RatingStars rating={Math.round(story.story_review[0].star)} />
                                     </div>
                                  </div>
                               </Link>
@@ -241,22 +179,16 @@ class Home extends Component {
    }
 
    renderUserBased() {
-
       let all_stories = this.state.userBased;
-      const star_counter = [1,2,3,4,5];
-      // console.log(all_stories);
-
       return(
-
          <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
                <div className="row no-gutters story-row">
-                  
-                  {               
+                  {
                      all_stories.map((story, index) => {
                         return(
                            <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
-                              <Link to={"/story/" + story.id}>   
+                              <Link to={"/story/" + story.id}>
                                  <div className="card story-box">
                                     <div className="card-header">
                                        <div className="image-wrapper">
@@ -279,27 +211,7 @@ class Home extends Component {
                                              })
                                           }
                                        </h2>
-                                       <div className="rating-stars">
-                                          {
-                                             story.story_review.length !== 0 ? [
-                                             
-                                                   star_counter.map((x, index) =>{
-                                                      return index + 1 <= Math.round(story.story_review[0].star) ? (
-                                                         <FaStars key={index} size={15} color="#f4c150"/>
-                                                      ) : (
-                                                         <FaStarO key={index} size={15} color="#f4c150"/>
-                                                      )
-                                                   }),
-                                                   <span key={index} className="star-average">{Math.round(story.story_review[0].star)}</span>
-                                             ] : [
-                                                   <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
-                                                   <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
-                                             ]
-                                          }
-                                       </div>
+                                       <RatingStars rating={Math.round(story.story_review[0].star)} />
                                     </div>
                                  </div>
                               </Link>
@@ -315,17 +227,9 @@ class Home extends Component {
    }
 
    render() {
-
       if(!this.state.isLoading) {
-
          return (
             <div className="container-fluid home animated fadeIn">
-               {/*
-               <div className="row no-gutters">
-                  <div className="col-12 col-sm-12 col-md-12 search-background">
-                     <h1>the next generation interactive fiction platform</h1>
-                  </div>
-               </div> */}
                <div className="row no-gutters">
                   <div className="col-12 col-sm-12 col-md-12">
 
@@ -333,26 +237,24 @@ class Home extends Component {
                         !this.state.isLoading ? (
                            <div>
                               <div className="story-category-wrapper">
-                                 <h1 className="category-title text-center">Most Popular</h1>                     
+                                 <h1 className="category-title text-center">Most Popular</h1>
                                  {this.renderMostPopular()}
                               </div>
 
                               <div className="story-category-wrapper">
-                                 <h1 className="category-title text-center">New Available</h1>                     
+                                 <h1 className="category-title text-center">New Available</h1>
                                  {this.renderNewAvailable()}
                               </div>
-                              
                               {
                                  this.props.isLogin && (this.state.userBased.length !== 0) ? (
                                     <div className="story-category-wrapper">
-                                       <h1 className="category-title text-center">User Based</h1>                     
+                                       <h1 className="category-title text-center">User Based</h1>
                                        {this.renderUserBased()}
                                     </div>
                                  ) : (
                                     ''
                                  )
                               }
-                              
                            </div>
                         ) : (
                            ''
@@ -364,21 +266,7 @@ class Home extends Component {
          );
       }
       else {
-         return(
-            <div className="loader">
-               <div className="sk-cube-grid">
-                  <div className="sk-cube sk-cube1"></div>
-                  <div className="sk-cube sk-cube2"></div>
-                  <div className="sk-cube sk-cube3"></div>
-                  <div className="sk-cube sk-cube4"></div>
-                  <div className="sk-cube sk-cube5"></div>
-                  <div className="sk-cube sk-cube6"></div>
-                  <div className="sk-cube sk-cube7"></div>
-                  <div className="sk-cube sk-cube8"></div>
-                  <div className="sk-cube sk-cube9"></div>
-               </div>
-            </div>
-         );
+         return <LoadingScreen />;
       }
    }
 }

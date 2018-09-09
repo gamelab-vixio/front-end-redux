@@ -3,7 +3,6 @@ import axios from 'axios';
 
 export default {
 	url : Config.api + '/blog',
-	
 	getAllBlogPosts(page){
 		if(page){
 			return axios.get(this.url + '/getPublishedBlog/?page=' + page);

@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 
 import TextTruncate from 'react-text-truncate';
-import FaStars from 'react-icons/lib/fa/star';
-import FaStarO from 'react-icons/lib/fa/star-o';
 import { Link } from 'react-router-dom';
 
-// Service Import
-import AuthService from '../services/auth.service';
-import UserService from '../services/user.service';
-
-
+import { AuthService, UserService } from '../services';
+import { RatingStars, LoadingScreen } from '../ui';
 class Story extends Component {
 
    constructor(props){
@@ -27,7 +22,6 @@ class Story extends Component {
    }
 
    componentWillMount() {
-      
       document.title = "Vixio - My History";
 
       // Set page to top
@@ -112,27 +106,7 @@ class Story extends Component {
                               })
                            }
                         </h2>
-                        <div className="rating-stars">
-                           {
-                              story.story.story_review.length !== 0 ? [
-                              
-                                 star_counter.map((x, index) =>{
-                                       return index + 1 <= Math.round(story.story.story_review[0].star) ? (
-                                          <FaStars key={index} size={15} color="#f4c150"/>
-                                       ) : (
-                                          <FaStarO key={index} size={15} color="#f4c150"/>
-                                       )
-                                    }),
-                                 <span key={index} className="star-average">{Math.round(story.story.story_review[0].star)}</span>
-                              ] : [
-                                 <FaStarO key={star_counter[0]} size={15} color="#f4c150"/>,
-                                 <FaStarO key={star_counter[1]} size={15} color="#f4c150"/>,
-                                 <FaStarO key={star_counter[2]} size={15} color="#f4c150"/>,
-                                 <FaStarO key={star_counter[3]} size={15} color="#f4c150"/>,
-                                 <FaStarO key={star_counter[4]} size={15} color="#f4c150"/>
-                              ]
-                           }
-                        </div>
+                        <RatingStars rating={Math.round(story.story.story_review[0].star)} />
                      </div>
                   </div>
                </Link>
@@ -167,21 +141,7 @@ class Story extends Component {
          );
       }
       else {
-         return(
-            <div className="loader">
-               <div className="sk-cube-grid">
-                  <div className="sk-cube sk-cube1"></div>
-                  <div className="sk-cube sk-cube2"></div>
-                  <div className="sk-cube sk-cube3"></div>
-                  <div className="sk-cube sk-cube4"></div>
-                  <div className="sk-cube sk-cube5"></div>
-                  <div className="sk-cube sk-cube6"></div>
-                  <div className="sk-cube sk-cube7"></div>
-                  <div className="sk-cube sk-cube8"></div>
-                  <div className="sk-cube sk-cube9"></div>
-               </div>
-            </div>
-         );
+         return <LoadingScreen />
       }
    }
 }

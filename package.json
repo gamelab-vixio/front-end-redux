@@ -66,7 +66,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "prettier": "prettier --single-quote --trailing-comma es5 --print-width 120 --write"
+    "prettier": "prettier --single-quote --trailing-comma es5 --print-width 120 --write",
+    "precommit": "pretty-quick --staged"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -111,8 +112,10 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "husky": "^0.14.3",
     "node-sass": "^4.9.2",
     "prettier": "1.14.2",
+    "pretty-quick": "^1.6.0",
     "sass-loader": "^7.0.3"
   }
 }

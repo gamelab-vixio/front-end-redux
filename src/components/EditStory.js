@@ -49,15 +49,6 @@ class Edit extends Component {
     };
 
     this.Auth = new AuthService();
-
-    this.editParagraphText = this.editParagraphText.bind(this);
-    this.addChoice = this.addChoice.bind(this);
-    this.deleteChoice = this.deleteChoice.bind(this);
-    this.deleteSection = this.deleteSection.bind(this);
-    this.openSideMenu = this.openSideMenu.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.fileChangedHandler = this.fileChangedHandler.bind(this);
-    this.save = this.save.bind(this);
   }
 
   componentWillMount() {
@@ -226,7 +217,7 @@ class Edit extends Component {
     }
   }
 
-  deleteSection(sectionIndex) {
+  deleteSection = sectionIndex => {
     if (sectionIndex !== 0) {
       let data = this.state.data;
       let upperSectionLength = data[sectionIndex - 1]['paragraphs'].length;
@@ -266,7 +257,7 @@ class Edit extends Component {
     } else {
       alert('First section cannot be deleted');
     }
-  }
+  };
 
   addParagraph(sectionIndex) {
     let data = this.state.data;
@@ -324,7 +315,7 @@ class Edit extends Component {
     }
   }
 
-  editParagraphText(sectionIndex, paragraphIndex, e) {
+  editParagraphText = (sectionIndex, paragraphIndex, e) => {
     let contentText = e.target.value;
 
     let data = this.state.data;
@@ -334,12 +325,12 @@ class Edit extends Component {
       data: data,
       isLoading: false,
     });
-  }
+  };
 
   /******************************* PARAGRAPH (END) *******************************/
 
   /******************************* CHOICES (START) *******************************/
-  addChoice(sectionIndex, paragraphIndex) {
+  addChoice = (sectionIndex, paragraphIndex) => {
     let data = this.state.data;
 
     data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].push('');
@@ -351,9 +342,9 @@ class Edit extends Component {
     });
 
     return data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].length - 1;
-  }
+  };
 
-  editChoice(sectionIndex, paragraphIndex, choiceIndex, e) {
+  editChoice = (sectionIndex, paragraphIndex, choiceIndex, e) => {
     let choiceText = e.target.value;
 
     let data = this.state.data;
@@ -364,9 +355,9 @@ class Edit extends Component {
       data: data,
       isLoading: false,
     });
-  }
+  };
 
-  deleteChoice(sectionIndex, paragraphIndex, choiceIndex) {
+  deleteChoice = (sectionIndex, paragraphIndex, choiceIndex) => {
     let data = this.state.data;
 
     data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].splice(choiceIndex, 1);
@@ -376,7 +367,7 @@ class Edit extends Component {
       data: data,
       isLoading: false,
     });
-  }
+  };
 
   /******************************* CHOICES (END) *******************************/
 
@@ -482,14 +473,14 @@ class Edit extends Component {
     });
   }
 
-  openSideMenu(sectionIndex, paragraphIndex, choiceIndex) {
+  openSideMenu = (sectionIndex, paragraphIndex, choiceIndex) => {
     this.setState({
       isSideMenu: true,
       clickedIndex: sectionIndex,
       clickedParagraphIndex: paragraphIndex,
       clickedChoiceIndex: choiceIndex,
     });
-  }
+  };
 
   renderStory() {
     let renderData = this.state.dataMapping.map((line, l_index) => {
@@ -511,10 +502,10 @@ class Edit extends Component {
                           value={section.name}
                           onChange={e => this.editSection(index, e)}
                         />
-                        <button className="btn add-section-button" onClick={() => this.addSection('', index)}>
+                        <button className="btn add-section-button" onClick={this.addSection('', index)}>
                           <FaPlus size={15} /> section
                         </button>
-                        <button className="btn delete-option-button" onClick={() => this.deleteSection(index)}>
+                        <button className="btn delete-option-button" onClick={this.deleteSection(index)}>
                           <FaPlus size={15} /> section
                         </button>
                       </div>
@@ -552,13 +543,13 @@ class Edit extends Component {
                                 />
                                 <button
                                   className="btn delete-option-button"
-                                  onClick={() => this.deleteChoice(index, p_index, c_index)}
+                                  onClick={this.deleteChoice(index, p_index, c_index)}
                                 >
                                   <FaPlus size={15} />
                                 </button>
                                 <button
                                   className="btn add-link-button"
-                                  onClick={() => this.openSideMenu(index, p_index, c_index)}
+                                  onClick={this.openSideMenu(index, p_index, c_index)}
                                 >
                                   add link
                                 </button>
@@ -581,7 +572,7 @@ class Edit extends Component {
                                 />
                                 <button
                                   className="btn delete-option-button"
-                                  onClick={() => this.deleteChoice(index, p_index, c_index)}
+                                  onClick={this.deleteChoice(index, p_index, c_index)}
                                 >
                                   <FaPlus size={15} />
                                 </button>
@@ -617,7 +608,7 @@ class Edit extends Component {
                           }
                         }
                       })}
-                      <button className="btn add-option-button" onClick={() => this.addChoice(index, p_index, '')}>
+                      <button className="btn add-option-button" onClick={this.addChoice(index, p_index, '')}>
                         <FaPlus size={15} /> option
                       </button>
                     </div>
@@ -670,13 +661,13 @@ class Edit extends Component {
                               />
                               <button
                                 className="btn delete-option-button"
-                                onClick={() => this.deleteChoice(index, p_index, c_index)}
+                                onClick={this.deleteChoice(index, p_index, c_index)}
                               >
                                 <FaPlus size={15} />
                               </button>
                               <button
                                 className="btn add-link-button"
-                                onClick={() => this.openSideMenu(index, p_index, c_index)}
+                                onClick={this.openSideMenu(index, p_index, c_index)}
                               >
                                 add link
                               </button>
@@ -761,13 +752,13 @@ class Edit extends Component {
                               />
                               <button
                                 className="btn delete-option-button"
-                                onClick={() => this.deleteChoice(index, p_index, c_index)}
+                                onClick={this.deleteChoice(index, p_index, c_index)}
                               >
                                 <FaPlus size={15} />
                               </button>
                               <button
                                 className="btn add-link-button"
-                                onClick={() => this.openSideMenu(index, p_index, c_index)}
+                                onClick={this.openSideMenu(index, p_index, c_index)}
                               >
                                 add link
                               </button>
@@ -881,10 +872,10 @@ class Edit extends Component {
     return renderStoryGenres;
   }
 
-  handleChange(e) {
+  handleChange = e => {
     // console.log("A", e);
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
   checkBoxValue = e => {
     // console.log(e.target.value)
@@ -893,11 +884,11 @@ class Edit extends Component {
     });
   };
 
-  fileChangedHandler(e) {
+  fileChangedHandler = e => {
     this.setState({ selectedFile: e.target.files[0] });
-  }
+  };
 
-  save() {
+  save = () => {
     let data = JSON.stringify(this.state.data);
     let token = this.Auth.getToken();
     let story_id = this.state.story_id;
@@ -925,7 +916,7 @@ class Edit extends Component {
       .catch(err => {
         console.log(err.response);
       });
-  }
+  };
 
   render() {
     if (!this.state.isLoading) {

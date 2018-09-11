@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
 import TextareaAutosize from 'react-autosize-textarea';
 import Alert from 'react-s-alert';
 import FaMailReply from 'react-icons/lib/fa/mail-reply';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
 import FaAngleDown from 'react-icons/lib/fa/angle-down';
-
 import { AuthService, StoryService, ReportService } from '../services';
 import { RatingStars, LoadingScreen } from '../ui';
 class PlayStoryDetail extends Component {
@@ -31,30 +29,12 @@ class PlayStoryDetail extends Component {
     };
 
     this.Auth = new AuthService();
-    this.renderContent = this.renderContent.bind(this);
-    this.reportStoryStatus = this.reportStoryStatus.bind(this);
-    this.reportStory = this.reportStory.bind(this);
-    this.handleStoryReport = this.handleStoryReport.bind(this);
-    this.storyFileChangedHandler = this.storyFileChangedHandler.bind(this);
-
-    //Comment
-    this.childCommentReply = this.childCommentReply.bind(this);
-    this.view_reply_toggle.bind(this);
-    this.cancelComment = this.cancelComment.bind(this);
-    this.handleChildCommentValue = this.handleChildCommentValue.bind(this);
-    this.handleChildCommentReplySubmit = this.handleChildCommentReplySubmit.bind(this);
-    this.handleCommentParentValue = this.handleCommentParentValue.bind(this);
-    this.handleCommentParentSubmit = this.handleCommentParentSubmit.bind(this);
   }
 
   componentWillMount() {
-    // Set page to top
     document.title = 'Vixio - Story Info';
-
     window.scrollTo(0, 0);
-
     let story_id = this.state.story_id;
-
     StoryService.getStoryContent(story_id)
       .then(res => {
         // Initialized comment status
@@ -65,17 +45,11 @@ class PlayStoryDetail extends Component {
           joined = joined.concat([[comment_id, 0]]);
         }
 
-        this.setState(
-          {
-            global_status_comment: joined,
-            story_read: res.data,
-            isLoading: false,
-          },
-          () => {
-            // console.log(this.state.global_status_comment)
-          }
-        );
-
+        this.setState({
+          global_status_comment: joined,
+          story_read: res.data,
+          isLoading: false,
+        });
         // console.log(res.data);
       })
       .catch(err => {
@@ -135,7 +109,7 @@ class PlayStoryDetail extends Component {
             <div className="comment-text">
               <h4 className="commentator">{comment.user.name}</h4>
               <p className="content">{comment.comment}</p>
-              <button className="btn reply-button" onClick={() => this.childCommentReply(comment.id)}>
+              <button className="btn reply-button" onClick={this.childCommentReply(comment.id)}>
                 reply&nbsp;
                 <FaMailReply size={10} />
               </button>
@@ -144,7 +118,7 @@ class PlayStoryDetail extends Component {
                     <button
                       key={'reply-button-' + index.toString()}
                       className="btn view-reply-button"
-                      onClick={() => this.view_reply_toggle(comment.id)}
+                      onClick={this.viewReplyToggle(comment.id)}
                     >
                       {this.state.global_status_comment[index][1] === 0 ? 'Show Reply' : 'Hide Reply'}
                       &nbsp;
@@ -165,7 +139,7 @@ class PlayStoryDetail extends Component {
                               <div className="col-10 col-sm-11 col-md-11 comment-text-wrapper">
                                 <h4 className="commentator">{second_level_comment.user.name}</h4>
                                 <p className="content">{second_level_comment.comment}</p>
-                                <button className="btn reply-button" onClick={() => this.childCommentReply(comment.id)}>
+                                <button className="btn reply-button" onClick={this.childCommentReply(comment.id)}>
                                   reply&nbsp;
                                   <FaMailReply size={10} />
                                 </button>
@@ -185,18 +159,18 @@ class PlayStoryDetail extends Component {
     return render_all_comments;
   }
 
-  handleChildCommentValue(e) {
+  handleChildCommentValue = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  childCommentReply(commentParentId) {
+  childCommentReply = commentParentId => {
     this.setState({
       isReply: true,
       commentParentIdFromChild: commentParentId,
     });
-  }
+  };
 
-  handleChildCommentReplySubmit(e) {
+  handleChildCommentReplySubmit = e => {
     e.preventDefault();
     let story_id = this.state.story_id;
     let commentParentId = this.state.commentParentIdFromChild;
@@ -226,15 +200,15 @@ class PlayStoryDetail extends Component {
     } else {
       this.nonLoginAlert();
     }
-  }
+  };
 
-  cancelComment() {
+  cancelComment = () => {
     this.setState({
       isReply: false,
     });
-  }
+  };
 
-  view_reply_toggle(comment_id) {
+  viewReplyToggle = comment_id => {
     let new_value;
     let array_length = this.state.global_status_comment.length;
     for (let i = 0; i < array_length; i++) {
@@ -253,13 +227,13 @@ class PlayStoryDetail extends Component {
         });
       }
     }
-  }
+  };
 
-  handleCommentParentValue(e) {
+  handleCommentParentValue = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  handleCommentParentSubmit(e) {
+  handleCommentParentSubmit = e => {
     e.preventDefault();
 
     // JSON into Variable
@@ -288,7 +262,7 @@ class PlayStoryDetail extends Component {
     } else {
       this.nonLoginAlert();
     }
-  }
+  };
 
   nonLoginAlert() {
     Alert.error('<h5>Please sign in first to comment in this blog post</h5>', {
@@ -298,21 +272,21 @@ class PlayStoryDetail extends Component {
     });
   }
 
-  handleStoryReport(e) {
+  handleStoryReport = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  storyFileChangedHandler(e) {
+  storyFileChangedHandler = e => {
     this.setState({ selectedStoryFile: e.target.files[0] });
-  }
+  };
 
-  reportStoryStatus() {
+  reportStoryStatus = () => {
     this.setState({
       isReport: !this.state.isReport,
     });
-  }
+  };
 
-  reportStory() {
+  reportStory = () => {
     let story_id = this.state.story_id;
     let token = this.Auth.getToken();
 
@@ -341,7 +315,7 @@ class PlayStoryDetail extends Component {
         this.errorAlert();
         // console.log(err);
       });
-  }
+  };
 
   successAlert() {
     Alert.success('<h5>Thank For Creating Better Community in Vixio :)</h5>', {
@@ -362,8 +336,6 @@ class PlayStoryDetail extends Component {
   renderContent() {
     let story_data = this.state.story_read;
     let story_id = this.state.story_id;
-    const star_counter = [1, 2, 3, 4, 5];
-
     return (
       <div className="card story-box">
         <div className="card-header">

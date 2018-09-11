@@ -1,50 +1,31 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
 import FaCaretDown from 'react-icons/lib/fa/caret-down';
-
 import { AuthService } from '../services';
-
-// Redux Import
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
 import { isLogout } from '../reducers/account';
-
 class Header extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       isOpen: false,
       isDropdownOpen: false,
-      isSearch: false,
     };
-
     this.Auth = new AuthService();
-    this.toggle = this.toggle.bind(this);
-    this.dropdownToggle = this.dropdownToggle.bind(this);
-    this.search = this.search.bind(this);
-    //   console.log(this.Auth.getToken());
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({
       isOpen: !this.state.isOpen,
     });
-  }
+  };
 
-  dropdownToggle() {
+  dropdownToggle = () => {
     this.setState({
       isDropdownOpen: !this.state.isDropdownOpen,
     });
-  }
-
-  search() {
-    this.setState({
-      isSearch: !this.state.isSearch,
-    });
-  }
+  };
 
   handleLogout() {
     this.Auth.logout();
@@ -111,7 +92,6 @@ class Header extends Component {
               ) : (
                 ''
               )}
-
               {this.Auth.getToken() ? (
                 <li className="nav-item user-dropdown-menu">
                   <a className="nav-link" onClick={this.dropdownToggle}>

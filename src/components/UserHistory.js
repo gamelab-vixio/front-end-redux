@@ -8,29 +8,22 @@ import { RatingStars, LoadingScreen } from '../ui';
 class Story extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       all_stories: [],
       isLoading: true,
       currentPageNumber: '',
     };
-
     this.Auth = new AuthService();
-    this.retrieveStoryData = this.retrieveStoryData.bind(this);
-    this.getMoreStory = this.getMoreStory.bind(this);
   }
 
   componentWillMount() {
     document.title = 'Vixio - My History';
-
-    // Set page to top
     window.scrollTo(0, 0);
-
     this.retrieveStoryData();
   }
 
-  retrieveStoryData(page_number) {
-    let token = this.Auth.getToken();
+  retrieveStoryData = page_number => {
+    const token = this.Auth.getToken();
 
     UserService.getHistory(page_number, token)
       .then(res => {
@@ -39,15 +32,13 @@ class Story extends Component {
           isLoading: false,
           currentPageNumber: res.data.current_page,
         });
-
-        console.log(res.data);
       })
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
-  getMoreStory() {
+  getMoreStory = () => {
     let next_page_number = this.state.currentPageNumber + 1;
 
     if (next_page_number <= this.state.all_stories.last_page) {
@@ -69,13 +60,11 @@ class Story extends Component {
           // console.log(err);
         });
     }
-  }
+  };
 
   renderStories() {
     let all_stories = this.state.all_stories;
-
     let render_all_stories = all_stories.data.map((story, index) => {
-      const star_counter = [1, 2, 3, 4, 5];
       return (
         <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 story-box-wrapper">
           <Link to={'/story/' + story.id}>
@@ -121,9 +110,8 @@ class Story extends Component {
               <h1 className="story-title">recently played</h1>
               <hr className="styled-line" />
               <div className="row no-gutters">{this.renderStories()}</div>
-
               <div className="col-12 col-sm-12 col-md-12 text-center">
-                <button className="btn story-box-load-more" onClick={() => this.getMoreStory()}>
+                <button className="btn story-box-load-more" onClick={this.getMoreStory}>
                   load more
                 </button>
               </div>

@@ -1,40 +1,27 @@
 import React, { Component } from 'react';
-
 import { Link, Element, animateScroll } from 'react-scroll';
-
 import { DocumentationService } from '../services';
 import { LoadingScreen } from '../ui';
 class Documentation extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       selected_title_id: 1,
       documentation_content: [],
       isLoading: true,
     };
-
-    this.handleChange = this.handleChange.bind(this);
   }
 
   componentWillMount() {
     document.title = 'Vixio - Documentation';
-
-    // Set page to top
     window.scrollTo(0, 0);
-
     this.setState({ isLoading: true });
-
     DocumentationService.getTableOfContent()
       .then(res => {
-        // console.log(res.data);
-
         this.setState({
           documentation_content: res.data,
           isLoading: false,
         });
-
-        // console.log(this.state.documentation_content);
       })
       .catch(error => {
         // console.log(error);
@@ -43,7 +30,6 @@ class Documentation extends Component {
 
   getDocumentationSelectBox() {
     let documentation_select = this.state.documentation_content;
-
     let render_documentation_select = documentation_select.map(first_level => (
       <option key={'select-toc-' + first_level.id} value={first_level.id}>
         {first_level.title}
@@ -53,9 +39,9 @@ class Documentation extends Component {
     return render_documentation_select;
   }
 
-  handleChange(e) {
+  handleChange = e => {
     this.setState({ selected_title_id: e.target.value });
-  }
+  };
 
   getDocumentationLeftContent() {
     let documentation_left_content = this.state.documentation_content;
@@ -71,9 +57,7 @@ class Documentation extends Component {
 
   getDocumentationTableOfContent() {
     let selected_title_id = parseInt(this.state.selected_title_id, 10);
-
     let documentation_toc = this.state.documentation_content;
-
     let link_counter = 0;
 
     const render_documentation_toc = documentation_toc.filter(e => e.id === selected_title_id).map(first_level => (

@@ -20,8 +20,6 @@ class Writer extends Component {
     };
 
     this.Auth = new AuthService();
-    this.handleSearch = this.handleSearch.bind(this);
-    this.searchStory = this.searchStory.bind(this);
   }
 
   componentWillMount() {
@@ -147,11 +145,11 @@ class Writer extends Component {
     }
   }
 
-  handleSearch(e) {
+  handleSearch = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  searchStory() {
+  searchStory = () => {
     let search = this.state.search;
     let token = this.Auth.getToken();
 
@@ -166,7 +164,7 @@ class Writer extends Component {
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
   render() {
     if (!this.state.isLoading) {

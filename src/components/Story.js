@@ -191,7 +191,7 @@ class Story extends Component {
                   <h1>displaying all result...</h1>
                 </div>
               )}
-              <div className="row no-gutters search-story-wrapper">{this.renderStories}</div>
+              <div className="row no-gutters search-story-wrapper">{this.renderStories()}</div>
 
               <div className="col-12 col-sm-12 col-md-12 text-center">
                 <button className="btn story-box-load-more" onClick={this.getMoreStory}>

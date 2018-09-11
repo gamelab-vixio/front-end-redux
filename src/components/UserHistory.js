@@ -73,9 +73,7 @@ class Story extends Component {
 
   renderStories() {
     let all_stories = this.state.all_stories;
-
     let render_all_stories = all_stories.data.map((story, index) => {
-      const star_counter = [1, 2, 3, 4, 5];
       return (
         <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 story-box-wrapper">
           <Link to={'/story/' + story.id}>

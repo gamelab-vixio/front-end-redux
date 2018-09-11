@@ -362,8 +362,6 @@ class PlayStoryDetail extends Component {
   renderContent() {
     let story_data = this.state.story_read;
     let story_id = this.state.story_id;
-    const star_counter = [1, 2, 3, 4, 5];
-
     return (
       <div className="card story-box">
         <div className="card-header">

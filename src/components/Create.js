@@ -46,20 +46,10 @@ class Create extends Component {
     };
 
     this.Auth = new AuthService();
-
-    this.editParagraphText = this.editParagraphText.bind(this);
-    this.addChoice = this.addChoice.bind(this);
-    this.deleteChoice = this.deleteChoice.bind(this);
-    this.deleteSection = this.deleteSection.bind(this);
-    this.openSideMenu = this.openSideMenu.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.fileChangedHandler = this.fileChangedHandler.bind(this);
-    this.save = this.save.bind(this);
   }
 
   componentWillMount() {
     document.title = 'Vixio - Create Story';
-
     StoryService.getStoryCategories()
       .then(res => {
         this.setState({
@@ -213,7 +203,7 @@ class Create extends Component {
     }
   }
 
-  deleteSection(sectionIndex) {
+  deleteSection = sectionIndex => {
     if (sectionIndex !== 0) {
       let data = this.state.data;
       let upperSectionLength = data[sectionIndex - 1]['paragraphs'].length;
@@ -253,7 +243,7 @@ class Create extends Component {
     } else {
       alert('First section cannot be deleted');
     }
-  }
+  };
 
   addParagraph(sectionIndex) {
     let data = this.state.data;
@@ -311,7 +301,7 @@ class Create extends Component {
     }
   }
 
-  editParagraphText(sectionIndex, paragraphIndex, e) {
+  editParagraphText = (sectionIndex, paragraphIndex, e) => {
     let contentText = e.target.value;
 
     let data = this.state.data;
@@ -321,12 +311,12 @@ class Create extends Component {
       data: data,
       isLoading: false,
     });
-  }
+  };
 
   /******************************* PARAGRAPH (END) *******************************/
 
   /******************************* CHOICES (START) *******************************/
-  addChoice(sectionIndex, paragraphIndex) {
+  addChoice = (sectionIndex, paragraphIndex) => {
     let data = this.state.data;
 
     data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].push('');
@@ -338,7 +328,7 @@ class Create extends Component {
     });
 
     return data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].length - 1;
-  }
+  };
 
   editChoice(sectionIndex, paragraphIndex, choiceIndex, e) {
     let choiceText = e.target.value;
@@ -353,7 +343,7 @@ class Create extends Component {
     });
   }
 
-  deleteChoice(sectionIndex, paragraphIndex, choiceIndex) {
+  deleteChoice = (sectionIndex, paragraphIndex, choiceIndex) => {
     let data = this.state.data;
 
     data[sectionIndex]['paragraphs'][paragraphIndex]['choices'].splice(choiceIndex, 1);
@@ -363,7 +353,7 @@ class Create extends Component {
       data: data,
       isLoading: false,
     });
-  }
+  };
 
   /******************************* CHOICES (END) *******************************/
 
@@ -469,14 +459,14 @@ class Create extends Component {
     });
   }
 
-  openSideMenu(sectionIndex, paragraphIndex, choiceIndex) {
+  openSideMenu = (sectionIndex, paragraphIndex, choiceIndex) => {
     this.setState({
       isSideMenu: true,
       clickedIndex: sectionIndex,
       clickedParagraphIndex: paragraphIndex,
       clickedChoiceIndex: choiceIndex,
     });
-  }
+  };
 
   renderStory() {
     let renderData = this.state.dataMapping.map((line, l_index) => {
@@ -604,7 +594,7 @@ class Create extends Component {
                           }
                         }
                       })}
-                      <button className="btn add-option-button" onClick={() => this.addChoice(index, p_index)}>
+                      <button className="btn add-option-button" onClick={this.addChoice(index, p_index)}>
                         <FaPlus size={15} /> option
                       </button>
                     </div>
@@ -872,9 +862,9 @@ class Create extends Component {
     return renderStoryGenres;
   }
 
-  handleChange(e) {
+  handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
   checkBoxValue = e => {
     this.setState({
@@ -882,11 +872,11 @@ class Create extends Component {
     });
   };
 
-  fileChangedHandler(e) {
+  fileChangedHandler = e => {
     this.setState({ selectedFile: e.target.files[0] });
-  }
+  };
 
-  save() {
+  save = () => {
     let data = JSON.stringify(this.state.data);
     let token = this.Auth.getToken();
     const storyData = new FormData();
@@ -904,7 +894,7 @@ class Create extends Component {
       .catch(err => {
         //  console.log(err.response);
       });
-  }
+  };
 
   render() {
     if (!this.state.isLoading) {

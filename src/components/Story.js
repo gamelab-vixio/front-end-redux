@@ -9,7 +9,6 @@ import { RatingStars, LoadingScreen } from '../ui';
 class Story extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       all_stories: [],
       search_stories: [],
@@ -17,11 +16,6 @@ class Story extends Component {
       currentPageNumber: '',
       search: '',
     };
-
-    this.retrieveStoryData = this.retrieveStoryData.bind(this);
-    this.getMoreStory = this.getMoreStory.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.searchStory = this.searchStory.bind(this);
   }
 
   componentWillMount() {
@@ -33,7 +27,7 @@ class Story extends Component {
     this.retrieveStoryData();
   }
 
-  retrieveStoryData(page_number) {
+  retrieveStoryData = page_number => {
     StoryService.getAllStories(page_number)
       .then(res => {
         this.setState({
@@ -47,9 +41,9 @@ class Story extends Component {
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
-  getMoreStory() {
+  getMoreStory = () => {
     let next_page_number = this.state.currentPageNumber + 1;
     let search_name = this.state.search;
 
@@ -93,13 +87,13 @@ class Story extends Component {
           });
       }
     }
-  }
+  };
 
-  handleSearch(e) {
+  handleSearch = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  searchStory() {
+  searchStory = () => {
     let search = this.state.search;
 
     StoryService.searchStory(search)
@@ -108,12 +102,11 @@ class Story extends Component {
           search_stories: res.data,
           currentPageNumber: res.data.current_page,
         });
-        // console.log(res.data);
       })
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
   renderStories() {
     let all_stories;
@@ -125,7 +118,6 @@ class Story extends Component {
 
     if (all_stories.length !== 0) {
       var render_all_stories = all_stories.data.map((story, index) => {
-        const star_counter = [1, 2, 3, 4, 5];
         return (
           <div key={index} className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 story-box-wrapper">
             <Link to={'/story/' + story.id}>
@@ -199,10 +191,10 @@ class Story extends Component {
                   <h1>displaying all result...</h1>
                 </div>
               )}
-              <div className="row no-gutters search-story-wrapper">{this.renderStories()}</div>
+              <div className="row no-gutters search-story-wrapper">{this.renderStories}</div>
 
               <div className="col-12 col-sm-12 col-md-12 text-center">
-                <button className="btn story-box-load-more" onClick={() => this.getMoreStory()}>
+                <button className="btn story-box-load-more" onClick={this.getMoreStory}>
                   load more
                 </button>
               </div>

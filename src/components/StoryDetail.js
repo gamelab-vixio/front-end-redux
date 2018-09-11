@@ -11,16 +11,10 @@ class StoryDetail extends Component {
       story_read: '',
       isLoading: true,
     };
-
     this.Auth = new AuthService();
-    this.deleteStory = this.deleteStory.bind(this);
-    this.renderContent = this.renderContent.bind(this);
-    this.publishStory = this.publishStory.bind(this);
-    this.unpublishStory = this.unpublishStory.bind(this);
   }
 
   componentWillMount() {
-    // Set page to top
     window.scrollTo(0, 0);
     let story_id = this.state.story_id;
     let token = this.Auth.getToken();
@@ -30,15 +24,13 @@ class StoryDetail extends Component {
           story_read: res.data.stories,
           isLoading: false,
         });
-
-        console.log(res.data);
       })
       .catch(err => {
         // console.log(err);
       });
   }
 
-  renderContent() {
+  renderContent = () => {
     let story_data = this.state.story_read;
     let story_id = this.state.story_id;
     return (
@@ -83,9 +75,9 @@ class StoryDetail extends Component {
         </div>
       </div>
     );
-  }
+  };
 
-  publishStory() {
+  publishStory = () => {
     let story_id = this.state.story_id;
     let token = this.Auth.getToken();
     let data = JSON.parse(this.state.story_read.content);
@@ -128,9 +120,9 @@ class StoryDetail extends Component {
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
-  unpublishStory() {
+  unpublishStory = () => {
     let story_id = this.state.story_id;
     let token = this.Auth.getToken();
 
@@ -142,9 +134,9 @@ class StoryDetail extends Component {
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
-  deleteStory() {
+  deleteStory = () => {
     let story_id = this.state.story_id;
     let token = this.Auth.getToken();
 
@@ -156,7 +148,7 @@ class StoryDetail extends Component {
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
   render() {
     if (!this.state.isLoading) {

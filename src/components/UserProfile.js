@@ -29,21 +29,15 @@ class UserProfile extends Component {
 
   componentWillMount() {
     document.title = 'Vixio - My Profile';
-
-    // Set page to top
     window.scrollTo(0, 0);
-
     if (this.Auth.getToken()) {
       let token = this.Auth.getToken();
-
       UserService.getUserProfile(token)
         .then(res => {
           this.setState({
             user_data: res.data,
             isLoading: false,
           });
-
-          // console.log(res);
         })
         .catch(err => {
           // console.log(err);
@@ -144,22 +138,15 @@ class UserProfile extends Component {
 
   uploadHandler() {
     console.log(this.state.selectedFile);
-
-    let token = this.Auth.getToken();
-
+    const token = this.Auth.getToken();
     const formData = new FormData();
-
     formData.append('photo', this.state.selectedFile, this.state.selectedFile.name);
-
     UserService.userEditProfile(token, formData)
       .then(res => {
         this.setState({
           selectedFile: null,
         });
-
         window.location.reload();
-
-        // console.log(res);
       })
       .catch(err => {
         // console.log(err);

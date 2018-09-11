@@ -19,10 +19,6 @@ class Writer extends Component {
     };
 
     this.Auth = new AuthService();
-    this.continueStory = this.continueStory.bind(this);
-    this.chooseChoice = this.chooseChoice.bind(this);
-    this.startReading = this.startreading.bind(this);
-    this.sendReview = this.sendReview.bind(this);
   }
 
   componentWillMount() {
@@ -48,15 +44,13 @@ class Writer extends Component {
             });
           }
         );
-
-        // console.log(res);
       })
       .catch(err => {
         // console.log(err);
       });
   }
 
-  continueStory() {
+  continueStory = () => {
     while (this.state.story_data.canContinue) {
       let data = this.state.story_continue;
 
@@ -78,10 +72,9 @@ class Writer extends Component {
         isThx: true,
       });
     }
-    // console.log(this.state.story_data);
-  }
+  };
 
-  sendReview(newRating) {
+  sendReview = newRating => {
     let story_id = this.state.story_id;
     let star = newRating;
     let token = this.Auth.getToken();
@@ -102,12 +95,12 @@ class Writer extends Component {
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
-  chooseChoice(choice) {
+  chooseChoice = choice => {
     this.state.story_data.ChooseChoiceIndex(choice.index);
     this.continueStory();
-  }
+  };
 
   renderParagraph() {
     let render_paragraph = this.state.story_continue.map((text, index) => {
@@ -133,11 +126,9 @@ class Writer extends Component {
     return render_choice;
   }
 
-  startreading() {
+  startReading = () => {
     let story_id = this.state.story_id;
-
     let token = this.Auth.getToken();
-
     StoryService.addPlayed(story_id, token)
       .then(res => {
         this.setState({
@@ -149,7 +140,7 @@ class Writer extends Component {
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
   backToStoryList() {
     this.props.history.push('/story/' + this.state.story_id);
@@ -172,7 +163,7 @@ class Writer extends Component {
                       className="btn start-read"
                       onClick={e => {
                         this.continueStory();
-                        this.startreading();
+                        this.startReading();
                       }}
                     >
                       start reading

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-
 import { AuthService, UserService } from '../services';
 import { LoadingScreen } from '../ui';
-
 class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -17,14 +15,7 @@ class UserProfile extends Component {
       confirmPassword: '',
       changePasswordErrorMessage: '',
     };
-
     this.Auth = new AuthService();
-    this.editProfile = this.editProfile.bind(this);
-    this.fileChangedHandler = this.fileChangedHandler.bind(this);
-    this.uploadHandler = this.uploadHandler.bind(this);
-    this.changePassword = this.changePassword.bind(this);
-    this.handleChangePasswordValue = this.handleChangePasswordValue.bind(this);
-    this.changePasswordHandler = this.changePasswordHandler.bind(this);
   }
 
   componentWillMount() {
@@ -61,7 +52,6 @@ class UserProfile extends Component {
           <div className="edit-profile-image">
             <label htmlFor="edit-profile-image">change profile image</label>
             <input type="file" onChange={this.fileChangedHandler} />
-
             <button type="submit" name="photo" className="btn submit-edit-profile" onClick={this.uploadHandler}>
               upload image
             </button>
@@ -120,23 +110,23 @@ class UserProfile extends Component {
     );
   }
 
-  editProfile() {
+  editProfile = () => {
     this.setState({
       isEdit: true,
     });
-  }
+  };
 
-  changePassword() {
+  changePassword = () => {
     this.setState({
       isChangePassword: true,
     });
-  }
+  };
 
-  fileChangedHandler(e) {
+  fileChangedHandler = e => {
     this.setState({ selectedFile: e.target.files[0] });
-  }
+  };
 
-  uploadHandler() {
+  uploadHandler = () => {
     console.log(this.state.selectedFile);
     const token = this.Auth.getToken();
     const formData = new FormData();
@@ -151,13 +141,13 @@ class UserProfile extends Component {
       .catch(err => {
         // console.log(err);
       });
-  }
+  };
 
-  handleChangePasswordValue(e) {
+  handleChangePasswordValue = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  changePasswordHandler() {
+  changePasswordHandler = () => {
     let token = this.Auth.getToken();
 
     let changePasswordData = {
@@ -184,7 +174,7 @@ class UserProfile extends Component {
         }
         // console.log(err);
       });
-  }
+  };
 
   render() {
     if (!this.state.isLoading) {

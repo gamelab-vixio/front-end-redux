@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-
-// import { Link } from 'react-router-dom';
 import TextareaAutosize from 'react-autosize-textarea';
 import Alert from 'react-s-alert';
-// import TiArrowRight from 'react-icons/lib/ti/arrow-right';
-// import TiArrowLeft from 'react-icons/lib/ti/arrow-left';
 import ReactHtmlParser from 'react-html-parser';
 import FaMailReply from 'react-icons/lib/fa/mail-reply';
 import FaAngleUp from 'react-icons/lib/fa/angle-up';
@@ -28,17 +24,9 @@ class BlogDetail extends Component {
     };
 
     this.Auth = new AuthService();
-    this.childCommentReply = this.childCommentReply.bind(this);
-    this.view_reply_toggle.bind(this);
-    this.cancelComment = this.cancelComment.bind(this);
-    this.handleChildCommentValue = this.handleChildCommentValue.bind(this);
-    this.handleChildCommentReplySubmit = this.handleChildCommentReplySubmit.bind(this);
-    this.handleCommentParentValue = this.handleCommentParentValue.bind(this);
-    this.handleCommentParentSubmit = this.handleCommentParentSubmit.bind(this);
   }
 
   componentWillMount() {
-    // Set page to top
     document.title = 'Vixio - Blog Content';
     window.scrollTo(0, 0);
 
@@ -113,7 +101,7 @@ class BlogDetail extends Component {
             <div className="comment-text">
               <h4 className="commentator">{comment.user.name}</h4>
               <p className="content">{comment.comment}</p>
-              <button className="btn reply-button" onClick={() => this.childCommentReply(comment.id)}>
+              <button className="btn reply-button" onClick={this.childCommentReply(comment.id)}>
                 reply&nbsp;
                 <FaMailReply size={10} />
               </button>
@@ -122,7 +110,7 @@ class BlogDetail extends Component {
                     <button
                       key={'reply-button-' + index.toString()}
                       className="btn view-reply-button"
-                      onClick={() => this.view_reply_toggle(comment.id)}
+                      onClick={this.viewReplyToggle(comment.id)}
                     >
                       {this.state.global_status_comment[index][1] === 0 ? 'Show Reply' : 'Hide Reply'}
                       &nbsp;
@@ -143,7 +131,7 @@ class BlogDetail extends Component {
                               <div className="col-10 col-sm-11 col-md-11 comment-text-wrapper">
                                 <h4 className="commentator">{second_level_comment.user.name}</h4>
                                 <p className="content">{second_level_comment.comment}</p>
-                                <button className="btn reply-button" onClick={() => this.childCommentReply(comment.id)}>
+                                <button className="btn reply-button" onClick={this.childCommentReply(comment.id)}>
                                   reply&nbsp;
                                   <FaMailReply size={10} />
                                 </button>
@@ -163,18 +151,18 @@ class BlogDetail extends Component {
     return render_all_comments;
   }
 
-  handleChildCommentValue(e) {
+  handleChildCommentValue = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  childCommentReply(commentParentId) {
+  childCommentReply = commentParentId => {
     this.setState({
       isReply: true,
       commentParentIdFromChild: commentParentId,
     });
-  }
+  };
 
-  handleChildCommentReplySubmit(e) {
+  handleChildCommentReplySubmit = e => {
     e.preventDefault();
     let blog_id = this.state.blog_id;
     let commentParentId = this.state.commentParentIdFromChild;
@@ -204,15 +192,15 @@ class BlogDetail extends Component {
     } else {
       this.nonLoginAlert();
     }
-  }
+  };
 
-  cancelComment() {
+  cancelComment = () => {
     this.setState({
       isReply: false,
     });
-  }
+  };
 
-  view_reply_toggle(comment_id) {
+  viewReplyToggle = comment_id => {
     let new_value;
     let array_length = this.state.global_status_comment.length;
     for (let i = 0; i < array_length; i++) {
@@ -231,13 +219,13 @@ class BlogDetail extends Component {
         });
       }
     }
-  }
+  };
 
-  handleCommentParentValue(e) {
+  handleCommentParentValue = e => {
     this.setState({ [e.target.name]: e.target.value });
-  }
+  };
 
-  handleCommentParentSubmit(e) {
+  handleCommentParentSubmit = e => {
     e.preventDefault();
 
     // JSON into Variable
@@ -266,7 +254,7 @@ class BlogDetail extends Component {
     } else {
       this.nonLoginAlert();
     }
-  }
+  };
 
   nonLoginAlert() {
     Alert.error('<h5>Please sign in first to comment in this blog post</h5>', {

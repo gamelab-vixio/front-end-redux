@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
-import { ProfileCard } from '../ui';
+import { ProfileCard, Timeline } from '../ui';
 class About extends Component {
-  // Set page to top
+  constructor(props) {
+    super(props);
+    this.timelineItems = [
+      {
+        title: 'Project initiated',
+        date: '01-01-2018',
+        description: 'This is the beginning of everything',
+      },
+      {
+        title: 'Project finished!',
+        date: '12-11-2018',
+        description: 'All the main features are finished!',
+      },
+    ];
+  }
+
   componentWillMount() {
     document.title = 'Vixio - About';
     window.scrollTo(0, 0);
@@ -20,18 +35,7 @@ class About extends Component {
                 similique laboriosam reiciendis, perspiciatis ex obcaecati cupiditate assumenda quos a. Veniam aperiam
                 nemo officia fuga.
               </p>
-              <div className="milestone">
-                <h2 className="milestone-title">milestone</h2>
-                <div className="timeline-item" date-is="01-01-2018">
-                  <h1>milestone title</h1>
-                  <p>description</p>
-                </div>
-
-                <div className="timeline-item" date-is="01-02-2018">
-                  <h1>milestone title</h1>
-                  <p>description</p>
-                </div>
-              </div>
+              <Timeline timelineItems={this.timelineItems} />
             </div>
           </div>
         </div>

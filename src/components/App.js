@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import '../scss/style.scss';
-import '../scss/mobile.scss';
+// import '../scss/mobile.scss';
 import '../scss/desktop.scss';
 import '../css/simplex.min.css';
 import '../css/animate.css';

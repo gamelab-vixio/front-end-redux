@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TextTruncate from 'react-text-truncate';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AuthService, StoryService } from '../services';
@@ -81,21 +80,24 @@ class Home extends Component {
                         </div>
                       </div>
                       <div className="card-body">
-                        <h1 className="card-title">
-                          <TextTruncate line={2} truncateText="…" text={story.title} />
-                        </h1>
-                        <h2 className="card-author">{story.user.name}</h2>
-                        <h2 className="card-author">
-                          category :&nbsp;
-                          <br />
+                        <div className="story-title">
+                          <h2>title :</h2>
+                          <label>{story.title}</label>
+                        </div>
+                        <div className="story-author">
+                          <h2>author :</h2>
+                          <label>{story.user.name}</label>
+                        </div>
+                        <div className="story-category-list">
+                          <h2>category :</h2>
                           {story.story_category.map((category, index) => {
                             return (
-                              <label key={index} className="category">
+                              <label key={index} className="label-category">
                                 {category.category_type.name}
                               </label>
                             );
                           })}
-                        </h2>
+                        </div>
                         <RatingStars rating={Math.round(story.story_review[0].star)} />
                       </div>
                     </div>
@@ -126,21 +128,24 @@ class Home extends Component {
                         </div>
                       </div>
                       <div className="card-body">
-                        <h1 className="card-title">
-                          <TextTruncate line={2} truncateText="…" text={story.title} />
-                        </h1>
-                        <h2 className="card-author">{story.user.name}</h2>
-                        <h2 className="card-author">
-                          category :&nbsp;
-                          <br />
+                        <div className="story-title">
+                          <h2>title :</h2>
+                          <label>{story.title}</label>
+                        </div>
+                        <div className="story-author">
+                          <h2>author :</h2>
+                          <label>{story.user.name}</label>
+                        </div>
+                        <div className="story-category-list">
+                          <h2>category :</h2>
                           {story.story_category.map((category, index) => {
                             return (
-                              <label key={index} className="category">
+                              <label key={index} className="label-category">
                                 {category.category_type.name}
                               </label>
                             );
                           })}
-                        </h2>
+                        </div>
                         <RatingStars rating={Math.round(story.story_review[0].star)} />
                       </div>
                     </div>
@@ -171,21 +176,24 @@ class Home extends Component {
                         </div>
                       </div>
                       <div className="card-body">
-                        <h1 className="card-title">
-                          <TextTruncate line={2} truncateText="…" text={story.title} />
-                        </h1>
-                        <h2 className="card-author">{story.user.name}</h2>
-                        <h2 className="card-author">
-                          category :&nbsp;
-                          <br />
+                        <div className="story-title">
+                          <h2>title :</h2>
+                          <label>{story.title}</label>
+                        </div>
+                        <div className="story-author">
+                          <h2>author :</h2>
+                          <label>{story.user.name}</label>
+                        </div>
+                        <div className="story-category-list">
+                          <h2>category :</h2>
                           {story.story_category.map((category, index) => {
                             return (
-                              <label key={index} className="category">
+                              <label key={index} className="label-category">
                                 {category.category_type.name}
                               </label>
                             );
                           })}
-                        </h2>
+                        </div>
                         <RatingStars rating={Math.round(story.story_review[0].star)} />
                       </div>
                     </div>
@@ -209,16 +217,19 @@ class Home extends Component {
                 <div>
                   <div className="story-category-wrapper">
                     <h1 className="category-title text-center">Most Popular</h1>
+                    <hr className="styled-line" />
                     {this.renderMostPopular()}
                   </div>
 
                   <div className="story-category-wrapper">
                     <h1 className="category-title text-center">New Available</h1>
+                    <hr className="styled-line" />
                     {this.renderNewAvailable()}
                   </div>
                   {this.props.isLogin && this.state.userBased.length !== 0 ? (
                     <div className="story-category-wrapper">
                       <h1 className="category-title text-center">User Based</h1>
+                      <hr className="styled-line" />
                       {this.renderUserBased()}
                     </div>
                   ) : (

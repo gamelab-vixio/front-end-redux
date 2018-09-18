@@ -1,4 +1,4 @@
-/* Font */
+/* Google Font */
 @import url('https://fonts.googleapis.com/css?family=Josefin+Sans'); /* Vixio */
 @import url('https://fonts.googleapis.com/css?family=Kanit'); /* H1 */
 
@@ -6,10 +6,6 @@
 @import url('https://cdn.jsdelivr.net/npm/react-s-alert@1.4.1/dist/s-alert-default.css');
 @import url('https://cdn.jsdelivr.net/npm/react-s-alert@1.4.1/dist/s-alert-css-effects/jelly.css');
 @import url('https://cdn.jsdelivr.net/npm/react-s-alert@1.4.1/dist/s-alert-css-effects/slide.css');
-
-/* Slick Carousel CSS */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css');
 
 * {
   box-sizing: border-box;
@@ -50,7 +46,7 @@ body {
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
   }
 
-  // CSS Loader
+  // CSS Loading Animaton
   .loader {
     height: 100vh;
 

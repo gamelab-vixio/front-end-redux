@@ -78,39 +78,37 @@ class Home extends Component {
       <div className="row no-gutters">
         {all_stories.map((story, index) => {
           return (
-            <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2">
-              <div className="story-box-wrapper">
-                <Link to={'/story/' + story.id}>
-                  <div className="card story-box">
-                    <div className="card-header">
-                      <div className="image-wrapper">
-                        <img className="story-image" src={'data:image/jpeg;base64,' + story.image_url} alt="IF" />
-                      </div>
-                    </div>
-                    <div className="card-body">
-                      <div className="story-title">
-                        <h2>title :</h2>
-                        <label>{story.title}</label>
-                      </div>
-                      <div className="story-author">
-                        <h2>author :</h2>
-                        <label>{story.user.name}</label>
-                      </div>
-                      <div className="story-category-list">
-                        <h2>category :</h2>
-                        {story.story_category.map((category, index) => {
-                          return (
-                            <label key={index} className="label-category">
-                              {category.category_type.name}
-                            </label>
-                          );
-                        })}
-                      </div>
-                      <RatingStars rating={Math.round(story.story_review[0].star)} />
+            <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
+              <Link to={'/story/' + story.id}>
+                <div className="card story-box">
+                  <div className="card-header">
+                    <div className="image-wrapper">
+                      <img className="story-image" src={'data:image/jpeg;base64,' + story.image_url} alt="IF" />
                     </div>
                   </div>
-                </Link>
-              </div>
+                  <div className="card-body">
+                    <div className="story-title">
+                      <h2>title :</h2>
+                      <label>{story.title}</label>
+                    </div>
+                    <div className="story-author">
+                      <h2>author :</h2>
+                      <label>{story.user.name}</label>
+                    </div>
+                    <div className="story-category-list">
+                      <h2>category :</h2>
+                      {story.story_category.map((category, index) => {
+                        return (
+                          <label key={index} className="label-category">
+                            {category.category_type.name}
+                          </label>
+                        );
+                      })}
+                    </div>
+                    <RatingStars rating={Math.round(story.story_review[0].star)} />
+                  </div>
+                </div>
+              </Link>
             </div>
           );
         })}

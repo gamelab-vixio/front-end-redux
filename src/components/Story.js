@@ -119,7 +119,7 @@ class Story extends Component {
     if (all_stories.length !== 0) {
       var render_all_stories = all_stories.data.map((story, index) => {
         return (
-          <div key={index} className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 story-box-wrapper">
+          <div key={index} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
             <Link to={'/story/' + story.id}>
               <div className="card story-box">
                 <div className="card-header">
@@ -128,21 +128,24 @@ class Story extends Component {
                   </div>
                 </div>
                 <div className="card-body">
-                  <h1 className="card-title">
-                    <TextTruncate line={2} truncateText="…" text={story.title} />
-                  </h1>
-                  <h2 className="card-author">{story.user.name}</h2>
-                  <h2 className="card-author">
-                    category :&nbsp;
-                    <br />
+                  <div className="story-title">
+                    <h2>title :</h2>
+                    <label>{story.title}</label>
+                  </div>
+                  <div className="story-author">
+                    <h2>author :</h2>
+                    <label>{story.user.name}</label>
+                  </div>
+                  <div className="story-category-list">
+                    <h2>category :</h2>
                     {story.story_category.map((category, index) => {
                       return (
-                        <label key={index} className="category">
+                        <label key={index} className="label-category">
                           {category.category_type.name}
                         </label>
                       );
                     })}
-                  </h2>
+                  </div>
                   <RatingStars rating={Math.round(story.story_review[0].star)} />
                 </div>
               </div>
@@ -193,11 +196,15 @@ class Story extends Component {
               )}
               <div className="row no-gutters search-story-wrapper">{this.renderStories()}</div>
 
-              <div className="col-12 col-sm-12 col-md-12 text-center">
-                <button className="btn story-box-load-more" onClick={this.getMoreStory}>
-                  load more
-                </button>
-              </div>
+              {this.state.search.length !== 0 ? (
+                ''
+              ) : (
+                <div className="col-12 col-sm-12 col-md-12 text-center">
+                  <button className="btn story-box-load-more" onClick={this.getMoreStory}>
+                    load more
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

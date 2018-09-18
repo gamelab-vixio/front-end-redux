@@ -1527,14 +1527,14 @@ $custom-black: #08182b;
   /*------------ Documentation ------------*/
   .documentation {
     position: relative;
-    padding: 15px !important;
+    padding: 15px;
     background-color: $custom-white;
 
     .documentation-title {
       position: relative;
-      margin: 0;
+      margin-bottom: 10px;
       text-align: center;
-      text-transform: uppercase;
+      text-transform: capitalize;
       font-size: 24px;
       color: $custom-black;
     }
@@ -2189,87 +2189,83 @@ $custom-black: #08182b;
   /*------------ About ------------*/
   .about {
     position: relative;
-    padding: 15px 0 15px 0 !important;
+    padding: 15px;
     background-color: $custom-white;
 
-    .wrapper {
-      padding-left: 15px;
-      padding-right: 15px;
+    .about-title {
+      position: relative;
+      margin-bottom: 10px;
+      text-align: center;
+      text-transform: capitalize;
+      font-size: 24px;
+      color: $custom-black;
+    }
 
-      .about-title {
-        margin: 0;
-        text-align: center;
+    .description-title {
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 20px;
+
+      &:first-letter {
         text-transform: uppercase;
-        font-size: 24px;
+      }
+    }
+
+    .description {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+
+    .milestone {
+      position: relative;
+      margin-top: 25px;
+
+      .milestone-title {
+        margin-top: 25px;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+        font-size: 20px;
         color: $custom-black;
       }
 
-      .description-title {
-        margin-top: 0;
-        margin-bottom: 5px;
-        font-size: 20px;
-
-        &:first-letter {
-          text-transform: uppercase;
-        }
-      }
-
-      .description {
-        margin-bottom: 0;
-        font-size: 14px;
-      }
-
-      .milestone {
+      .timeline-item {
+        padding: 3em 2em 2em;
         position: relative;
-        margin-top: 25px;
+        color: rgba(black, 0.7);
+        border-left: 2px solid rgba($custom-black, 0.3);
 
-        .milestone-title {
-          margin-top: 25px;
-          margin-bottom: 10px;
-          text-transform: capitalize;
-          font-size: 20px;
-          color: $custom-black;
+        h1 {
+          text-transform: uppercase;
+          font-size: 18px;
         }
 
-        .timeline-item {
-          padding: 3em 2em 2em;
-          position: relative;
-          color: rgba(black, 0.7);
-          border-left: 2px solid rgba($custom-black, 0.3);
+        p {
+          font-size: 14px;
+        }
 
-          h1 {
-            text-transform: uppercase;
-            font-size: 18px;
-          }
+        &::before {
+          content: attr(date-is);
+          position: absolute;
+          left: 2em;
+          font-weight: bold;
+          top: 8.5px;
+          display: block;
+          font-weight: 700;
+          font-size: 13px;
+        }
 
-          p {
-            font-size: 14px;
-          }
-
-          &::before {
-            content: attr(date-is);
-            position: absolute;
-            left: 2em;
-            font-weight: bold;
-            top: 8.5px;
-            display: block;
-            font-weight: 700;
-            font-size: 13px;
-          }
-
-          &::after {
-            content: '';
-            position: absolute;
-            display: block;
-            width: 10px;
-            height: 10px;
-            margin-left: 1px;
-            top: 1em;
-            left: -7px;
-            border-radius: 10px;
-            border: 2px solid rgba($custom-black, 0.3);
-            background: white;
-          }
+        &::after {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 10px;
+          height: 10px;
+          margin-left: 1px;
+          top: 1em;
+          left: -7px;
+          border-radius: 10px;
+          border: 2px solid rgba($custom-black, 0.3);
+          background: white;
         }
       }
     }
@@ -2293,6 +2289,7 @@ $custom-black: #08182b;
 
       .card-body {
         padding: 15px;
+        background-color: $custom-black;
 
         .profile-image {
           width: 100%;
@@ -2310,22 +2307,18 @@ $custom-black: #08182b;
           font-size: 18px;
           text-transform: capitalize;
           text-align: center;
-          color: $custom-black;
-        }
-
-        .card-subtitle {
-          margin-top: 5px;
-          margin-bottom: 5px;
-          text-transform: capitalize;
-          text-align: center;
-          font-size: 16px;
-          color: rgba($custom-black, 0.7);
+          color: $custom-white;
         }
 
         .card-text {
-          text-align: justify;
+          margin-bottom: 5px;
+          text-align: center;
           font-size: 14px;
-          color: $custom-black;
+          color: $custom-white;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
 
           &:first-letter {
             text-transform: uppercase;
@@ -2335,14 +2328,14 @@ $custom-black: #08182b;
 
       .card-footer {
         padding: 15px;
-        background-color: $custom-black;
+        background-color: white;
 
         .social-media {
           display: inline-block;
           margin-right: 10px;
           padding: 1.5px;
           border-radius: 3px;
-          background-color: $custom-white;
+          background-color: transparent;
         }
       }
     }

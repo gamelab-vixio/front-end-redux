@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import FaLinkedin from 'react-icons/lib/fa/linkedin';
-import FaFacebook from 'react-icons/lib/fa/facebook';
+import FaLinkedinSquare from 'react-icons/lib/fa/linkedin-square';
+import FaFacebookSquare from 'react-icons/lib/fa/facebook-square';
 
 class ProfileCard extends Component {
   static propTypes = {
@@ -30,15 +30,15 @@ class ProfileCard extends Component {
               <img src={require('../../images/albert.jpg')} alt={fullName} />
             </div>
             <h2 className="card-title">{fullName}</h2>
-            <h3 className="card-subtitle">{universityName}</h3>
             <p className="card-text">{description}</p>
+            <p className="card-text">{universityName}</p>
           </div>
           <div className="card-footer">
             <a className="social-media" href={facebookLink}>
-              <FaFacebook size={25} color="#3b5998" />
+              <FaFacebookSquare size={30} color="#3b5998" />
             </a>
             <a className="social-media" href={linkedinLink}>
-              <FaLinkedin size={25} color="#0077b5" />
+              <FaLinkedinSquare size={30} color="#0077b5" />
             </a>
           </div>
         </div>

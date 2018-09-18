@@ -78,7 +78,7 @@ class Home extends Component {
       <div className="row no-gutters">
         {all_stories.map((story, index) => {
           return (
-            <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
+            <div key={story.id} className="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 story-box-wrapper">
               <Link to={'/story/' + story.id}>
                 <div className="card story-box">
                   <div className="card-header">

@@ -121,31 +121,6 @@ $custom-black: #08182b;
     padding: 15px 0 15px 0;
     background-color: $custom-white;
 
-    .search-background {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-image: url('../images/home-background.jpg');
-      background-size: 100% 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-
-      h1 {
-        position: absolute;
-        top: 150px;
-        letter-spacing: 0.1em;
-        text-transform: capitalize;
-        font-size: 34px;
-        color: #fff;
-
-        &:first-letter {
-          text-transform: uppercase;
-        }
-      }
-    }
-
     // Interactive Fiction Card
     .story-category-wrapper {
       position: relative;
@@ -158,123 +133,115 @@ $custom-black: #08182b;
         color: $custom-black;
       }
 
-      .story-box-wrapper {
+      .story-box {
         position: relative;
-        margin-right: 15px;
+        margin: 15px;
+        border: none;
+        -webkit-box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
+        -moz-box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
+        box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
 
-        &:last-child {
-          margin-right: 0;
+        &:hover {
+          .image-wrapper {
+            opacity: 0.5;
+          }
         }
 
-        .story-box {
+        .card-header {
           position: relative;
-          border: none;
-          -webkit-box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
-          -moz-box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
-          box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
+          padding: 0;
 
-          &:hover {
-            .image-wrapper {
-              opacity: 0.5;
-            }
-          }
-
-          .card-header {
+          .image-wrapper {
             position: relative;
-            padding: 0;
+            width: 100%;
+            height: 150px;
 
-            .image-wrapper {
-              position: relative;
+            .story-image {
               width: 100%;
-              height: 150px;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
 
-              .story-image {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
+        .card-body {
+          position: relative;
+          padding: 15px;
+
+          .story-title {
+            position: relative;
+            display: block;
+            margin: 0 0 15px 0;
+
+            h2 {
+              margin-bottom: 5px;
+              text-transform: capitalize;
+              font-size: 15px;
+              color: $custom-black;
+            }
+
+            label {
+              margin: 0;
+              color: $custom-black;
+            }
+          }
+
+          .story-author {
+            position: relative;
+            display: block;
+            margin: 0 0 15px 0;
+
+            h2 {
+              margin-bottom: 5px;
+              text-transform: capitalize;
+              font-size: 15px;
+              color: $custom-black;
+            }
+
+            label {
+              margin: 0;
+              color: $custom-black;
+            }
+          }
+
+          .story-category-list {
+            position: relative;
+            display: block;
+            margin: 0 0 10px 0;
+
+            h2 {
+              margin-bottom: 5px;
+              text-transform: capitalize;
+              font-size: 15px;
+              color: $custom-black;
+            }
+
+            .label-category {
+              margin-bottom: 5px;
+              text-transform: capitalize;
+              color: $custom-black;
+
+              &:after {
+                content: ', ';
+                white-space: pre;
+              }
+
+              &:last-child:after {
+                content: '';
               }
             }
           }
 
-          .card-body {
+          .rating-stars {
             position: relative;
-            padding: 15px;
 
-            .story-title {
+            .star-average {
               position: relative;
-              display: block;
-              margin: 0 0 15px 0;
-
-              h2 {
-                margin-bottom: 5px;
-                text-transform: capitalize;
-                font-size: 15px;
-                color: $custom-black;
-              }
-
-              label {
-                margin: 0;
-                color: $custom-black;
-              }
-            }
-
-            .story-author {
-              position: relative;
-              display: block;
-              margin: 0 0 15px 0;
-
-              h2 {
-                margin-bottom: 5px;
-                text-transform: capitalize;
-                font-size: 15px;
-                color: $custom-black;
-              }
-
-              label {
-                margin: 0;
-                color: $custom-black;
-              }
-            }
-
-            .story-category-list {
-              position: relative;
-              display: block;
-              margin: 0 0 10px 0;
-
-              h2 {
-                margin-bottom: 5px;
-                text-transform: capitalize;
-                font-size: 15px;
-                color: $custom-black;
-              }
-
-              .label-category {
-                margin-bottom: 5px;
-                text-transform: capitalize;
-                color: $custom-black;
-
-                &:after {
-                  content: ', ';
-                  white-space: pre;
-                }
-
-                &:last-child:after {
-                  content: '';
-                }
-              }
-            }
-
-            .rating-stars {
-              position: relative;
-
-              .star-average {
-                position: relative;
-                display: inline-block;
-                padding-left: 5px;
-                vertical-align: middle;
-                font-size: 15px;
-                color: #a1a7b3;
-              }
+              display: inline-block;
+              padding-left: 5px;
+              vertical-align: middle;
+              font-size: 15px;
+              color: #a1a7b3;
             }
           }
         }
@@ -371,128 +338,120 @@ $custom-black: #08182b;
       }
     }
 
-    .story-box-wrapper {
+    .story-box {
       position: relative;
-      margin-right: 15px;
+      margin: 15px;
+      border: none;
+      -webkit-box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
+      -moz-box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
+      box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
+      cursor: pointer;
 
-      &:last-child {
-        margin-right: 0;
+      &:hover {
+        .image-wrapper {
+          opacity: 0.5;
+        }
       }
 
-      .story-box {
+      .card-header {
         position: relative;
-        border: none;
-        -webkit-box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
-        -moz-box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
-        box-shadow: 2px 2px 10px -2px rgba(8, 24, 43, 1);
-        cursor: pointer;
+        padding: 0;
 
-        &:hover {
-          .image-wrapper {
-            opacity: 0.5;
-          }
-        }
-
-        .card-header {
+        .image-wrapper {
           position: relative;
-          padding: 0;
+          width: 100%;
+          height: 150px;
 
-          .image-wrapper {
-            position: relative;
+          .story-image {
             width: 100%;
-            height: 150px;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+      }
 
-            .story-image {
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
+      .card-body {
+        position: relative;
+        padding: 15px;
+
+        .story-title {
+          position: relative;
+          display: block;
+          margin: 0 0 15px 0;
+
+          h2 {
+            margin-bottom: 5px;
+            text-transform: capitalize;
+            text-align: left;
+            font-size: 15px;
+            color: $custom-black;
+          }
+
+          label {
+            display: block;
+            margin: 0;
+            text-align: left;
+            font-size: 13px;
+            color: $custom-black;
+          }
+        }
+
+        .story-author {
+          position: relative;
+          display: block;
+          margin: 0 0 15px 0;
+
+          h2 {
+            margin-bottom: 5px;
+            text-transform: capitalize;
+            font-size: 15px;
+            color: $custom-black;
+          }
+
+          label {
+            margin: 0;
+            color: $custom-black;
+          }
+        }
+
+        .story-category-list {
+          position: relative;
+          display: block;
+          margin: 0 0 10px 0;
+
+          h2 {
+            margin-bottom: 5px;
+            text-transform: capitalize;
+            font-size: 15px;
+            color: $custom-black;
+          }
+
+          .label-category {
+            margin-bottom: 5px;
+            text-transform: capitalize;
+            color: $custom-black;
+
+            &:after {
+              content: ', ';
+              white-space: pre;
+            }
+
+            &:last-child:after {
+              content: '';
             }
           }
         }
 
-        .card-body {
+        .rating-stars {
           position: relative;
-          padding: 15px;
 
-          .story-title {
+          .star-average {
             position: relative;
-            display: block;
-            margin: 0 0 15px 0;
-
-            h2 {
-              margin-bottom: 5px;
-              text-transform: capitalize;
-              text-align: left;
-              font-size: 15px;
-              color: $custom-black;
-            }
-
-            label {
-              display: block;
-              margin: 0;
-              text-align: left;
-              font-size: 13px;
-              color: $custom-black;
-            }
-          }
-
-          .story-author {
-            position: relative;
-            display: block;
-            margin: 0 0 15px 0;
-
-            h2 {
-              margin-bottom: 5px;
-              text-transform: capitalize;
-              font-size: 15px;
-              color: $custom-black;
-            }
-
-            label {
-              margin: 0;
-              color: $custom-black;
-            }
-          }
-
-          .story-category-list {
-            position: relative;
-            display: block;
-            margin: 0 0 10px 0;
-
-            h2 {
-              margin-bottom: 5px;
-              text-transform: capitalize;
-              font-size: 15px;
-              color: $custom-black;
-            }
-
-            .label-category {
-              margin-bottom: 5px;
-              text-transform: capitalize;
-              color: $custom-black;
-
-              &:after {
-                content: ', ';
-                white-space: pre;
-              }
-
-              &:last-child:after {
-                content: '';
-              }
-            }
-          }
-
-          .rating-stars {
-            position: relative;
-
-            .star-average {
-              position: relative;
-              display: inline-block;
-              padding-left: 5px;
-              vertical-align: middle;
-              font-size: 15px;
-              color: #a1a7b3;
-            }
+            display: inline-block;
+            padding-left: 5px;
+            vertical-align: middle;
+            font-size: 15px;
+            color: #a1a7b3;
           }
         }
       }
@@ -513,33 +472,27 @@ $custom-black: #08182b;
   .blog {
     position: relative;
     background-color: $custom-white;
-    padding: 15px 0 15px 0 !important;
+    padding: 15px 0 15px 0;
 
     .blog-title {
       position: relative;
-      margin: 0;
+      margin-bottom: 10px;
       text-align: center;
-      text-transform: uppercase;
+      text-transform: capitalize;
       font-size: 24px;
       color: $custom-black;
-    }
-
-    hr.styled-line {
-      margin-left: 15px;
-      margin-right: 15px;
     }
 
     .blog-box {
       display: block;
       position: relative;
-      margin: 15px;
+      margin-right: 15px;
       padding: 15px;
       border-radius: 3px;
       background-color: $custom-black;
 
       .blog-box-title {
         position: relative;
-        min-height: 50px;
         text-transform: capitalize;
         font-size: 20px;
         color: white;
@@ -581,11 +534,6 @@ $custom-black: #08182b;
       }
 
       .read-more {
-        // position: relative;
-        // margin-top: 15px;
-        // display: flex;
-        // justify-content: flex-end;
-        // align-items: center;
         position: absolute;
         right: 15px;
         bottom: 15px;
@@ -602,58 +550,12 @@ $custom-black: #08182b;
 
     .blog-box-load-more {
       position: relative;
-      margin-top: 15px;
+      margin-top: 30px;
       padding-left: 50px;
       padding-right: 50px;
       text-transform: capitalize;
       background-color: $custom-black;
       color: white;
-    }
-
-    .older-post-box {
-      margin-top: 50px;
-      position: relative;
-
-      .older-post-header {
-        margin: 13px 0 20px 0;
-        border-bottom: 2px solid $custom-black;
-        text-align: center;
-        line-height: 0.1em;
-        font-size: 24px;
-
-        span {
-          padding: 0 10px;
-          background-color: $custom-white;
-          text-transform: uppercase;
-        }
-      }
-
-      .older-post {
-        position: relative;
-        display: block;
-        margin-bottom: 10px;
-        color: $custom-black;
-
-        &:hover {
-          text-decoration: none;
-        }
-
-        &:last-child {
-          margin-bottom: 0;
-        }
-
-        .older-post-title {
-          margin-bottom: 0;
-          text-transform: capitalize;
-          font-size: 20px;
-        }
-
-        .older-post-date {
-          margin-bottom: 0;
-          text-transform: capitalize;
-          font-size: 12px;
-        }
-      }
     }
   }
 

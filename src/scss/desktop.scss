@@ -2286,6 +2286,7 @@ $custom-black: #08182b;
     .card {
       position: relative;
       margin: 0 15px 0 15px;
+      border: 1px solid $custom-black;
 
       .card-body {
         padding: 15px;

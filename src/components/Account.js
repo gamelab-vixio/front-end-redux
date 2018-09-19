@@ -191,9 +191,11 @@ class Login extends Component {
     return (
       <div className="container-fluid account animated fadeInDown">
         <div className="row no-gutters">
-          <div className="col-12 col-sm-9 col-md-9 col-lg-6 col-xl-6 offset-sm-2 offset-md-2 offset-lg-3 offset-xl-3">
+          <div className="col-12 col-sm-12 col-md-12">
             <h1 className="login-title">login</h1>
             <hr className="styled-line" />
+          </div>
+          <div className="col-12 col-sm-9 col-md-9 col-lg-6 col-xl-6 offset-sm-2 offset-md-2 offset-lg-3 offset-xl-3">
             <form onSubmit={this.handleLoginSubmit}>
               <div className="form-group">
                 <label htmlFor="login-email">Email address</label>
@@ -234,90 +236,87 @@ class Login extends Component {
         </div>
 
         <div className="row no-gutters">
+          <div className="col-12 col-sm-12 col-md-12">
+            <h1 className="register-title">register</h1>
+            <hr className="styled-line" />
+          </div>
           <div className="col-12 col-sm-9 col-md-9 col-lg-6 col-xl-6 offset-sm-2 offset-md-2 offset-lg-3 offset-xl-3">
-            <div className="register">
-              <h1 className="divider">
-                <span>or</span>
-              </h1>
-              <h1 className="login-title">register</h1>
-              <hr className="styled-line" />
-              <form onSubmit={this.handleRegisterSubmit}>
-                <div className="form-group">
-                  <label htmlFor="login-firstname">First Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="register-firstname"
-                    value={firstName}
-                    name="firstName"
-                    placeholder="Your first name"
-                    autoComplete="off"
-                    onChange={this.handleRegisterValue}
-                  />
-                  {firstNameStatus ? '' : <span className="error-message">The first name field is required.</span>}
+            <form onSubmit={this.handleRegisterSubmit}>
+              <div className="form-group">
+                <label htmlFor="login-firstname">First Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="register-firstname"
+                  value={firstName}
+                  name="firstName"
+                  placeholder="Your first name"
+                  autoComplete="off"
+                  onChange={this.handleRegisterValue}
+                />
+                {firstNameStatus ? '' : <span className="error-message">The first name field is required.</span>}
 
-                  <label htmlFor="login-lastname">Last Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="register-lastname"
-                    value={lastName}
-                    name="lastName"
-                    placeholder="Your last name"
-                    autoComplete="off"
-                    onChange={this.handleRegisterValue}
-                  />
-                  {lastNameStatus ? '' : <span className="error-message">The last name field is required.</span>}
+                <label htmlFor="login-lastname">Last Name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="register-lastname"
+                  value={lastName}
+                  name="lastName"
+                  placeholder="Your last name"
+                  autoComplete="off"
+                  onChange={this.handleRegisterValue}
+                />
+                {lastNameStatus ? '' : <span className="error-message">The last name field is required.</span>}
 
-                  <label htmlFor="login-email">Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="register-email"
-                    value={email}
-                    name="email"
-                    aria-describedby="emailHelp"
-                    placeholder="Your email"
-                    autoComplete="off"
-                    onChange={this.handleRegisterValue}
-                  />
-                  <span className="error-message">{registerErrorMessage.email}</span>
+                <label htmlFor="login-email">Email address</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="register-email"
+                  value={email}
+                  name="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Your email"
+                  autoComplete="off"
+                  onChange={this.handleRegisterValue}
+                />
+                <span className="error-message">{registerErrorMessage.email}</span>
 
-                  <label htmlFor="login-password">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="register-password"
-                    value={password}
-                    name="password"
-                    placeholder="Your password"
-                    autoComplete="off"
-                    onChange={this.handleRegisterValue}
-                  />
-                  <span className="error-message">{registerErrorMessage.password}</span>
+                <label htmlFor="login-password">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="register-password"
+                  value={password}
+                  name="password"
+                  placeholder="Your password"
+                  autoComplete="off"
+                  onChange={this.handleRegisterValue}
+                />
+                <span className="error-message">{registerErrorMessage.password}</span>
 
-                  <label htmlFor="login-confirm-password">Confirm Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="register-confirm-password"
-                    value={confirmPassword}
-                    name="confirmPassword"
-                    placeholder="Confirm your password"
-                    autoComplete="off"
-                    onChange={this.handleRegisterValue}
-                  />
-                  {confirmPasswordStatus ? '' : <span className="error-message">Your password does not match</span>}
+                <label htmlFor="login-confirm-password">Confirm Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  id="register-confirm-password"
+                  value={confirmPassword}
+                  name="confirmPassword"
+                  placeholder="Confirm your password"
+                  autoComplete="off"
+                  onChange={this.handleRegisterValue}
+                />
+                {confirmPasswordStatus ? '' : <span className="error-message">Your password does not match</span>}
 
-                  <div className="text-right button-wrapper">
-                    <button type="submit" className="btn btn-outline-primary manual-signin-button">
-                      register
-                    </button>
-                  </div>
-                  <Alert stack={{ limit: 3 }} timeout={5000} html={true} />
+                <div className="text-right button-wrapper">
+                  <button type="submit" className="btn btn-outline-primary manual-signin-button">
+                    register
+                  </button>
                 </div>
-              </form>
-            </div>
+                <Alert stack={{ limit: 3 }} timeout={5000} html={true} />
+              </div>
+            </form>
           </div>
         </div>
       </div>

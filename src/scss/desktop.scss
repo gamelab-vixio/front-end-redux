@@ -2348,7 +2348,8 @@ $custom-black: #08182b;
     padding: 15px !important;
     background-color: $custom-white;
 
-    .login-title {
+    .login-title,
+    .register-title {
       margin: 0;
       text-align: center;
       text-transform: uppercase;
@@ -2403,24 +2404,6 @@ $custom-black: #08182b;
     .manual-signin-button:focus {
       -webkit-box-shadow: 0 0 0 0.1rem rgba(238, 37, 96, 0.5) !important;
       box-shadow: 0 0 0 0.1rem rgba(238, 37, 96, 0.5) !important;
-    }
-
-    .register {
-      position: relative;
-
-      .divider {
-        margin: 25px 0 45px 0;
-        border-bottom: 2px solid $custom-black;
-        text-align: center;
-        line-height: 0.1em;
-        font-size: 18px;
-
-        span {
-          padding: 0 10px;
-          background-color: $custom-white;
-          text-transform: uppercase;
-        }
-      }
     }
 
     span.error-message {

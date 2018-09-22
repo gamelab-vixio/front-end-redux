@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TextTruncate from 'react-text-truncate';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AuthService, StoryService } from '../services';
@@ -64,137 +63,55 @@ class Home extends Component {
       });
   };
 
-  renderMostPopular() {
-    let all_stories = this.state.mostPopular;
-    return (
-      <div className="row no-gutters">
-        <div className="col-12 col-sm-12 col-md-12">
-          <div className="row no-gutters story-row">
-            {all_stories.map((story, index) => {
-              return (
-                <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
-                  <Link to={'/story/' + story.id}>
-                    <div className="card story-box">
-                      <div className="card-header">
-                        <div className="image-wrapper">
-                          <img className="story-image" src={'data:image/jpeg;base64,' + story.image_url} alt="IF" />
-                        </div>
-                      </div>
-                      <div className="card-body">
-                        <h1 className="card-title">
-                          <TextTruncate line={2} truncateText="…" text={story.title} />
-                        </h1>
-                        <h2 className="card-author">{story.user.name}</h2>
-                        <h2 className="card-author">
-                          category :&nbsp;
-                          <br />
-                          {story.story_category.map((category, index) => {
-                            return (
-                              <label key={index} className="category">
-                                {category.category_type.name}
-                              </label>
-                            );
-                          })}
-                        </h2>
-                        <RatingStars rating={Math.round(story.story_review[0].star)} />
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  }
+  renderCategory(category) {
+    let all_stories;
 
-  renderNewAvailable() {
-    let all_stories = this.state.newAvailable;
-    return (
-      <div className="row no-gutters">
-        <div className="col-12 col-sm-12 col-md-12">
-          <div className="row no-gutters story-row">
-            {all_stories.map((story, index) => {
-              return (
-                <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
-                  <Link to={'/story/' + story.id}>
-                    <div className="card story-box">
-                      <div className="card-header">
-                        <div className="image-wrapper">
-                          <img className="story-image" src={'data:image/jpeg;base64,' + story.image_url} alt="IF" />
-                        </div>
-                      </div>
-                      <div className="card-body">
-                        <h1 className="card-title">
-                          <TextTruncate line={2} truncateText="…" text={story.title} />
-                        </h1>
-                        <h2 className="card-author">{story.user.name}</h2>
-                        <h2 className="card-author">
-                          category :&nbsp;
-                          <br />
-                          {story.story_category.map((category, index) => {
-                            return (
-                              <label key={index} className="category">
-                                {category.category_type.name}
-                              </label>
-                            );
-                          })}
-                        </h2>
-                        <RatingStars rating={Math.round(story.story_review[0].star)} />
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  }
+    if (category === 1) {
+      all_stories = this.state.mostPopular;
+    } else if (category === 2) {
+      all_stories = this.state.newAvailable;
+    } else {
+      all_stories = this.state.userBased;
+    }
 
-  renderUserBased() {
-    let all_stories = this.state.userBased;
     return (
       <div className="row no-gutters">
-        <div className="col-12 col-sm-12 col-md-12">
-          <div className="row no-gutters story-row">
-            {all_stories.map((story, index) => {
-              return (
-                <div key={story.id} className="col-12 col-sm-5 col-md-3 col-lg-3 col-xl-2 story-box-wrapper">
-                  <Link to={'/story/' + story.id}>
-                    <div className="card story-box">
-                      <div className="card-header">
-                        <div className="image-wrapper">
-                          <img className="story-image" src={'data:image/jpeg;base64,' + story.image_url} alt="IF" />
-                        </div>
-                      </div>
-                      <div className="card-body">
-                        <h1 className="card-title">
-                          <TextTruncate line={2} truncateText="…" text={story.title} />
-                        </h1>
-                        <h2 className="card-author">{story.user.name}</h2>
-                        <h2 className="card-author">
-                          category :&nbsp;
-                          <br />
-                          {story.story_category.map((category, index) => {
-                            return (
-                              <label key={index} className="category">
-                                {category.category_type.name}
-                              </label>
-                            );
-                          })}
-                        </h2>
-                        <RatingStars rating={Math.round(story.story_review[0].star)} />
-                      </div>
+        {all_stories.map((story, index) => {
+          return (
+            <div key={story.id} className="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 story-box-wrapper">
+              <Link to={'/story/' + story.id}>
+                <div className="card story-box">
+                  <div className="card-header">
+                    <div className="image-wrapper">
+                      <img className="story-image" src={'data:image/jpeg;base64,' + story.image_url} alt="IF" />
                     </div>
-                  </Link>
+                  </div>
+                  <div className="card-body">
+                    <div className="story-title">
+                      <h2>title :</h2>
+                      <label>{story.title}</label>
+                    </div>
+                    <div className="story-author">
+                      <h2>author :</h2>
+                      <label>{story.user.name}</label>
+                    </div>
+                    <div className="story-category-list">
+                      <h2>category :</h2>
+                      {story.story_category.map((category, index) => {
+                        return (
+                          <label key={index} className="label-category">
+                            {category.category_type.name}
+                          </label>
+                        );
+                      })}
+                    </div>
+                    <RatingStars rating={Math.round(story.story_review[0].star)} />
+                  </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
+              </Link>
+            </div>
+          );
+        })}
       </div>
     );
   }
@@ -209,17 +126,20 @@ class Home extends Component {
                 <div>
                   <div className="story-category-wrapper">
                     <h1 className="category-title text-center">Most Popular</h1>
-                    {this.renderMostPopular()}
+                    <hr className="styled-line" />
+                    {this.renderCategory(1)}
                   </div>
 
                   <div className="story-category-wrapper">
                     <h1 className="category-title text-center">New Available</h1>
-                    {this.renderNewAvailable()}
+                    <hr className="styled-line" />
+                    {this.renderCategory(2)}
                   </div>
                   {this.props.isLogin && this.state.userBased.length !== 0 ? (
                     <div className="story-category-wrapper">
                       <h1 className="category-title text-center">User Based</h1>
-                      {this.renderUserBased()}
+                      <hr className="styled-line" />
+                      {this.renderCategory(3)}
                     </div>
                   ) : (
                     ''

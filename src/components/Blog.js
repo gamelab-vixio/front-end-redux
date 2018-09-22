@@ -62,7 +62,7 @@ class Blog extends Component {
     let all_blogs = this.state.all_blogs.data;
 
     let render_all_blogs = all_blogs.map(blog => (
-      <div key={blog.id} className="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3 d-flex">
+      <div key={blog.id} className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex">
         <div className="blog-box">
           <h2 className="blog-box-title">{blog.title}</h2>
           <h3 className="blog-box-date">post date: {blog.updated_at} - by administrator</h3>

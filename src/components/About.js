@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ProfileCard, Timeline } from '../ui';
+import { ProfileCard, Timeline, Title } from '../ui';
+
 class About extends Component {
   constructor(props) {
     super(props);
@@ -27,8 +28,7 @@ class About extends Component {
         <div className="row no-gutters">
           <div className="col-12 col-sm-12 col-md-12">
             <div className="wrapper">
-              <h1 className="about-title">about</h1>
-              <hr className="styled-line" />
+              <Title text={'About'} />
               <h2 className="description-title">about this project</h2>
               <p className="description">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum quas praesentium sint quae quo asperiores

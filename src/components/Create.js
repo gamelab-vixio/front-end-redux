@@ -4,6 +4,7 @@ import TextTruncate from 'react-text-truncate';
 import TextareaAutosize from 'react-autosize-textarea';
 import FaPlus from 'react-icons/lib/fa/plus';
 import Checkbox from 'rc-checkbox';
+import { Title } from '../ui';
 
 import { AuthService, StoryService } from '../services';
 class Create extends Component {
@@ -902,8 +903,7 @@ class Create extends Component {
         <div className="container-fluid create animated fadeInDown">
           <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
-              <h1 className="create-title">create story</h1>
-              <hr className="styled-line" />
+              <Title text={'Create Story'} />
             </div>
             <div className="col-12 col-sm-12 col-md-3 right-bar">
               <div className="left-side-bar-wrapper">

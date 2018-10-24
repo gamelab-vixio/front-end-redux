@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { AuthService, StoryService } from '../services';
-import { RatingStars, LoadingScreen } from '../ui';
+import { RatingStars, LoadingScreen, Title } from '../ui';
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -125,20 +125,17 @@ class Home extends Component {
               {!this.state.isLoading ? (
                 <div>
                   <div className="story-category-wrapper">
-                    <h1 className="category-title text-center">Most Popular</h1>
-                    <hr className="styled-line" />
+                    <Title text={'Most Popular'} />
                     {this.renderCategory(1)}
                   </div>
 
                   <div className="story-category-wrapper">
-                    <h1 className="category-title text-center">New Available</h1>
-                    <hr className="styled-line" />
+                    <Title text={'New Available'} />
                     {this.renderCategory(2)}
                   </div>
                   {this.props.isLogin && this.state.userBased.length !== 0 ? (
                     <div className="story-category-wrapper">
-                      <h1 className="category-title text-center">User Based</h1>
-                      <hr className="styled-line" />
+                      <Title text={'Recommendations for You'} />
                       {this.renderCategory(3)}
                     </div>
                   ) : (

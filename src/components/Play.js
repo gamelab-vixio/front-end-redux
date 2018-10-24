@@ -3,7 +3,8 @@ import { Story } from 'inkjs';
 import ReactStars from 'react-stars';
 
 import { AuthService, StoryService } from '../services';
-import { Token, LoadingScreen } from '../ui';
+import { Token, LoadingScreen, Title } from '../ui';
+
 class Writer extends Component {
   constructor(props) {
     super(props);
@@ -152,8 +153,7 @@ class Writer extends Component {
         <div className="container-fluid play animated fadeInDownBig">
           <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
-              <h1 className="play-title">play story</h1>
-              <hr className="styled-line" />
+              <Title text={'Play Story'} />
             </div>
             <div className="col-12 col-sm-12 col-md-6 offset-md-3">
               <div className="play-read">

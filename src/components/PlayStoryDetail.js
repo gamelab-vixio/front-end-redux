@@ -109,7 +109,7 @@ class PlayStoryDetail extends Component {
             <div className="comment-text">
               <h4 className="commentator">{comment.user.name}</h4>
               <p className="content">{comment.comment}</p>
-              <button className="btn reply-button" onClick={this.childCommentReply(comment.id)}>
+              <button className="btn reply-button" onClick={() => this.childCommentReply(comment.id)}>
                 reply&nbsp;
                 <FaMailReply size={10} />
               </button>
@@ -118,7 +118,7 @@ class PlayStoryDetail extends Component {
                     <button
                       key={'reply-button-' + index.toString()}
                       className="btn view-reply-button"
-                      onClick={this.viewReplyToggle(comment.id)}
+                      onClick={() => this.viewReplyToggle(comment.id)}
                     >
                       {this.state.global_status_comment[index][1] === 0 ? 'Show Reply' : 'Hide Reply'}
                       &nbsp;
@@ -139,7 +139,7 @@ class PlayStoryDetail extends Component {
                               <div className="col-10 col-sm-11 col-md-11 comment-text-wrapper">
                                 <h4 className="commentator">{second_level_comment.user.name}</h4>
                                 <p className="content">{second_level_comment.comment}</p>
-                                <button className="btn reply-button" onClick={this.childCommentReply(comment.id)}>
+                                <button className="btn reply-button" onClick={() => this.childCommentReply(comment.id)}>
                                   reply&nbsp;
                                   <FaMailReply size={10} />
                                 </button>

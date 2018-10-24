@@ -595,7 +595,7 @@ class Create extends Component {
                           }
                         }
                       })}
-                      <button className="btn add-option-button" onClick={this.addChoice(index, p_index)}>
+                      <button className="btn add-option-button" onClick={() => this.addChoice(index, p_index)}>
                         <FaPlus size={15} /> option
                       </button>
                     </div>

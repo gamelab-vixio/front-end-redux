@@ -94,7 +94,7 @@ class Blog extends Component {
               <Title text={'Blog'} />
               <div className="row no-gutters">{this.getPosts()}</div>
               <div className="col-12 col-sm-12 col-md-12 text-center">
-                <button className="btn blog-box-load-more" onClick={this.getMoreBlog()}>
+                <button className="btn blog-box-load-more" onClick={this.getMoreBlog}>
                   load more
                 </button>
               </div>

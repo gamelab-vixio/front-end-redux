@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { AuthService, UserService } from '../services';
-import { LoadingScreen } from '../ui';
+import { LoadingScreen, Title } from '../ui';
 class UserProfile extends Component {
   constructor(props) {
     super(props);
@@ -182,8 +182,7 @@ class UserProfile extends Component {
         <div className="container-fluid user-profile animated fadeIn">
           <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
-              <h1 className="user-profile-title">user profile</h1>
-              <hr className="styled-line" />
+              <Title text={'User Profile'} />
             </div>
             <div className="col-12 col-sm-12 col-md-6 offset-md-3">{this.renderProfile()}</div>
           </div>

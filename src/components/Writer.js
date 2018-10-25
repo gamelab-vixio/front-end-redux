@@ -6,7 +6,7 @@ import FaPlus from 'react-icons/lib/fa/plus';
 import FaSearch from 'react-icons/lib/fa/search';
 
 import { AuthService, WriterService } from '../services';
-import { RatingStars, LoadingScreen } from '../ui';
+import { RatingStars, LoadingScreen, Title } from '../ui';
 class Writer extends Component {
   constructor(props) {
     super(props);
@@ -172,8 +172,7 @@ class Writer extends Component {
         <div className="container-fluid writer animated fadeIn">
           <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
-              <h1 className="writer-title">Writer</h1>
-              <hr className="styled-line" />
+              <Title text={'Writer'} />
               <div className="row no-gutters">
                 <div className="col-12 col-sm-12 col-md-12">
                   <div className="flex-wrapper">

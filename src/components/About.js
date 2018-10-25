@@ -29,11 +29,10 @@ class About extends Component {
           <div className="col-12 col-sm-12 col-md-12">
             <div className="wrapper">
               <Title text={'About'} />
-              <h2 className="description-title">about this project</h2>
+              <h2 className="description-title">About this project</h2>
               <p className="description">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum quas praesentium sint quae quo asperiores
-                similique laboriosam reiciendis, perspiciatis ex obcaecati cupiditate assumenda quos a. Veniam aperiam
-                nemo officia fuga.
+              Researchers and interactive fiction enthusiasts are continuing to explore hidden benefits of reading interactive fiction, a video game that primarily consists of text. To enable proper research on interactive fiction, a robust development tool and a distribution platform is necessary. 
+              Unfortunately, current existing platforms are mostly either outdated or discontinued, even though there are many interactive fiction enthusiasts. This motivates us to develop Vixio, an all-in-one interactive fiction platform available as a web application. Vixio enables researchers and enthusiasts to develop and distribute interactive fiction with ease!
               </p>
               <Timeline timelineItems={this.timelineItems} />
             </div>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link, Element, animateScroll } from 'react-scroll';
 import { DocumentationService } from '../services';
-import { LoadingScreen } from '../ui';
+import { LoadingScreen, Title } from '../ui';
+
 class Documentation extends Component {
   constructor(props) {
     super(props);
@@ -147,8 +148,7 @@ class Documentation extends Component {
         <div className="container-fluid documentation animated fadeIn">
           <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
-              <h1 className="documentation-title">documentation</h1>
-              <hr className="styled-line" />
+              <Title text={'Documentation'} />
 
               <div className="row no-gutters documentation-read">
                 <div className="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3 left-content">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { StoryService } from '../services';
-import { RatingStars, LoadingScreen } from '../ui';
+import { RatingStars, LoadingScreen, Title } from '../ui';
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -46,19 +46,10 @@ class Home extends Component {
   };
 
   renderCategory(category) {
-    let all_stories;
-
-    if (category === 1) {
-      all_stories = this.state.mostPopular;
-    } else if (category === 2) {
-      all_stories = this.state.newAvailable;
-    } else {
-      all_stories = this.state.userBased;
-    }
-
+    const allStories = category === 1 ? this.state.mostPopular : this.state.newAvailable;
     return (
       <div className="row no-gutters">
-        {all_stories.map((story, index) => {
+        {allStories.map((story, index) => {
           return (
             <div key={story.id} className="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 story-box-wrapper">
               <Link to={'/story/' + story.id}>
@@ -107,14 +98,12 @@ class Home extends Component {
               {!this.state.isLoading ? (
                 <div>
                   <div className="story-category-wrapper">
-                    <h1 className="category-title text-center">Most Popular</h1>
-                    <hr className="styled-line" />
+                    <Title text={'Most Popular'} />
                     {this.renderCategory(1)}
                   </div>
 
                   <div className="story-category-wrapper">
-                    <h1 className="category-title text-center">New Available</h1>
-                    <hr className="styled-line" />
+                    <Title text={'New Available'} />
                     {this.renderCategory(2)}
                   </div>
                 </div>

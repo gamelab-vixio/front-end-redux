@@ -4,6 +4,7 @@ import { AuthService, LoginService, RegisterService } from '../services';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { clearLoginFieldAfterLogin, isLogin } from '../reducers/account';
+import { Title } from '../ui';
 
 class Login extends Component {
   constructor(props) {
@@ -192,8 +193,7 @@ class Login extends Component {
       <div className="container-fluid account animated fadeInDown">
         <div className="row no-gutters">
           <div className="col-12 col-sm-12 col-md-12">
-            <h1 className="login-title">login</h1>
-            <hr className="styled-line" />
+            <Title text={'Login'} />
           </div>
           <div className="col-12 col-sm-9 col-md-9 col-lg-6 col-xl-6 offset-sm-2 offset-md-2 offset-lg-3 offset-xl-3">
             <form onSubmit={this.handleLoginSubmit}>
@@ -237,8 +237,7 @@ class Login extends Component {
 
         <div className="row no-gutters">
           <div className="col-12 col-sm-12 col-md-12">
-            <h1 className="register-title">register</h1>
-            <hr className="styled-line" />
+            <Title text={'Register'} />
           </div>
           <div className="col-12 col-sm-9 col-md-9 col-lg-6 col-xl-6 offset-sm-2 offset-md-2 offset-lg-3 offset-xl-3">
             <form onSubmit={this.handleRegisterSubmit}>

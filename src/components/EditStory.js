@@ -6,6 +6,7 @@ import FaPlus from 'react-icons/lib/fa/plus';
 import Checkbox from 'rc-checkbox';
 
 import { AuthService, WriterService } from '../services';
+import { Title } from '../ui';
 
 class Edit extends Component {
   constructor(props) {
@@ -502,10 +503,10 @@ class Edit extends Component {
                           value={section.name}
                           onChange={e => this.editSection(index, e)}
                         />
-                        <button className="btn add-section-button" onClick={this.addSection('', index)}>
+                        <button className="btn add-section-button" onClick={() => this.addSection('', index)}>
                           <FaPlus size={15} /> section
                         </button>
-                        <button className="btn delete-option-button" onClick={this.deleteSection(index)}>
+                        <button className="btn delete-option-button" onClick={() => this.deleteSection(index)}>
                           <FaPlus size={15} /> section
                         </button>
                       </div>
@@ -543,13 +544,13 @@ class Edit extends Component {
                                 />
                                 <button
                                   className="btn delete-option-button"
-                                  onClick={this.deleteChoice(index, p_index, c_index)}
+                                  onClick={() => this.deleteChoice(index, p_index, c_index)}
                                 >
                                   <FaPlus size={15} />
                                 </button>
                                 <button
                                   className="btn add-link-button"
-                                  onClick={this.openSideMenu(index, p_index, c_index)}
+                                  onClick={() => this.openSideMenu(index, p_index, c_index)}
                                 >
                                   add link
                                 </button>
@@ -572,7 +573,7 @@ class Edit extends Component {
                                 />
                                 <button
                                   className="btn delete-option-button"
-                                  onClick={this.deleteChoice(index, p_index, c_index)}
+                                  onClick={() => this.deleteChoice(index, p_index, c_index)}
                                 >
                                   <FaPlus size={15} />
                                 </button>
@@ -608,7 +609,7 @@ class Edit extends Component {
                           }
                         }
                       })}
-                      <button className="btn add-option-button" onClick={this.addChoice(index, p_index, '')}>
+                      <button className="btn add-option-button" onClick={() => this.addChoice(index, p_index, '')}>
                         <FaPlus size={15} /> option
                       </button>
                     </div>
@@ -661,13 +662,13 @@ class Edit extends Component {
                               />
                               <button
                                 className="btn delete-option-button"
-                                onClick={this.deleteChoice(index, p_index, c_index)}
+                                onClick={() => this.deleteChoice(index, p_index, c_index)}
                               >
                                 <FaPlus size={15} />
                               </button>
                               <button
                                 className="btn add-link-button"
-                                onClick={this.openSideMenu(index, p_index, c_index)}
+                                onClick={() => this.openSideMenu(index, p_index, c_index)}
                               >
                                 add link
                               </button>
@@ -752,13 +753,13 @@ class Edit extends Component {
                               />
                               <button
                                 className="btn delete-option-button"
-                                onClick={this.deleteChoice(index, p_index, c_index)}
+                                onClick={() => this.deleteChoice(index, p_index, c_index)}
                               >
                                 <FaPlus size={15} />
                               </button>
                               <button
                                 className="btn add-link-button"
-                                onClick={this.openSideMenu(index, p_index, c_index)}
+                                onClick={() => this.openSideMenu(index, p_index, c_index)}
                               >
                                 add link
                               </button>
@@ -924,8 +925,7 @@ class Edit extends Component {
         <div className="container-fluid create animated fadeInDown">
           <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
-              <h1 className="create-title">edit story</h1>
-              <hr className="styled-line" />
+              <Title text={'Edit Story'} />
             </div>
             <div className="col-12 col-sm-12 col-md-3 right-bar">
               <div className="left-side-bar-wrapper">

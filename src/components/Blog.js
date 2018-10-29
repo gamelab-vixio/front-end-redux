@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TiArrowRight from 'react-icons/lib/ti/arrow-right';
 import ReactHtmlParser from 'react-html-parser';
 import { BlogService } from '../services';
-import { LoadingScreen } from '../ui';
+import { LoadingScreen, Title } from '../ui';
 class Blog extends Component {
   constructor(props) {
     super(props);
@@ -91,11 +91,10 @@ class Blog extends Component {
         <div className="container-fluid blog animated fadeIn">
           <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
-              <h1 className="blog-title">blog</h1>
-              <hr className="styled-line" />
+              <Title text={'Blog'} />
               <div className="row no-gutters">{this.getPosts()}</div>
               <div className="col-12 col-sm-12 col-md-12 text-center">
-                <button className="btn blog-box-load-more" onClick={this.getMoreBlog()}>
+                <button className="btn blog-box-load-more" onClick={this.getMoreBlog}>
                   load more
                 </button>
               </div>

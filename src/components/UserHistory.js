@@ -4,7 +4,8 @@ import TextTruncate from 'react-text-truncate';
 import { Link } from 'react-router-dom';
 
 import { AuthService, UserService } from '../services';
-import { RatingStars, LoadingScreen } from '../ui';
+import { RatingStars, LoadingScreen, Title } from '../ui';
+
 class Story extends Component {
   constructor(props) {
     super(props);
@@ -107,8 +108,7 @@ class Story extends Component {
         <div className="container-fluid story animated fadeIn">
           <div className="row no-gutters">
             <div className="col-12 col-sm-12 col-md-12">
-              <h1 className="story-title">recently played</h1>
-              <hr className="styled-line" />
+              <Title text={'Recently Played'} />
               <div className="row no-gutters">{this.renderStories()}</div>
               <div className="col-12 col-sm-12 col-md-12 text-center">
                 <button className="btn story-box-load-more" onClick={this.getMoreStory}>

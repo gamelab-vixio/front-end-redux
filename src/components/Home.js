@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { AuthService, StoryService } from '../services';
+import { StoryService } from '../services';
 import { RatingStars, LoadingScreen } from '../ui';
 class Home extends Component {
   constructor(props) {
@@ -9,10 +8,8 @@ class Home extends Component {
     this.state = {
       mostPopular: [],
       newAvailable: [],
-      userBased: [],
       isLoading: true,
     };
-    this.Auth = new AuthService();
   }
 
   componentWillMount() {
@@ -20,7 +17,6 @@ class Home extends Component {
     window.scrollTo(0, 0);
     this.retrieveMostPopular();
     this.retrieveNewAvailable();
-    this.retrieveUserBased();
   }
 
   retrieveMostPopular = () => {
@@ -41,20 +37,6 @@ class Home extends Component {
       .then(res => {
         this.setState({
           newAvailable: res.data,
-          isLoading: false,
-        });
-      })
-      .catch(err => {
-        // console.log(err);
-      });
-  };
-
-  retrieveUserBased = () => {
-    let token = this.Auth.getToken();
-    StoryService.userBased(token)
-      .then(res => {
-        this.setState({
-          userBased: res.data,
           isLoading: false,
         });
       })
@@ -135,15 +117,6 @@ class Home extends Component {
                     <hr className="styled-line" />
                     {this.renderCategory(2)}
                   </div>
-                  {this.props.isLogin && this.state.userBased.length !== 0 ? (
-                    <div className="story-category-wrapper">
-                      <h1 className="category-title text-center">User Based</h1>
-                      <hr className="styled-line" />
-                      {this.renderCategory(3)}
-                    </div>
-                  ) : (
-                    ''
-                  )}
                 </div>
               ) : (
                 ''
@@ -158,8 +131,4 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isLogin: state.account.isLogin,
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

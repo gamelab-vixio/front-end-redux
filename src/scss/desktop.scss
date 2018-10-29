@@ -115,6 +115,14 @@ $custom-black: #08182b;
     }
   }
 
+  .main-title {
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 24px;
+    color: $custom-black;
+  }
+
   /*------------ Home --------------*/
   .home {
     position: relative;

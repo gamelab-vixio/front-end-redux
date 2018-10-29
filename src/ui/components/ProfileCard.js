@@ -11,23 +11,23 @@ class ProfileCard extends Component {
     description: PropTypes.string.isRequired,
     facebookLink: PropTypes.string,
     linkedinLink: PropTypes.string,
+    imageName: PropTypes.string,
   };
 
   static defaultProps = {
     facebookLink: '#',
     linkedinLink: '#',
+    imageName: 'profile.png',
   };
 
-  // TODO: Add image source to ProfileCard
-
   render() {
-    const { fullName, universityName, description, facebookLink, linkedinLink } = this.props;
+    const { fullName, universityName, description, facebookLink, linkedinLink, imageName } = this.props;
     return (
       <div className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
         <div className="card">
           <div className="card-body">
             <div className="profile-image">
-              <img src={require('../../images/albert.jpg')} alt={fullName} />
+              <img src={require('../../images/' + imageName)} alt={fullName} />
             </div>
             <h2 className="card-title">{fullName}</h2>
             <p className="card-text">{description}</p>

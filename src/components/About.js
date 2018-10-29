@@ -50,6 +50,7 @@ class About extends Component {
             description={'Software Engineer at Tiket.com'}
             facebookLink={'https://www.facebook.com/ieuan.ignatius'}
             linkedinLink={'https://www.linkedin.com/in/ieuanignatius'}
+            imageName={'ieuan.jpg'}
           />
           <ProfileCard
             fullName={'Albert Darmawan'}
@@ -57,6 +58,7 @@ class About extends Component {
             description={'Software Engineer at Traveloka'}
             facebookLink={'https://www.facebook.com/darmawanalbert'}
             linkedinLink={'https://www.linkedin.com/in/darmawanalbert'}
+            imageName={'albert.jpg'}
           />
           <ProfileCard
             fullName={'Shan Valdo'}
@@ -64,6 +66,7 @@ class About extends Component {
             description={'Software Engineer'}
             facebookLink={'https://www.facebook.com/shanvaldo'}
             linkedinLink={'https://www.linkedin.com/in/shan-valdo-96873412b'}
+            imageName={'shanvaldo.jpg'}
           />
         </div>
       </div>

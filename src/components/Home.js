@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { AuthService, StoryService } from '../services';
+import { StoryService } from '../services';
 import { RatingStars, LoadingScreen, Title } from '../ui';
 class Home extends Component {
   constructor(props) {
@@ -9,10 +8,8 @@ class Home extends Component {
     this.state = {
       mostPopular: [],
       newAvailable: [],
-      userBased: [],
       isLoading: true,
     };
-    this.Auth = new AuthService();
   }
 
   componentWillMount() {
@@ -20,7 +17,6 @@ class Home extends Component {
     window.scrollTo(0, 0);
     this.retrieveMostPopular();
     this.retrieveNewAvailable();
-    this.retrieveUserBased();
   }
 
   retrieveMostPopular = () => {
@@ -49,34 +45,11 @@ class Home extends Component {
       });
   };
 
-  retrieveUserBased = () => {
-    let token = this.Auth.getToken();
-    StoryService.userBased(token)
-      .then(res => {
-        this.setState({
-          userBased: res.data,
-          isLoading: false,
-        });
-      })
-      .catch(err => {
-        // console.log(err);
-      });
-  };
-
   renderCategory(category) {
-    let all_stories;
-
-    if (category === 1) {
-      all_stories = this.state.mostPopular;
-    } else if (category === 2) {
-      all_stories = this.state.newAvailable;
-    } else {
-      all_stories = this.state.userBased;
-    }
-
+    const allStories = category === 1 ? this.state.mostPopular : this.state.newAvailable;
     return (
       <div className="row no-gutters">
-        {all_stories.map((story, index) => {
+        {allStories.map((story, index) => {
           return (
             <div key={story.id} className="col-12 col-sm-6 col-md-3 col-lg-3 col-xl-3 story-box-wrapper">
               <Link to={'/story/' + story.id}>
@@ -133,14 +106,6 @@ class Home extends Component {
                     <Title text={'New Available'} />
                     {this.renderCategory(2)}
                   </div>
-                  {this.props.isLogin && this.state.userBased.length !== 0 ? (
-                    <div className="story-category-wrapper">
-                      <Title text={'Recommendations for You'} />
-                      {this.renderCategory(3)}
-                    </div>
-                  ) : (
-                    ''
-                  )}
                 </div>
               ) : (
                 ''
@@ -155,8 +120,4 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isLogin: state.account.isLogin,
-});
-
-export default connect(mapStateToProps)(Home);
+export default Home;

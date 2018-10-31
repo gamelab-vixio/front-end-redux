@@ -25,7 +25,7 @@ class Documentation extends Component {
         });
       })
       .catch(error => {
-        // console.log(error);
+
       });
   }
 
@@ -107,13 +107,11 @@ class Documentation extends Component {
   getDocumentation() {
     let element_counter = 0;
 
-    let selected_title_id = parseInt(this.state.selected_title_id, 10);
-    // console.log(selected_title_id);
+    const selected_title_id = parseInt(this.state.selected_title_id, 10);
 
-    let documentation = this.state.documentation_content[selected_title_id - 1].subtitle;
-    // console.log(documentation);
+    const documentation = this.state.documentation_content[selected_title_id - 1].subtitle;
 
-    let render_documentation = documentation.map((second_level, index) => (
+    const render_documentation = documentation.map((second_level, index) => (
       <div key={'subtitle-' + index.toString()}>
         <Element className="element second-level" name={'subtitle-toc-' + index.toString()}>
           <h2>{second_level.subtitle}</h2>
@@ -161,17 +159,14 @@ class Documentation extends Component {
                       Select Title
                     </label>
                     <select className="form-control" id="select_title" onChange={this.handleChange}>
-                      {/* Select Box Title*/}
                       {this.getDocumentationSelectBox()}
                     </select>
                   </div>
 
-                  {/* Table Of Content*/}
                   {this.getDocumentationTableOfContent()}
 
                   <hr className="toc-divider" />
 
-                  {/* Documentation Content*/}
                   {this.getDocumentation()}
                   <button className="btn scroll-top" onClick={this.scrollToTop}>
                     back to top

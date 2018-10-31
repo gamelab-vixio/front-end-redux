@@ -245,7 +245,7 @@ $custom-black: #08182b;
   /*------------ Story ------------*/
   .story {
     position: relative;
-    min-height: 70vh;
+    min-height: calc(100vh - 175px);
     padding: 15px;
     background-color: $custom-white;
 
@@ -790,7 +790,8 @@ $custom-black: #08182b;
     position: relative;
     padding: 15px 0 15px 0 !important;
     background-color: $custom-white;
-
+    min-height: calc(100vh - 175px);
+    
     .styled-line {
       margin: 0 15px 0 15px;
     }
@@ -1394,7 +1395,7 @@ $custom-black: #08182b;
   .play {
     position: relative;
     background-color: $custom-white;
-    min-height: 77vh;
+    min-height: calc(100vh - 175px);
     padding: 15px 0 15px 0 !important;
 
     .play-title {
@@ -2299,6 +2300,7 @@ $custom-black: #08182b;
     position: relative;
     padding: 15px !important;
     background-color: $custom-white;
+    min-height: calc(100vh - 175px);
 
     .login-title,
     .register-title {
@@ -2374,7 +2376,8 @@ $custom-black: #08182b;
   /*------------ Footer ------------*/
   .footer {
     position: relative;
-    padding: 30px 5px 30px 5px;
+    height: 110px;
+    padding: 15px;
     background-color: $custom-black;
 
     .footer-top {

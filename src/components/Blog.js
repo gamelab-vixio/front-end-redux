@@ -16,8 +16,6 @@ class Blog extends Component {
 
   componentWillMount() {
     document.title = 'Vixio - Blog';
-
-    // Set page to top
     window.scrollTo(0, 0);
 
     BlogService.getAllBlogPosts()
@@ -27,11 +25,8 @@ class Blog extends Component {
           isLoading: false,
           currentPageNumber: res.data.current_page,
         });
-
-        // console.log(res.data);
       })
       .catch(err => {
-        // console.log(err);
       });
   }
 
@@ -41,7 +36,7 @@ class Blog extends Component {
     if (next_page_number <= this.state.all_blogs.last_page) {
       BlogService.getAllBlogPosts(next_page_number)
         .then(res => {
-          let result = res.data.data;
+          const result = res.data.data;
           let newArr = this.state.all_blogs;
           result.forEach(function(data, i) {
             newArr.data.push(data);
@@ -50,18 +45,17 @@ class Blog extends Component {
             all_blogs: newArr,
             currentPageNumber: next_page_number,
           });
-          // console.log(res);
         })
         .catch(err => {
-          // console.log(err);
+
         });
     }
   };
 
   getPosts() {
-    let all_blogs = this.state.all_blogs.data;
+    const all_blogs = this.state.all_blogs.data;
 
-    let render_all_blogs = all_blogs.map(blog => (
+    const render_all_blogs = all_blogs.map(blog => (
       <div key={blog.id} className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex">
         <div className="blog-box">
           <h2 className="blog-box-title">{blog.title}</h2>

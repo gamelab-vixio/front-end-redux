@@ -26,8 +26,7 @@ class Blog extends Component {
           currentPageNumber: res.data.current_page,
         });
       })
-      .catch(err => {
-      });
+      .catch(err => {});
   }
 
   getMoreBlog = () => {
@@ -46,16 +45,14 @@ class Blog extends Component {
             currentPageNumber: next_page_number,
           });
         })
-        .catch(err => {
-
-        });
+        .catch(err => {});
     }
   };
 
   getPosts() {
-    const all_blogs = this.state.all_blogs.data;
+    const allBlogs = this.state.all_blogs.data;
 
-    const render_all_blogs = all_blogs.map(blog => (
+    const renderAllBlogs = allBlogs.map(blog => (
       <div key={blog.id} className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex">
         <div className="blog-box">
           <h2 className="blog-box-title">{blog.title}</h2>
@@ -76,7 +73,7 @@ class Blog extends Component {
       </div>
     ));
 
-    return render_all_blogs;
+    return renderAllBlogs;
   }
 
   render() {

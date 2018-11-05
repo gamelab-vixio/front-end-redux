@@ -8,7 +8,7 @@ class Blog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      all_blogs: [],
+      allBlogs: [],
       isLoading: true,
       currentPageNumber: '',
     };
@@ -21,7 +21,7 @@ class Blog extends Component {
     BlogService.getAllBlogPosts()
       .then(res => {
         this.setState({
-          all_blogs: res.data,
+          allBlogs: res.data,
           isLoading: false,
           currentPageNumber: res.data.current_page,
         });
@@ -30,19 +30,19 @@ class Blog extends Component {
   }
 
   getMoreBlog = () => {
-    let next_page_number = this.state.currentPageNumber + 1;
+    let nextPageNumber = this.state.currentPageNumber + 1;
 
-    if (next_page_number <= this.state.all_blogs.last_page) {
-      BlogService.getAllBlogPosts(next_page_number)
+    if (nextPageNumber <= this.state.allBlogs.last_page) {
+      BlogService.getAllBlogPosts(nextPageNumber)
         .then(res => {
           const result = res.data.data;
-          let newArr = this.state.all_blogs;
+          let newArr = this.state.allBlogs;
           result.forEach(function(data, i) {
             newArr.data.push(data);
           });
           this.setState({
-            all_blogs: newArr,
-            currentPageNumber: next_page_number,
+            allBlogs: newArr,
+            currentPageNumber: nextPageNumber,
           });
         })
         .catch(err => {});
@@ -50,7 +50,7 @@ class Blog extends Component {
   };
 
   getPosts() {
-    const allBlogs = this.state.all_blogs.data;
+    const allBlogs = this.state.allBlogs.data;
 
     const renderAllBlogs = allBlogs.map(blog => (
       <div key={blog.id} className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex">

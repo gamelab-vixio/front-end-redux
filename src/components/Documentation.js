@@ -110,7 +110,12 @@ class Documentation extends Component {
     let selected_title_id = parseInt(this.state.selected_title_id, 10);
     // console.log(selected_title_id);
 
-    let documentation = this.state.documentation_content[selected_title_id - 1].subtitle;
+    let find_index = this.state.documentation_content.findIndex(obj => obj.id === selected_title_id);
+    if (find_index === -1) {
+      find_index = 0;
+    }
+
+    let documentation = this.state.documentation_content[find_index].subtitle;
     // console.log(documentation);
 
     let render_documentation = documentation.map((second_level, index) => (

@@ -8,7 +8,7 @@ class Blog extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      all_blogs: [],
+      allBlogs: [],
       isLoading: true,
       currentPageNumber: '',
     };
@@ -16,52 +16,43 @@ class Blog extends Component {
 
   componentWillMount() {
     document.title = 'Vixio - Blog';
-
-    // Set page to top
     window.scrollTo(0, 0);
 
     BlogService.getAllBlogPosts()
       .then(res => {
         this.setState({
-          all_blogs: res.data,
+          allBlogs: res.data,
           isLoading: false,
           currentPageNumber: res.data.current_page,
         });
-
-        // console.log(res.data);
       })
-      .catch(err => {
-        // console.log(err);
-      });
+      .catch(err => {});
   }
 
   getMoreBlog = () => {
-    let next_page_number = this.state.currentPageNumber + 1;
+    let nextPageNumber = this.state.currentPageNumber + 1;
 
-    if (next_page_number <= this.state.all_blogs.last_page) {
-      BlogService.getAllBlogPosts(next_page_number)
+    if (nextPageNumber <= this.state.allBlogs.last_page) {
+      BlogService.getAllBlogPosts(nextPageNumber)
         .then(res => {
-          let result = res.data.data;
-          let newArr = this.state.all_blogs;
+          const result = res.data.data;
+          let newArr = this.state.allBlogs;
           result.forEach(function(data, i) {
             newArr.data.push(data);
           });
           this.setState({
-            all_blogs: newArr,
-            currentPageNumber: next_page_number,
+            allBlogs: newArr,
+            currentPageNumber: nextPageNumber,
           });
-          // console.log(res);
         })
-        .catch(err => {
-          // console.log(err);
-        });
+        .catch(err => {});
     }
   };
 
   getPosts() {
-    let all_blogs = this.state.all_blogs.data;
+    const allBlogs = this.state.allBlogs.data;
 
-    let render_all_blogs = all_blogs.map(blog => (
+    const renderAllBlogs = allBlogs.map(blog => (
       <div key={blog.id} className="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 d-flex">
         <div className="blog-box">
           <h2 className="blog-box-title">{blog.title}</h2>
@@ -82,7 +73,7 @@ class Blog extends Component {
       </div>
     ));
 
-    return render_all_blogs;
+    return renderAllBlogs;
   }
 
   render() {

@@ -125,6 +125,7 @@ class Edit extends Component {
         }
       });
     });
+    console.log(knot);
 
     this.setState({
       data: data,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import TextTruncate from 'react-text-truncate';
+//import TextTruncate from 'react-text-truncate';
 import FaSearch from 'react-icons/lib/fa/search';
 import { Link } from 'react-router-dom';
 

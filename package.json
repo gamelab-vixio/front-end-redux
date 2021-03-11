@@ -39,7 +39,7 @@
     "rc-checkbox": "^2.1.5",
     "react": "^16.4.1",
     "react-autosize-textarea": "^3.0.3",
-    "react-dev-utils": "^5.0.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.4.1",
     "react-html-parser": "^2.0.2",
     "react-icons": "^2.2.7",
